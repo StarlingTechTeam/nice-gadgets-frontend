@@ -1,4 +1,4 @@
-# 🌟 StarlingTechTeam — Frontend Project
+# 🌟 StarlingTechTeam — Nice Gadgets Project
 
 A frontend application built by **StarlingTechTeam**.
 The project focuses on creating a modern, responsive React-based interface using best practices in development, teamwork, and scalable architecture.
