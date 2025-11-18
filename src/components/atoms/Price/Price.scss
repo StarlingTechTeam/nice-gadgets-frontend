@@ -1,0 +1,13 @@
+.card__price-container {
+  display: flex;
+  gap: 8px;
+  font:
+    700 22px/31px 'Mont',
+    sans-serif;
+}
+
+.card__full-price {
+  color: var(--color-secondary);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}

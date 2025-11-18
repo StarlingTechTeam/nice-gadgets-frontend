@@ -6,21 +6,14 @@ type ButtonProps = {
   icon?: React.ReactNode;
 };
 
-export const Button = ({
-  children,
-  variant = 'primary',
-  icon,
-  ...props
-}: ButtonProps) => {
+export const Button = ({ children, variant, icon, ...props }: ButtonProps) => {
   return (
-    <>
-      <button
-        className={`btn btn-${variant}`}
-        {...props}
-      >
-        {icon && <span className="btn-icon">{icon}</span>}
-        {children}
-      </button>
-    </>
+    <button
+      className={`btn btn-${variant}`}
+      {...props}
+    >
+      {icon && <span className="btn-icon">{icon}</span>}
+      {children}
+    </button>
   );
 };

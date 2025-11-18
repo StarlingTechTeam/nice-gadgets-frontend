@@ -1,16 +1,11 @@
 import { Button } from '../../atoms/Button/Button';
-import heartIcon from '../../../assets/icons/heart-icon.svg';
 
 const AddToFavButton = () => {
   return (
-    <div>
+    <div className="fav-button">
       <Button
-        icon={
-          <img
-            src={heartIcon}
-            alt="Heart Icon"
-          />
-        }
+        variant="icon"
+        icon={<span className="heart-icon" />}
       />
     </div>
   );
