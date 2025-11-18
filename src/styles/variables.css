@@ -10,6 +10,19 @@
 }
 
 @layer base {
+  :root {
+    --color-primary: #000000;
+    --color-secondary: #89939a;
+    --color-background: #ffffff;
+    --color-background-secondary: #fafbfc;
+    --color-border: #e2e6e9;
+    --color-icon: #b4bdc3;
+    --color-button-add: #4219d0;
+    --color-like: #e2e6e9;
+  }
+}
+
+@layer base {
   .dark {
     --color-primary: #f1f2f9;
     --color-secondary: #75767f;
