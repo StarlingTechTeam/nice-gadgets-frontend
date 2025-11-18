@@ -1,20 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-
-import App from '../App';
-import { HomePage } from '../../components/pages/HomePage';
-import { ProductsCatalogPage } from '../../components/pages/ProductsCatalogPage';
-import { ProductDetailsPage } from '../../components/pages/ProductDetailsPage';
-import { CartPage } from '../../components/pages/CartPage';
-import { FavoritesPage } from '../../components/pages/FavoritesPage';
-import { NotFoundPage } from '../../components/pages/NotFoundPage';
+import { ProductsCatalogPage } from '../../pages/ProductsCatalogPage';
+import { ProductDetailsPage } from '../../pages/ProductDetailsPage';
+import { CartPage } from '../../pages/CartPage';
+import { FavoritesPage } from '../../pages/FavoritesPage';
+import { NotFoundPage } from '../../pages/NotFoundPage';
+import HomePage from '../../pages/HomePage';
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<App />}
-      >
+      <Route path="/">
         <Route
           index
           element={<HomePage />}
