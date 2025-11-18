@@ -1,0 +1,30 @@
+.btn {
+  display: block;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  width: 100%;
+  font-family: 'Mont';
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+
+  &-primary {
+    color: var(--color-background);
+    background-color: var(--color-button-add);
+    height: 40px;
+  }
+
+  &-icon {
+    top: 12px;
+    right: 14px;
+    border: 1px solid var(--color-icon);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

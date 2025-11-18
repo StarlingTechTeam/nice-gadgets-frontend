@@ -1,0 +1,10 @@
+.card__img-wrapper {
+  display: flex;
+  height: 196px;
+  justify-content: center;
+  width: 208px;
+}
+
+.card__img {
+  object-fit: contain;
+}

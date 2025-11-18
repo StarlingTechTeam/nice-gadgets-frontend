@@ -1,0 +1,62 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 288px;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 32px;
+  transition: box-shadow 0.3s;
+  gap: 8px;
+
+  .fav-button {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    border-radius: 50%;
+    background-color: var(--color-dropdown);
+  }
+
+  .heart-icon {
+    width: 18px;
+    height: 18px;
+    background-color: var(--color-primary);
+    mask: url('../../../assets/icons/heart-icon.svg') no-repeat center;
+    mask-size: contain;
+  }
+
+  & * {
+    box-sizing: border-box;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__product-parameters {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 77px;
+  }
+
+  &__product-screen,
+  &__product-capacity,
+  &__product-ram {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__product-ram {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.1);
+  }
+}
