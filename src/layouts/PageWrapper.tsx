@@ -1,14 +1,13 @@
 import type { ReactNode } from 'react';
+import Header from '../components/organisms/Header/Header';
 import Footer from '../components/organisms/Footer/Footer';
 
 const PageWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <header>HEADER</header>
+      <Header />
       {children}
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </>
   );
 };
