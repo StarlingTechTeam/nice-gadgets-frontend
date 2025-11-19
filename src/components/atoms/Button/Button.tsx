@@ -9,7 +9,7 @@ type ButtonProps = DetailedHTMLProps<
   icon?: React.ReactNode;
 };
 
-export const Button = ({ children, variant, icon, ...props }: ButtonProps) => {
+const Button = ({ children, variant, icon, ...props }: ButtonProps) => {
   return (
     <button
       className={`btn btn-${variant}`}
@@ -20,3 +20,5 @@ export const Button = ({ children, variant, icon, ...props }: ButtonProps) => {
     </button>
   );
 };
+
+export default Button;

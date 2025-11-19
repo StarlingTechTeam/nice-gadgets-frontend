@@ -1,5 +1,5 @@
 import { useTheme } from '../../../hooks/useTheme';
-import { Button } from '../../atoms/Button';
+import Button from '../../atoms/Button';
 
 const Header = () => {
   const { toggleTheme } = useTheme();

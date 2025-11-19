@@ -1,12 +1,12 @@
-import Image from '../../atoms/Image/Image';
-import Title from '../../atoms/Text/Title/Title';
-import Price from '../../atoms/Price/Price';
-import Subtitle from '../../atoms/Text/Subtitle/Subtitle';
-import Value from '../../atoms/Text/Value/Value';
-import Divider from '../../atoms/Divider/Divider';
+import Image from '@atoms/Image';
+import Title from '@atoms/Text/Title';
+import Price from '@atoms/Price';
+import Subtitle from '@atoms/Text/Subtitle';
+import Value from '@atoms/Text/Value';
+import Divider from '@atoms/Divider';
 
-import AddToCartButton from '../../molecules/AddToCartButton/AddToCartButton';
-import AddToFavButton from '../../molecules/AddToFavButton/AddToFavButton';
+import AddToCartButton from '@molecules/AddToCartButton';
+import AddToFavButton from '@molecules/AddToFavButton';
 
 import './ProductCard.scss';
 

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import Header from '../components/organisms/Header/Header';
-import Footer from '../components/organisms/Footer/Footer';
+import Header from '@organisms/Header';
+import Footer from '@organisms/Footer';
 
 const PageWrapper = ({ children }: { children: ReactNode }) => {
   return (
