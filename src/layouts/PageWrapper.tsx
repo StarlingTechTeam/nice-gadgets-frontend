@@ -8,7 +8,9 @@ const PageWrapper = ({ children }: { children: ReactNode }) => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <Divider />
-      <main className="grow bg-background main">{children}</main>
+      <main className="grow bg-background main">
+        <div className="content-wrapper"> {children}</div>
+      </main>
       <Divider />
       <div className="footer-wrapper">
         <Footer />
