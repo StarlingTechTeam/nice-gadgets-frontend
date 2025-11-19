@@ -10,21 +10,13 @@
   cursor: pointer;
 
   &-primary {
-    color: var(--color-background);
+    color: var(--color-button-text);
     background-color: var(--color-button-add);
     height: 40px;
   }
 
   &-icon {
-    top: 12px;
-    right: 14px;
-    border: 1px solid var(--color-icon);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    cursor: pointer;
   }
 }
