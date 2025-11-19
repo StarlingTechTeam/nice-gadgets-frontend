@@ -15,7 +15,7 @@ const HomePage = () => {
         <div className="h-[352px] bg-gray-500 text-center leading-[352px] text-2xl inline-wrapper homepage-block__item">
           Brand new models
         </div>
-        <div className="text-primary text-center leading-[352px] text-2xl inline-wrapper homepage-block__item homepage-category">
+        <div className="text-primary text-2xl inline-wrapper homepage-block__item homepage-category">
           Shop by category
           <div className="category-block">
             <div className="category-item">Item</div>
