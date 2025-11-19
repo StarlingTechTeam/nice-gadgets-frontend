@@ -1,0 +1,19 @@
+@import '@styles/mixins';
+
+.home-page_wrapper {
+  margin-block: 24px;
+
+  @include on-tablet {
+    margin-block: 32px;
+  }
+
+  @include on-desktop {
+    margin-block: 56px;
+  }
+}
+
+.home-page-title {
+  font:
+    700 32px/41px 'Mont',
+    sans-serif;
+}
