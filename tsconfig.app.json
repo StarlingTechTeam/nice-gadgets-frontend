@@ -31,7 +31,7 @@
       "@organisms/*": ["./src/components/organisms/*"],
       "@context/*": ["./src/context/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@layout/*": ["./src/layout/*"],
+      "@layouts/*": ["./src/layouts/*"],
       "@pages/*": ["./src/pages/*"],
       "@types/*": ["./src/types/*"],
       "@assets/*": ["./src/assets/*"],
