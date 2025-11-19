@@ -1,7 +1,10 @@
+import type { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import './Button.scss';
 
-type ButtonProps = {
-  children?: React.ReactNode;
+type ButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+> & {
   variant?: 'primary' | 'secondary' | 'danger' | 'icon';
   icon?: React.ReactNode;
 };
