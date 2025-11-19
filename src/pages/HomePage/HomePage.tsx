@@ -3,7 +3,7 @@ import './HomePage.scss';
 
 const HomePage = () => {
   return (
-    <div className="content-wrapper">
+    <>
       <div className="inline-wrapper">
         <HomePageTitle />
       </div>
@@ -28,7 +28,7 @@ const HomePage = () => {
           Hot prices
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default HomePage;
