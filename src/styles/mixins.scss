@@ -1,0 +1,46 @@
+@mixin on-tablet {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin on-desktop {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin content-margin-inline() {
+  margin-inline: 16px;
+
+  @include on-tablet {
+    margin-inline: 24px;
+  }
+
+  @include on-desktop {
+    max-width: 1200px;
+    margin-inline: 32px;
+  }
+}
+
+.container {
+  @include content-margin-inline;
+}
+
+@mixin grid-column {
+  --column-count: 2;
+
+  display: grid;
+  grid-template-columns: repeat(var(--column-count), 1fr);
+  column-gap: 20px;
+
+  @include on-tablet {
+    --column-count: 6;
+
+    column-gap: 24px;
+  }
+
+  @include on-desktop {
+    --column-count: 12;
+  }
+}

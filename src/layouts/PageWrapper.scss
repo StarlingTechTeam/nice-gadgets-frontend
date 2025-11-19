@@ -1,0 +1,7 @@
+@import '@styles/mixins';
+
+.main {
+  @include on-desktop {
+    margin: auto 0;
+  }
+}

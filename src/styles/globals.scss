@@ -1,50 +1,4 @@
-@mixin on-tablet {
-  @media (min-width: $tablet-min-width) {
-    @content;
-  }
-}
-
-@mixin on-desktop {
-  @media (min-width: $desktop-min-width) {
-    @content;
-  }
-}
-
-@mixin content-padding-inline() {
-  padding-inline: 20px;
-
-  @include on-tablet {
-    padding-inline: 72px;
-  }
-
-  @include on-desktop {
-    max-width: 1020px;
-    margin-inline: auto;
-    padding-inline: 120px;
-  }
-}
-
-.container {
-  @include content-padding-inline;
-}
-
-@mixin grid-column {
-  --column-count: 2;
-
-  display: grid;
-  grid-template-columns: repeat(var(--column-count), 1fr);
-  column-gap: 20px;
-
-  @include on-tablet {
-    --column-count: 6;
-
-    column-gap: 24px;
-  }
-
-  @include on-desktop {
-    --column-count: 12;
-  }
-}
+@import './mixins.scss';
 
 @font-face {
   font-family: 'Mont';
@@ -65,4 +19,15 @@
   src: url('../assets/fonts/Mont-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
+}
+
+.inline-wrapper {
+  @include content-margin-inline();
+}
+
+.content-wrapper {
+  @include on-desktop {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
 }
