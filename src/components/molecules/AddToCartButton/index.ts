@@ -1,1 +1,2 @@
-export * from './AddToCartButton';
+import AddToCartButton from './AddToCartButton';
+export default AddToCartButton;
