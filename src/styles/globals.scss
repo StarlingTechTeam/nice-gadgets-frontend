@@ -26,6 +26,8 @@
 }
 
 .content-wrapper {
+  min-width: 320px;
+
   @include on-desktop {
     max-width: 1200px;
     margin-inline: auto;
