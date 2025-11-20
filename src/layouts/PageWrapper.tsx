@@ -5,10 +5,10 @@ import Divider from '@/components/atoms/Divider';
 
 const PageWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col ">
       <Header />
       <Divider />
-      <main className="grow bg-background main">
+      <main className="grow bg-background main transition-colors duration-400">
         <div className="content-wrapper"> {children}</div>
       </main>
       <Divider />

@@ -22,7 +22,7 @@
 }
 
 .inline-wrapper {
-  @include mixins.content-margin-inline();
+  @include content-margin-inline();
 }
 
 .content-wrapper {
