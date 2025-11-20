@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@use 'mixins';
 
 @font-face {
   font-family: 'Mont';
@@ -22,11 +22,11 @@
 }
 
 .inline-wrapper {
-  @include content-margin-inline();
+  @include mixins.content-margin-inline();
 }
 
 .content-wrapper {
-  @include on-desktop {
+  @include mixins.on-desktop {
     max-width: 1200px;
     margin-inline: auto;
   }
