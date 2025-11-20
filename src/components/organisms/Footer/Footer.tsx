@@ -6,7 +6,7 @@ const Footer = () => {
   const darkTheme = useTheme();
 
   return (
-    <div className="bg-background">
+    <div>
       {darkTheme.theme === 'dark' ?
         <img
           className="h-auto max-w-lg rounded-base"
