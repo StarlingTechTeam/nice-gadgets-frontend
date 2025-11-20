@@ -1,4 +1,4 @@
-@use 'mixins';
+@use 'mixins' as *;
 
 @font-face {
   font-family: 'Mont';
@@ -26,7 +26,9 @@
 }
 
 .content-wrapper {
-  @include mixins.on-desktop {
+  min-width: 320px;
+
+  @include on-desktop {
     max-width: 1200px;
     margin-inline: auto;
   }
