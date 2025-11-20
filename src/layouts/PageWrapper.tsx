@@ -6,16 +6,18 @@ import Divider from '@/components/atoms/Divider';
 const PageWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-background main transition-colors duration-400">
-        <Header />
+      <div className="bg-background transition-colors duration-400">
+        <div className="content-wrapper">
+          <Header />
+        </div>
       </div>
       <Divider />
-      <main className="grow bg-background main transition-colors duration-400">
+      <main className="grow bg-background transition-colors duration-400">
         <div className="content-wrapper"> {children}</div>
       </main>
       <Divider />
       <div className="footer-wrapper bg-background transition-colors duration-400">
-        <div className="content-wrapper">
+        <div className="inline-wrapper content-wrapper">
           <Footer />
         </div>
       </div>
