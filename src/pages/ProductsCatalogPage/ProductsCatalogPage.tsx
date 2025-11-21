@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import ProductsCatalogTemplate from '@/components/templates/ProductsCatalogTemplate/ProductsCatalogTemplate';
+import ProductsCatalogTemplate from '@templates/ProductsCatalogTemplate';
 import { products, type Product } from '@/shared/api/products';
 
-const ProductsCatalogPage = () => {
+export const ProductsCatalogPage = () => {
   const { categoryType } = useParams();
   const [items, setItems] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,5 +37,3 @@ const ProductsCatalogPage = () => {
     />
   );
 };
-
-export default ProductsCatalogPage;

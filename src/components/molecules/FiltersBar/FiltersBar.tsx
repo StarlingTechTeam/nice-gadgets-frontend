@@ -1,5 +1,5 @@
 import Subtitle from '@atoms/Text/Subtitle';
-import Select from '@atoms/Select/Select';
+import Select from '@atoms/Select';
 
 import './FiltersBar.scss';
 

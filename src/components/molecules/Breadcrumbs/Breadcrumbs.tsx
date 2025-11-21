@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router-dom';
+import './Breadcrumbs.scss';
 import BreadcrumbItem, {
   type BreadcrumbItemProps,
-} from '@/components/atoms/BreadcrumbItem/BreadcrumbItem';
+} from '@atoms/BreadcrumbItem';
 
 const Breadcrumbs = () => {
   const location = useLocation();

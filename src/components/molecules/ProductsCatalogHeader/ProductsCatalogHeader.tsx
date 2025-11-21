@@ -1,7 +1,7 @@
+import Breadcrumbs from '@molecules/Breadcrumbs';
+import PageTitle from '@atoms/PageTitle';
+import FiltersBar from '@molecules/FiltersBar';
 import './ProductsCatalogHeader.scss';
-import Breadcrumbs from '@/components/molecules/Breadcrumbs/Breadcrumbs';
-import PageTitle from '@/components/atoms/PageTitle';
-import FiltersBar from '@/components/molecules/FiltersBar/FiltersBar';
 
 type ProductsCatalogHeaderProps = {
   title: string;

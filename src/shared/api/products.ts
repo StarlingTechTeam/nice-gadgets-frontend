@@ -1,4 +1,4 @@
-import productsData from '../api/data/products.json';
+import productsData from '@/shared/api/data/products.json';
 
 export type Product = {
   id: number;

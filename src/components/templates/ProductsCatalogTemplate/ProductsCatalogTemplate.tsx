@@ -1,6 +1,6 @@
-import ProductsCatalogHeader from '@/components/molecules/ProductsCatalogHeader/ProductsCatalogHeader';
-import ProductList from '@/components/organisms/ProductList/ProductsList';
+import ProductList from '@organisms/ProductList/ProductsList';
 import type { Product } from '@/shared/api/products';
+import ProductsCatalogHeader from '@molecules/ProductsCatalogHeader';
 import './ProductsCatalogTemplate.scss';
 
 type ProductsCatalogTemplateProps = {
