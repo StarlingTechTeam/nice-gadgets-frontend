@@ -17,10 +17,9 @@
     --color-background-secondary: #ffffff;
     --color-border: #e2e6e9;
     --color-icon: #b4bdc3;
-    --color-background-icon: #ffffff;
     --color-button-add: #905bff;
     --color-button-text: #ffffff;
-    --color-like: #ff6347;
+    --color-like: #e2e6e9;
   }
 }
 
@@ -32,6 +31,7 @@
     --color-background-secondary: #161827;
     --color-border: #323542;
     --color-icon: #4a4d58;
-    --color-background-icon: #323542;
+    --color-like: #4a4d58;
+    --color-dropdown: #323542;
   }
 }
