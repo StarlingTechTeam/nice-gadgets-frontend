@@ -2,12 +2,13 @@ import './Subtitle.scss';
 
 type SubtitleProps = {
   title: string;
+  tech?: boolean;
 };
 
-const Subtitle = ({ title, ...props }: SubtitleProps) => {
+const Subtitle = ({ title, tech, ...props }: SubtitleProps) => {
   return (
     <span
-      className="text-secondary card__subtitle"
+      className={`text-secondary ${tech ? 'card__subtitle__lg' : 'card__subtitle'}`}
       {...props}
     >
       {title}
