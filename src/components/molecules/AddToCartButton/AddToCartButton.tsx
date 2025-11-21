@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from '@atoms/Button/Button';
+import Button from '@atoms/Button';
 
 const AddToCartButton = () => {
   const [added, setAdded] = useState(false);
