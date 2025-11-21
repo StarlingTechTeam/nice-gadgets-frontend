@@ -2,12 +2,13 @@ import './Value.scss';
 
 type ValueProps = {
   value: string;
+  tech?: boolean;
 };
 
-const Value = ({ value, ...props }: ValueProps) => {
+const Value = ({ value, tech, ...props }: ValueProps) => {
   return (
     <div
-      className="text-primary card__values"
+      className={`text-primary ${tech ? 'card__values__lg' : 'card__values'}`}
       {...props}
     >
       {value}
