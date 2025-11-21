@@ -1,0 +1,36 @@
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &__content {
+    display: flex;
+    align-items: center;
+
+    &.active .breadcrumb-item__label {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+  }
+
+  .breadcrumb-icon {
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-primary);
+    mask: url('@/assets/icons/home-icon.svg') center / contain no-repeat;
+  }
+
+  &__label {
+    font:
+      600 12px/15px 'Mont',
+      sans-serif;
+    color: var(--color-secondary);
+  }
+
+  .breadcrumb-separator {
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-secondary);
+    mask: url('@/assets/icons/arrow-right.svg') center / contain no-repeat;
+  }
+}

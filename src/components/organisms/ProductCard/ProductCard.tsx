@@ -17,6 +17,8 @@ type ProductCardProps = {
   screen: string;
   capacity: string;
   ram: string;
+  image: string;
+  capacityLabel: string;
 };
 
 const ProductCard = ({
@@ -26,13 +28,20 @@ const ProductCard = ({
   screen,
   capacity,
   ram,
+  image,
+  capacityLabel,
 }: ProductCardProps) => {
   return (
     <div className="card">
-      <Image />
+      <Image
+        src={image}
+        alt={productName}
+      />
 
-      <AddToFavButton />
-      {/* <div className="card__content"> */}
+      <div className="add-to-fav-btn absolute">
+        <AddToFavButton />
+      </div>
+
       <div className="card__title-wrapper">
         <Title productName={productName} />
       </div>
@@ -51,7 +60,7 @@ const ProductCard = ({
         </div>
 
         <div className="card__product-capacity">
-          <Subtitle title="Capacity" />
+          <Subtitle title={capacityLabel} />
           <Value value={capacity} />
         </div>
 
@@ -64,7 +73,6 @@ const ProductCard = ({
       <div className="card__add-to-cart-wrapper">
         <AddToCartButton />
       </div>
-      {/* </div> */}
     </div>
   );
 };

@@ -1,0 +1,10 @@
+.filters-bar {
+  display: flex;
+  gap: 16px;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

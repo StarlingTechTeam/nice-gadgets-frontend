@@ -21,6 +21,8 @@
     --color-button-add: #905bff;
     --color-button-text: #ffffff;
     --color-like: #ff6347;
+    --color-dropdown: #fafbfc;
+    --color-dropdown-border: #b4bdc3;
   }
 }
 
@@ -33,5 +35,7 @@
     --color-border: #323542;
     --color-icon: #4a4d58;
     --color-background-icon: #323542;
+    --color-dropdown: #323542;
+    --color-dropdown-border: #161827;
   }
 }
