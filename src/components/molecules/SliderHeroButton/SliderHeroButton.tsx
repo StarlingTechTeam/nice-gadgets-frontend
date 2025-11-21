@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import { Button } from '../../atoms/Button/Button';
+import Button from '@atoms/Button';
 
 interface SliderHeroButtonProps {
   direction: 'next' | 'prev';
