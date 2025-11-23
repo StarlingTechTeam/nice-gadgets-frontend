@@ -17,9 +17,7 @@ const PageWrapper = ({ children }: { children: ReactNode }) => {
       </main>
       <Divider />
       <div className="footer-wrapper bg-background transition-colors duration-400">
-        <div className="inline-wrapper content-wrapper">
-          <Footer />
-        </div>
+        <Footer />
       </div>
     </div>
   );

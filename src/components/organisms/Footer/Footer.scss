@@ -1,0 +1,78 @@
+@use '@styles/mixins' as *;
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: space-between;
+  height: 257px;
+  padding: 32px 16px;
+  z-index: -1;
+
+  @include on-tablet {
+    flex-direction: row;
+    height: 96px;
+    align-items: center;
+    padding-inline: 32px;
+  }
+
+  &-back-to-top-wrapper {
+    align-self: center;
+  }
+
+  &-nav-company-information {
+    & ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1px;
+
+      @include on-tablet {
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+      }
+
+      @include on-desktop {
+        gap: 106px;
+      }
+    }
+
+    & li {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      height: 21px;
+    }
+  }
+}
+
+.footer-navlink {
+  text-decoration: none;
+  color: var(--color-secondary);
+  font-family: 'Mont';
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 11px;
+  letter-spacing: 4%;
+  text-transform: uppercase;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.footer-border {
+  height: 1px;
+  width: 100%;
+  box-shadow: 0px -1px 0px 0px var(--color-border);
+  margin-top: 64px;
+
+  @include on-desktop {
+    margin-top: 80px;
+  }
+}
