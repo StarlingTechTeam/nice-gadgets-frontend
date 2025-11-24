@@ -1,2 +1,3 @@
-import FiltersBar from './FiltersBar';
-export default FiltersBar;
+export { default } from './FiltersBar';
+export type { SortOption } from './FiltersBar';
+export { SORT_OPTIONS, DEFAULT_SORT } from './FiltersBar';
