@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import ProductsCatalogTemplate from '@templates/ProductsCatalogTemplate';
 import { products, type Product } from '@/shared/api/products';
 
-export const ProductsCatalogPage = () => {
+const ProductsCatalogPage = () => {
   const { categoryType } = useParams();
   const [items, setItems] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,3 +37,5 @@ export const ProductsCatalogPage = () => {
     />
   );
 };
+
+export default ProductsCatalogPage;
