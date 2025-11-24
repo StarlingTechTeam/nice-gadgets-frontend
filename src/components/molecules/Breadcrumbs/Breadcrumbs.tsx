@@ -1,11 +1,12 @@
-import { useLocation } from 'react-router-dom';
-import './Breadcrumbs.scss';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import BreadcrumbItem, {
   type BreadcrumbItemProps,
 } from '@atoms/BreadcrumbItem';
+import './Breadcrumbs.scss';
 
 const Breadcrumbs = () => {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const segments = location.pathname.split('/').filter(Boolean);
 
   const normalizeBreadcrumbText = (segment: string): string => {
@@ -30,28 +31,49 @@ const Breadcrumbs = () => {
     return words.map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
   };
 
-  const normalizeLabel = (segment: string, index: number) => {
+  const normalizeLabel = (segment: string, index: number, isLast: boolean) => {
+    if (isLast) {
+      const capacity = searchParams.get('capacity');
+      const color = searchParams.get('color');
+
+      if (capacity && color) {
+        const fullSlug = `${segment}-${capacity}-${color}`;
+
+        return normalizeBreadcrumbText(fullSlug);
+      }
+
+      return normalizeBreadcrumbText(segment);
+    }
+
     const isCategory = index === 1;
-    return isCategory ?
-        segment[0].toUpperCase() + segment.slice(1)
-      : normalizeBreadcrumbText(segment);
+    if (isCategory) {
+      return segment[0].toUpperCase() + segment.slice(1);
+    }
+
+    return normalizeBreadcrumbText(segment);
   };
 
   const items: BreadcrumbItemProps[] = [
     { label: '', to: '/', icon: true },
     ...segments.map((segment, idx) => {
+      const isLast = idx === segments.length - 1;
       const path = '/' + segments.slice(0, idx + 1).join('/');
 
+      const toLink = isLast ? undefined : path;
+
       return {
-        label: normalizeLabel(segment, idx + 1),
-        to: idx === segments.length - 1 ? undefined : path,
+        label: normalizeLabel(segment, idx + 1, isLast),
+        to: toLink,
         icon: false,
       };
     }),
   ];
 
   return (
-    <nav className="breadcrumbs">
+    <nav
+      className="breadcrumbs"
+      aria-label="Breadcrumbs"
+    >
       {items.map((item, index) => (
         <BreadcrumbItem
           key={item.to ?? item.label}

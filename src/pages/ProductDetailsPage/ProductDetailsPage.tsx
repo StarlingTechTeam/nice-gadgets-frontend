@@ -4,7 +4,7 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import data from '@/shared/api/data/phones.json';
 import Divider from '@atoms/Divider';
 import Price from '@atoms/Price';
@@ -16,6 +16,7 @@ import SliderHero from '@organisms/SliderHero';
 import { useTheme } from '@/hooks/useTheme';
 import { formatCapacityOrRAM, normalizeScreenQuote } from '@/utills/formatting';
 import './ProductDetailsPage.scss';
+import SliderProductDetails from '@/components/organisms/SliderProductDetails';
 
 type Param = string | number;
 type Params = {
@@ -44,8 +45,6 @@ const COLOR_MAP: Record<string, string> = {
 };
 
 const ProductDetailsPage = () => {
-  const [selectedImage, setSelectedImage] = useState<string>('');
-
   const { theme } = useTheme();
 
   const { productId: urlProductId, categoryType } = useParams();
@@ -77,14 +76,11 @@ const ProductDetailsPage = () => {
   const product = useMemo(() => {
     let foundProduct = null;
 
-    // 1. Try to find by full slug (e.g., apple-iphone-11-128gb-black)
     if (tempFullId) {
       foundProduct = data.find((p) => p.id === tempFullId);
     }
 
-    // 2. If not found by full slug, try to find by namespaceId + search params (capacity & color)
     if (!foundProduct && initialCapacity && initialColor) {
-      // Construct the full ID to search, assuming the format: namespaceId-capacity-color
       const namespaceId = urlProductId?.replace(
         `-${initialCapacity}-${initialColor}`,
         '',
@@ -99,10 +95,8 @@ const ProductDetailsPage = () => {
       });
     }
 
-    // 3. Fallback: Find ANY product that matches the namespaceId (for a base page load)
     if (!foundProduct) {
-      // Extract the namespace ID from the URL path.
-      const baseNamespaceId = urlProductId?.split('-').slice(0, -2).join('-'); // crude way to get namespaceId from slug
+      const baseNamespaceId = urlProductId?.split('-').slice(0, -2).join('-');
 
       foundProduct = data.find((p) => {
         return (
@@ -133,20 +127,11 @@ const ProductDetailsPage = () => {
   };
 
   useEffect(() => {
-    if (product?.images?.[0]) {
-      setSelectedImage(product.images[0]);
-    }
-  }, [product]);
-
-  // Handle URL normalization AFTER "product" is confirmed
-  useEffect(() => {
     if (!product) return;
 
-    // Construct the correct path: /category/namespaceId
     const currentCategory = categoryType || product.category;
     const expectedPathname = `/${currentCategory}/${product.namespaceId}`;
 
-    // Construct the correct search params: ?capacity=X&color=Y
     const newSearchParams = new URLSearchParams();
     if (currentCapacity) {
       newSearchParams.set('capacity', currentCapacity);
@@ -157,9 +142,8 @@ const ProductDetailsPage = () => {
     const expectedSearch = newSearchParams.toString();
 
     const currentPathname = location.pathname.replace('#', '');
-    const currentSearch = location.search.substring(1); // remove leading '?'
+    const currentSearch = location.search.substring(1);
 
-    // Only redirect if the path or search params are incorrect
     if (
       currentPathname !== expectedPathname ||
       currentSearch !== expectedSearch
@@ -176,7 +160,6 @@ const ProductDetailsPage = () => {
     location.search,
   ]);
 
-  // Early return for not found
   if (!product) {
     return (
       <div className="inline-wrapper">
@@ -189,7 +172,7 @@ const ProductDetailsPage = () => {
     { key: 'Screen', value: normalizeScreenQuote(product.screen) },
     { key: 'Resolution', value: product.resolution },
     { key: 'Processor', value: product.processor },
-    { key: 'RAM', value: formatCapacityOrRAM(product.ram) }, // Apply formatting here
+    { key: 'RAM', value: formatCapacityOrRAM(product.ram) },
   ];
 
   const techSpecifications = [
@@ -218,34 +201,10 @@ const ProductDetailsPage = () => {
 
       <div className="product mb-14">
         <div className="product__slider">
-          {/* Main Image */}
-          <div className="product__slider__main-img cursor-pointer">
-            <img
-              src={`./src/assets/${selectedImage}`}
-              alt={`${product.name} - main view`}
-              className="max-w-full max-h-full"
-            />
-          </div>
-
-          {/* Thumbnail Slider */}
-          <div className="product__sliders  gap-2 mb-10">
-            {product.images.map((link) => (
-              <button
-                key={link}
-                className={`product__sliders-item border rounded-sm cursor-pointer hover:opacity-80 p-1 flex items-center justify-center bg-background transition-colors ${
-                  selectedImage === link ? 'border-primary' : 'border-border'
-                }`}
-                onClick={() => setSelectedImage(link)}
-                aria-label={`View image ${link}`}
-              >
-                <img
-                  src={`./src/assets/${link}`}
-                  alt={`${product.name} thumbnail`}
-                  className="max-w-full max-h-full object-contain"
-                />
-              </button>
-            ))}
-          </div>
+          <SliderProductDetails
+            slides={product.images}
+            productName="Product Images"
+          />
         </div>
         <div className="product__info">
           <div className="product__info-wrapper flex flex-col justify-between">
