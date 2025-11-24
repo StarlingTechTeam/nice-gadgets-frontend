@@ -1,10 +1,18 @@
+@use '@styles/mixins' as *;
+
 .filters-bar {
-  display: flex;
   gap: 16px;
 
   &__group {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    width: 127px;
+
+    &:first-child {
+      @include on-tablet {
+        width: 187px;
+      }
+    }
   }
 }
