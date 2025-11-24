@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
-import { useTheme } from '@/hooks/useTheme';
-import logo from '@/assets/icons/Logo.svg';
-import logoDark from '@/assets/icons/Logo_dark.svg';
+import { useTheme } from '@hooks/useTheme';
+import logo from '@assets/icons/Logo.svg';
+import logoDark from '@assets/icons/Logo_dark.svg';
 import './Logo.scss';
 
 interface LogoProps {
