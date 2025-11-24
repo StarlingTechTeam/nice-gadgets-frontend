@@ -4,7 +4,7 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom';
-import { useEffect, useMemo } from 'react';
+import { Fragment, useEffect, useMemo } from 'react';
 import data from '@/shared/api/data/phones.json';
 import Divider from '@atoms/Divider';
 import Price from '@atoms/Price';
@@ -299,10 +299,10 @@ const ProductDetailsPage = () => {
               <h4 className="text-primary mb-4">{title}</h4>
 
               {text.map((paragraph) => (
-                <>
+                <Fragment key={paragraph}>
                   <p className="text-secondary">{paragraph}</p>
                   <br />
-                </>
+                </Fragment>
               ))}
             </div>
           ))}
