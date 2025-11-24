@@ -1,5 +1,5 @@
-import BackToTop from '@/components/molecules/BackToTop';
-import Logo from '@/components/molecules/Logo/Logo';
+import BackToTop from '@molecules/BackToTop';
+import Logo from '@molecules/Logo';
 import './Footer.scss';
 import { NavLink } from 'react-router-dom';
 
