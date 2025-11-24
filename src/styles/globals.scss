@@ -33,3 +33,47 @@
     margin-inline: auto;
   }
 }
+
+h1 {
+  font:
+    700 32px / 41px 'Mont',
+    sans-serif;
+  @include on-tablet {
+    font:
+      700 48px / 56px 'Mont',
+      sans-serif;
+  }
+}
+
+h2 {
+  font:
+    700 22px / 31px 'Mont',
+    sans-serif;
+  @include on-tablet {
+    font:
+      700 32px / 41px 'Mont',
+      sans-serif;
+  }
+}
+
+h3 {
+  font:
+    700 20px / 26px 'Mont',
+    sans-serif;
+  @include on-tablet {
+    font:
+      700 22px / 31px 'Mont',
+      sans-serif;
+  }
+}
+
+h4 {
+  font:
+    700 16px / 20px 'Mont',
+    sans-serif;
+  @include on-tablet {
+    font:
+      600 20px / 26px 'Mont',
+      sans-serif;
+  }
+}
