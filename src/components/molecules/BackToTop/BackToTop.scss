@@ -1,0 +1,56 @@
+.back-to-top-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover .back-to-top-text {
+    color: var(--color-primary);
+  }
+
+  &:hover .back-to-top-button {
+    border-color: var(--color-primary);
+  }
+}
+
+.back-to-top-button {
+  border: 1px solid var(--color-icon);
+  border-radius: 50%;
+  background-color: var(--color-background);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s;
+}
+
+.back-to-top-text {
+  font-family: 'Mont';
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+  color: var(--color-secondary);
+  transition: color 0.3s;
+}
+
+.arrow-up-icon-wrapper {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+
+.arrow-up-icon {
+  position: absolute;
+  inset: 0;
+  width: 16px;
+  height: 16px;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  mask-image: url('@assets/icons/arrow-right.svg');
+  background-color: var(--color-primary);
+  transform: rotate(-90deg);
+}

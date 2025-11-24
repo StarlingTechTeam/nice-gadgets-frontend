@@ -1,24 +1,52 @@
-import logo from '../../../assets/icons/Logo.svg';
-import logoDark from '../../../assets/icons/Logo_dark.svg';
-import { useTheme } from '../../../hooks/useTheme';
+import BackToTop from '@molecules/BackToTop';
+import Logo from '@molecules/Logo';
+import './Footer.scss';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
-  const darkTheme = useTheme();
-
   return (
-    <div>
-      {darkTheme.theme === 'dark' ?
-        <img
-          className="h-auto max-w-lg rounded-base"
-          src={logoDark}
-        />
-      : <img
-          className="h-auto max-w-lg rounded-base"
-          src={logo}
-        />
-      }
-      <div>Footer</div>
-    </div>
+    <>
+      <div className="footer-border"></div>
+      <footer className="footer content-wrapper">
+        <Logo footer />
+
+        <nav className="footer-nav-company-information">
+          <ul>
+            <li>
+              <a
+                href="#"
+                className="footer-navlink"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+            </li>
+            <li>
+              <NavLink
+                to="/"
+                className="footer-navlink"
+              >
+                Contacts
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/"
+                className="footer-navlink"
+              >
+                Rights
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="footer-back-to-top-wrapper">
+          <BackToTop />
+        </div>
+      </footer>
+    </>
   );
 };
+
 export default Footer;
