@@ -62,6 +62,8 @@ const ProductList = ({ products }: ProductListProps) => {
             capacityLabel={capacityLabel}
             ram={ram}
             image={image_url}
+            categoryType={categoryType!}
+            itemId={product.itemId}
           />
         );
       })}

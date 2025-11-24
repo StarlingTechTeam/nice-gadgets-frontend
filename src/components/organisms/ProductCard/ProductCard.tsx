@@ -9,6 +9,7 @@ import AddToCartButton from '@molecules/AddToCartButton';
 import AddToFavButton from '@molecules/AddToFavButton';
 
 import './ProductCard.scss';
+import { Link } from 'react-router-dom';
 
 type ProductCardProps = {
   productName: string;
@@ -19,6 +20,8 @@ type ProductCardProps = {
   ram: string;
   image: string;
   capacityLabel: string;
+  itemId: string;
+  categoryType: string;
 };
 
 const ProductCard = ({
@@ -30,50 +33,54 @@ const ProductCard = ({
   ram,
   image,
   capacityLabel,
+  itemId,
+  categoryType,
 }: ProductCardProps) => {
   return (
-    <div className="card">
-      <Image
-        src={image}
-        alt={productName}
-      />
+    <Link to={`/${categoryType}/${itemId}`}>
+      <div className="card">
+        <Image
+          src={image}
+          alt={productName}
+        />
 
-      <div className="add-to-fav-btn absolute">
-        <AddToFavButton />
-      </div>
-
-      <div className="card__title-wrapper">
-        <Title productName={productName} />
-      </div>
-
-      <Price
-        price={price}
-        fullPrice={fullPrice}
-      />
-
-      <Divider />
-
-      <div className="card__product-parameters">
-        <div className="card__product-screen">
-          <Subtitle title="Screen" />
-          <Value value={screen} />
+        <div className="add-to-fav-btn absolute">
+          <AddToFavButton />
         </div>
 
-        <div className="card__product-capacity">
-          <Subtitle title={capacityLabel} />
-          <Value value={capacity} />
+        <div className="card__title-wrapper">
+          <Title productName={productName} />
         </div>
 
-        <div className="card__product-ram">
-          <Subtitle title="RAM" />
-          <Value value={ram} />
+        <Price
+          price={price}
+          fullPrice={fullPrice}
+        />
+
+        <Divider />
+
+        <div className="card__product-parameters">
+          <div className="card__product-screen">
+            <Subtitle title="Screen" />
+            <Value value={screen} />
+          </div>
+
+          <div className="card__product-capacity">
+            <Subtitle title={capacityLabel} />
+            <Value value={capacity} />
+          </div>
+
+          <div className="card__product-ram">
+            <Subtitle title="RAM" />
+            <Value value={ram} />
+          </div>
+        </div>
+
+        <div className="card__add-to-cart-wrapper">
+          <AddToCartButton />
         </div>
       </div>
-
-      <div className="card__add-to-cart-wrapper">
-        <AddToCartButton />
-      </div>
-    </div>
+    </Link>
   );
 };
 
