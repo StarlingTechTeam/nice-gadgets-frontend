@@ -10,6 +10,10 @@ type ProductListProps = {
 const ProductList = ({ products }: ProductListProps) => {
   const { categoryType } = useParams();
 
+  if (!categoryType) {
+    return null;
+  }
+
   return (
     <div className="products-grid">
       {products.map((product) => {
@@ -62,6 +66,8 @@ const ProductList = ({ products }: ProductListProps) => {
             capacityLabel={capacityLabel}
             ram={ram}
             image={image_url}
+            categoryType={categoryType}
+            itemId={product.itemId}
           />
         );
       })}
