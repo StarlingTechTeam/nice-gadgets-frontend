@@ -63,7 +63,7 @@
   &__info {
     &-wrapper {
       @include on-tablet {
-        max-width: 320px;
+        width: 320px;
       }
     }
   }
@@ -102,5 +102,16 @@
   &.selected {
     background-color: var(--color-primary);
     color: var(--color-background);
+  }
+}
+
+.go-back {
+  display: flex;
+  align-items: center;
+  font:
+    600 12px / 100% 'Mont',
+    sans-serif;
+  span {
+    margin-top: 1px;
   }
 }

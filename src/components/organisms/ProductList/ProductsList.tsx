@@ -1,17 +1,27 @@
 import { useParams } from 'react-router-dom';
-import type { Product } from '@/shared/api/products';
 import ProductCard from '@organisms/ProductCard';
 import './ProductsList.scss';
+import type { ProductCard as ProductCardType } from '@/types/ProductCard ';
+import ProductCardSkeleton from '@organisms/ProductCardSkeleton';
 
 type ProductListProps = {
-  products: Product[];
+  products: ProductCardType[];
+  loading?: boolean;
 };
 
-const ProductList = ({ products }: ProductListProps) => {
+const ProductList = ({ products, loading = false }: ProductListProps) => {
   const { categoryType } = useParams();
 
-  if (!categoryType) {
-    return null;
+  if (!categoryType) return null;
+
+  if (loading) {
+    return (
+      <div className="products-grid">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
+      </div>
+    );
   }
 
   return (

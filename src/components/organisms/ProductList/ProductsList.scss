@@ -1,3 +1,15 @@
 .products-grid {
   display: contents;
 }
+
+.product-card-skeleton {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-background);
+  height: 100%;
+  min-height: 280px;
+  width: 100%;
+}
