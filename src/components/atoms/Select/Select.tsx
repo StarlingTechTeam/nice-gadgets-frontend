@@ -3,7 +3,7 @@ import './Select.scss';
 
 type SelectProps = {
   value: string;
-  items: string[];
+  items: readonly string[];
   onChange: (value: string) => void;
 };
 

@@ -3,18 +3,36 @@ import Subtitle from '@atoms/Text/Subtitle';
 import Select from '@atoms/Select';
 import './FiltersBar.scss';
 
-const FiltersBar = () => {
-  const [sortBy, setSortBy] = useState('Newest');
+export const SORT_OPTIONS = [
+  'Newest',
+  'Oldest',
+  'Price low to high',
+  'Price high to low',
+] as const;
+
+export type SortOption = (typeof SORT_OPTIONS)[number];
+
+export const DEFAULT_SORT: SortOption = SORT_OPTIONS[0];
+
+type FiltersBarProps = {
+  sortValue: SortOption;
+  onSortChange: (value: SortOption) => void;
+};
+
+const FiltersBar = ({ sortValue, onSortChange }: FiltersBarProps) => {
   const [itemsOnPage, setItemsOnPage] = useState('16');
+  const handleSortChange = (value: string) => {
+    onSortChange(value as SortOption);
+  };
 
   return (
     <div className="filters-bar flex">
       <div className="filters-bar__group">
         <Subtitle title="Sort by" />
         <Select
-          value={sortBy}
-          items={['Newest', 'Oldest', 'Price low to high', 'Price high to low']}
-          onChange={setSortBy}
+          value={sortValue}
+          items={SORT_OPTIONS}
+          onChange={handleSortChange}
         />
       </div>
 
