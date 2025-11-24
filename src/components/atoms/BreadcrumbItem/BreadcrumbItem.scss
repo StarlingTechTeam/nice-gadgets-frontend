@@ -17,7 +17,7 @@
     width: 16px;
     height: 16px;
     background-color: var(--color-primary);
-    mask: url('@/assets/icons/home-icon.svg') center / contain no-repeat;
+    mask: url('@assets/icons/home-icon.svg') center / contain no-repeat;
   }
 
   &__label {
@@ -25,12 +25,13 @@
       600 12px/15px 'Mont',
       sans-serif;
     color: var(--color-secondary);
+    margin-top: 1px;
   }
 
   .breadcrumb-separator {
     width: 16px;
     height: 16px;
     background-color: var(--color-secondary);
-    mask: url('@/assets/icons/arrow-right.svg') center / contain no-repeat;
+    mask: url('@assets/icons/arrow-right.svg') center / contain no-repeat;
   }
 }
