@@ -8,7 +8,11 @@ const AddToCartButton = () => {
     <Button
       variant="primary"
       isActive={added}
-      onClick={() => setAdded((prev) => !prev)}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setAdded((prev) => !prev);
+      }}
     >
       {added ? 'Added to cart' : 'Add to cart'}
     </Button>

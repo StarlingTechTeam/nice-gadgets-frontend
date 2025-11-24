@@ -9,7 +9,11 @@ const AddToFavButton = () => {
     <div>
       <div
         className={`fav-button ${active ? 'is-active' : ''}`}
-        onClick={() => setActive((prev) => !prev)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setActive((prev) => !prev);
+        }}
       >
         <Button
           variant="icon"
