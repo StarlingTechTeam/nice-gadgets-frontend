@@ -17,8 +17,6 @@ const SliderProductItem: FC<SliderProductItemProps> = ({ image, title }) => {
 
   return (
     <div className="product__slider__main-img cursor-pointer">
-      {!loaded && <div className="slider-product-details__skeleton" />}
-
       <div className="slider-product-details__image-wrapper">
         <img
           src={image}
