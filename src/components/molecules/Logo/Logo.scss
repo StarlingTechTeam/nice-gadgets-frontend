@@ -1,0 +1,25 @@
+@use '@styles/mixins' as *;
+
+.logo-link {
+  display: inline-block;
+  width: 64px;
+  transition: transform ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @include on-desktop {
+    width: 80px;
+  }
+
+  &--footer {
+    width: 90px;
+  }
+}
+
+.logo-image {
+  display: block;
+  height: auto;
+  width: 100%;
+}
