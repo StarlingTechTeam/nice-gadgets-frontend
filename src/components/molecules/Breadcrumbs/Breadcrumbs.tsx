@@ -6,7 +6,7 @@ import './Breadcrumbs.scss';
 
 const Breadcrumbs = () => {
   const location = useLocation();
-  const [searcParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const segments = location.pathname.split('/').filter(Boolean);
 
   const normalizeBreadcrumbText = (segment: string): string => {
@@ -33,8 +33,8 @@ const Breadcrumbs = () => {
 
   const normalizeLabel = (segment: string, index: number, isLast: boolean) => {
     if (isLast) {
-      const capacity = searcParams.get('capacity');
-      const color = searcParams.get('color');
+      const capacity = searchParams.get('capacity');
+      const color = searchParams.get('color');
 
       if (capacity && color) {
         const fullSlug = `${segment}-${capacity}-${color}`;
