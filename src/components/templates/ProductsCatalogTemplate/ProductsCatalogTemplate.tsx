@@ -1,14 +1,15 @@
 import ProductList from '@organisms/ProductList';
-import type { Product } from '@/shared/api/products';
 import ProductsCatalogHeader from '@molecules/ProductsCatalogHeader';
 import type { SortOption } from '@molecules/FiltersBar';
 import './ProductsCatalogTemplate.scss';
+import type { ProductCard } from '@/types/ProductCard ';
 
 type ProductsCatalogTemplateProps = {
-  products: Product[];
+  products: ProductCard[];
   category: string;
   sortValue: SortOption;
   onSortChange: (value: SortOption) => void;
+  loading: boolean;
 };
 
 const formatCategoryTitle = (category: string) => {
@@ -29,6 +30,7 @@ const ProductsCatalogTemplate = ({
   category,
   sortValue,
   onSortChange,
+  loading,
 }: ProductsCatalogTemplateProps) => {
   return (
     <div className="catalog-grid inline-wrapper">
@@ -39,7 +41,10 @@ const ProductsCatalogTemplate = ({
         onSortChange={onSortChange}
       />
 
-      <ProductList products={products} />
+      <ProductList
+        products={products}
+        loading={loading}
+      />
     </div>
   );
 };

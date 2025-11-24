@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
 import ProductsCatalogTemplate from '@templates/ProductsCatalogTemplate';
-import { products, type Product } from '@/shared/api/products';
+import { products } from '@/shared/api/products';
 import { DEFAULT_SORT, type SortOption } from '@molecules/FiltersBar';
+import type { ProductCard } from '@/types/ProductCard ';
 
-const sortProducts = (list: Product[], sortOrder: SortOption) => {
+const sortProducts = (list: ProductCard[], sortOrder: SortOption) => {
   const sorted = [...list];
 
   switch (sortOrder) {
@@ -44,7 +45,7 @@ const getParamFromSort = (option: SortOption) => SORT_PARAM_BY_OPTION[option];
 const ProductsCatalogPage = () => {
   const { categoryType } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [items, setItems] = useState<Product[]>([]);
+  const [items, setItems] = useState<ProductCard[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -94,11 +95,7 @@ const ProductsCatalogPage = () => {
     [items, sortValue],
   );
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!items.length || !categoryType) {
+  if (!items.length && !loading) {
     return <h1>Not Found</h1>;
   }
 
@@ -108,6 +105,7 @@ const ProductsCatalogPage = () => {
       category={categoryType!}
       sortValue={sortValue}
       onSortChange={handleSortChange}
+      loading={loading}
     />
   );
 };
