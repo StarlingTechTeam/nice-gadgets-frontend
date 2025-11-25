@@ -23,6 +23,8 @@
     --color-like: #ff6347;
     --color-dropdown: #fafbfc;
     --color-dropdown-border: #b4bdc3;
+    --color-pagination-button-background: #000000;
+    --color-pagination-button-text: #ffffff;
   }
 }
 
@@ -37,5 +39,6 @@
     --color-background-icon: #323542;
     --color-dropdown: #323542;
     --color-dropdown-border: #161827;
+    --color-pagination-button-background: #905bff;
   }
 }

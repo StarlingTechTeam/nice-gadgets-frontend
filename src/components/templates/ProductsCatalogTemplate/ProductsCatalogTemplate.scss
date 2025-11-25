@@ -1,7 +1,17 @@
+@use '@styles/mixins' as *;
+
 .catalog-grid {
   display: grid;
   column-gap: 16px;
   row-gap: 40px;
   grid-template-columns: repeat(auto-fit, minmax(270px, 270px));
   justify-content: center;
+
+  > *:last-child {
+    margin-top: -16px;
+
+    @include on-tablet {
+      margin-top: 0;
+    }
+  }
 }
