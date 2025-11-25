@@ -20,5 +20,5 @@ export const getColorHex = (input: string): string => {
     console.log('Error getting color:', input);
   }
 
-  return FALLBACK_COLORS[normalized] || '#cccccc'; // safe default grey
+  return FALLBACK_COLORS[normalized] || '#cccccc';
 };
