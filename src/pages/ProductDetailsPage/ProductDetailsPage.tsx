@@ -14,17 +14,19 @@ import ProductSpecRow from '@molecules/ProductCardParams';
 import SliderHero from '@organisms/SliderHero';
 import { useTheme } from '@/hooks/useTheme';
 import { formatCapacityOrRAM, normalizeScreenQuote } from '@/utills/formatting';
-import SliderProductDetails from '@organisms/SliderProductDetails';
-import { productDetailsApi } from '@/shared/api/productDetailsApi';
-import type { ProductDetails } from '@/types/ProductDetails';
+import './ProductDetailsPage.scss';
+import SliderProductDetails from '@/components/organisms/SliderProductDetails';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import './ProductDetailsPage.scss';
+import { productDetailsApi } from '@/shared/api/productDetailsApi';
+import type { ProductDetails } from '@/types/ProductDetails';
 
 type Param = string | number;
 type Params = {
   [key: string]: Param | null;
 };
+
+const skeletonArray = (n: number) => Array.from({ length: n });
 
 const getSearchWith = (
   params: Params,
@@ -44,14 +46,14 @@ const getSearchWith = (
 };
 
 const COLOR_MAP: Record<string, string> = {
-  rosegold: '#E0BFB8',
+  'rosegold': '#E0BFB8',
+  'space+grey': '#717378',
+  'space+gray': '#717378',
 };
 
-const skeletonArray = (n: number) => Array.from({ length: n });
-
 const ProductDetailsPage = () => {
-  const [product, setProduct] = useState<ProductDetails | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<ProductDetails[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const { theme } = useTheme();
 
@@ -61,24 +63,95 @@ const ProductDetailsPage = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!urlProductId) return;
-
+    let mounted = true;
     setLoading(true);
     productDetailsApi
-      .getById(urlProductId)
-      .then((product) => setProduct(product ?? null))
-      .finally(() => setLoading(false));
-  }, [urlProductId]);
+      .getAll()
+      .then((all) => {
+        if (!mounted) return;
+        setData(all);
+      })
+      .catch(() => {
+        if (!mounted) return;
+        setData([]);
+      })
+      .finally(() => {
+        if (!mounted) return;
+        setLoading(false);
+      });
 
-  const currentCapacity =
-    searchParams.get('capacity') || product?.capacity || null;
-  const currentColor = searchParams.get('color') || product?.color || null;
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  let initialCapacity = searchParams.get('capacity');
+  let initialColor = searchParams.get('color');
+
+  const slugParts = urlProductId?.split('-');
+  if (
+    urlProductId &&
+    !initialCapacity &&
+    !initialColor &&
+    slugParts &&
+    slugParts.length > 2
+  ) {
+    const lastPart = slugParts[slugParts.length - 1];
+    const secondToLastPart = slugParts[slugParts.length - 2];
+
+    initialCapacity = secondToLastPart;
+    initialColor = lastPart;
+  }
+
+  const tempFullId = urlProductId;
+
+  const product: ProductDetails | undefined = (() => {
+    if (!data || !urlProductId) return undefined;
+
+    let foundProduct: ProductDetails | undefined;
+
+    if (tempFullId) {
+      foundProduct = data.find((p) => p.id === tempFullId);
+    }
+
+    if (!foundProduct && initialCapacity && initialColor) {
+      const namespaceId = urlProductId.replace(
+        `-${initialCapacity}-${initialColor}`,
+        '',
+      );
+
+      foundProduct = data.find(
+        (p) =>
+          p.namespaceId === namespaceId &&
+          p.capacity?.toLowerCase() === initialCapacity?.toLowerCase() &&
+          p.color?.toLowerCase() === initialColor?.toLowerCase(),
+      );
+    }
+
+    if (!foundProduct) {
+      const baseNamespaceId = urlProductId.split('-').slice(0, -2).join('-');
+      foundProduct = data.find(
+        (p) =>
+          (p.namespaceId && urlProductId.includes(p.namespaceId)) ||
+          (baseNamespaceId && p.namespaceId === baseNamespaceId),
+      );
+    }
+
+    return foundProduct;
+  })();
+
+  let currentCapacity = null;
+  let currentColor = null;
+  if (product) {
+    currentCapacity = searchParams.get('capacity') || product.capacity || null;
+    currentColor = searchParams.get('color') || product.color || null;
+  }
 
   useEffect(() => {
     if (!product) return;
 
-    const currentCategory = categoryType || product.category;
-    const expectedPathname = `/${currentCategory}/${product.id}`;
+    const currentCategory = (categoryType as string) || product.category;
+    const expectedPathname = `/${currentCategory}/${product.namespaceId}`;
 
     const newSearchParams = new URLSearchParams();
     if (currentCapacity) {
@@ -87,12 +160,14 @@ const ProductDetailsPage = () => {
     if (currentColor) {
       newSearchParams.set('color', currentColor);
     }
-
     const expectedSearch = newSearchParams.toString();
 
+    const currentPathname = location.pathname.replace('#', '');
+    const currentSearch = location.search.substring(1);
+
     if (
-      location.pathname !== expectedPathname ||
-      location.search.substring(1) !== expectedSearch
+      currentPathname !== expectedPathname ||
+      currentSearch !== expectedSearch
     ) {
       navigate(`${expectedPathname}?${expectedSearch}`, { replace: true });
     }
@@ -105,6 +180,14 @@ const ProductDetailsPage = () => {
     navigate,
     location.search,
   ]);
+
+  if (!product && !loading) {
+    return (
+      <div className="inline-wrapper">
+        <div className="text-primary">Product Not Found</div>
+      </div>
+    );
+  }
 
   const updateSearchParams = (params: Params) => {
     const search = getSearchWith(params, searchParams);
@@ -119,29 +202,23 @@ const ProductDetailsPage = () => {
     updateSearchParams({ capacity: value || null });
   };
 
-  const mainSpecifications =
-    loading ?
-      skeletonArray(4).map(() => ({ key: '', value: '' }))
-    : [
-        { key: 'Screen', value: normalizeScreenQuote(product?.screen || '') },
-        { key: 'Resolution', value: product?.resolution ?? '' },
-        { key: 'Processor', value: product?.processor ?? '' },
-        { key: 'RAM', value: formatCapacityOrRAM(product?.ram ?? '') },
-      ];
+  const mainSpecifications = [
+    { key: 'Screen', value: normalizeScreenQuote(product?.screen || '') },
+    { key: 'Resolution', value: product?.resolution ?? '' },
+    { key: 'Processor', value: product?.processor ?? '' },
+    { key: 'RAM', value: formatCapacityOrRAM(product?.ram ?? '') },
+  ];
 
-  const techSpecifications =
-    loading ?
-      skeletonArray(8).map(() => ({ key: '', value: '' }))
-    : [
-        { key: 'Screen', value: normalizeScreenQuote(product?.screen ?? '') },
-        { key: 'Resolution', value: product?.resolution ?? '' },
-        { key: 'Processor', value: product?.processor ?? '' },
-        { key: 'RAM', value: formatCapacityOrRAM(product?.ram ?? '') },
-        { key: 'Built in memory', value: product?.capacity ?? '' },
-        { key: 'Camera', value: product?.camera ?? '' },
-        { key: 'Zoom', value: product?.zoom ?? '' },
-        { key: 'Cell', value: product?.cell?.join(', ') ?? '' },
-      ];
+  const techSpecifications = [
+    { key: 'Screen', value: normalizeScreenQuote(product?.screen ?? '') },
+    { key: 'Resolution', value: product?.resolution ?? '' },
+    { key: 'Processor', value: product?.processor ?? '' },
+    { key: 'RAM', value: formatCapacityOrRAM(product?.ram ?? '') },
+    { key: 'Built in memory', value: product?.capacity ?? '' },
+    { key: 'Camera', value: product?.camera ?? '' },
+    { key: 'Zoom', value: product?.zoom ?? '' },
+    { key: 'Cell', value: product?.cell?.join(', ') ?? '' },
+  ];
 
   return (
     <div className="inline-wrapper mt-6">
@@ -193,7 +270,12 @@ const ProductDetailsPage = () => {
                       />
                     ))
                   : product?.colorsAvailable.map((color) => {
-                      const displayColor = COLOR_MAP[color] || color;
+                      const normalized = color
+                        .toLowerCase()
+                        .replace(/\s+/g, '+');
+                      const displayColor = COLOR_MAP[normalized] || color;
+                      console.log('display color:', displayColor);
+                      console.log('map', COLOR_MAP[color]);
                       return (
                         <button
                           key={color}
@@ -309,7 +391,8 @@ const ProductDetailsPage = () => {
             skeletonArray(2).map((_, i) => (
               <Fragment key={i}>
                 <Skeleton
-                  width={200}
+                  style={{ minWidth: '320px' }}
+                  width={600}
                   height={25}
                   className="mb-4"
                 />
