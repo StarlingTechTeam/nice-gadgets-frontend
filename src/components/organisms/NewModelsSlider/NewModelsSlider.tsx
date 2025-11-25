@@ -1,6 +1,6 @@
 import { type FC } from 'react';
-import ProductsSlider from '@/components/templates/ProductSliderTemplate';
-import { selectNewModels } from '@/utills/productFilters';
+import ProductsSlider from '@templates/ProductSliderTemplate';
+import { selectNewModels } from '@utils/productFilters';
 import type { ProductCard as ProductCardType } from '@/types/ProductCard ';
 
 type Props = {

@@ -9,8 +9,8 @@ import './SliderHero.scss';
 
 import { slides } from './slides';
 
-import SliderHeroButton from '@molecules/SliderHeroButton/SliderHeroButton';
-import SliderHeroItem from '@molecules/SliderHeroItem/SliderHeroItem';
+import SliderHeroButton from '@molecules/SliderHeroButton';
+import SliderHeroItem from '@molecules/SliderHeroItem';
 
 const SliderHero: FC = () => {
   return (
