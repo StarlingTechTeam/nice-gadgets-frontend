@@ -1,13 +1,13 @@
-import HomePageTitle from '@/components/atoms/HomePageTitle';
-import './HomePage.scss';
 import { useEffect, useState } from 'react';
-import { productDetailsApi } from '@/shared/api/productDetailsApi';
-import { Link } from 'react-router-dom';
-import HomePageSkeleton from './HomeSkeleton';
+import HomePageTitle from '@atoms/HomePageTitle';
 import SliderHero from '@organisms/SliderHero';
-import HotPricesSlider from '@organisms/HotPricesSlider';
+import CategorySection from '@organisms/CategorySection';
 import NewModelsSlider from '@organisms/NewModelsSlider/';
-import { useProducts } from '@hooks/useProducts';
+import HotPricesSlider from '@organisms/HotPricesSlider';
+import HomePageSkeleton from './HomeSkeleton';
+import { productDetailsApi } from '@/shared/api/productDetailsApi';
+import { useProducts } from '@/hooks/useProducts';
+import './HomePage.scss';
 
 type CategoryCounts = {
   phones: number;
@@ -23,7 +23,6 @@ const HomePage = () => {
     tablets: 0,
     accessories: 0,
   });
-  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -56,65 +55,28 @@ const HomePage = () => {
       <div className="inline-wrapper">
         <HomePageTitle />
       </div>
+
       <div className="homepage-block__wrapper">
         <div className="inline-wrapper">
           <SliderHero />
         </div>
-        <div className="text-primary inline-wrapper homepage-category">
+
+        <div className="inline-wrapper">
           <NewModelsSlider products={products} />
         </div>
-        <div className="text-primary text-2xl inline-wrapper homepage-category">
-          <div className="homepage__section-title__wrapper">
-            <h2 className="homepage__section-title">Shop by category</h2>
-          </div>
-          <div className="category-block">
-            <Link
-              to={'./phones'}
-              className="category-item"
-            >
-              <div className="category-item__image-block image-block-1"></div>
-              <div className="category-item__text-block">
-                <h4 className="homepage__category-title">Mobile phones</h4>
-                <span className="homepage__category-subtitle text-secondary">
-                  {counts.phones} models
-                </span>
-              </div>
-            </Link>
-            <Link
-              to={'./tablets'}
-              className="category-item"
-            >
-              <div className="category-item__image-block image-block-2"></div>
-              <div className="category-item__text-block">
-                <h4 className="homepage__category-title text-primary">
-                  Tablets
-                </h4>
-                <span className="homepage__category-subtitle text-secondary">
-                  {counts.tablets} models
-                </span>
-              </div>
-            </Link>
-            <Link
-              to={'./accessories'}
-              className="category-item"
-            >
-              <div className="category-item__image-block image-block-3"></div>
-              <div className="category-item__text-block">
-                <h4 className="homepage__category-title text-primary">
-                  Accessories
-                </h4>
-                <span className="homepage__category-subtitle text-secondary">
-                  {counts.accessories} models
-                </span>
-              </div>
-            </Link>
-          </div>
-        </div>
-        <div className="text-primary inline-wrapper homepage-category">
+
+        <CategorySection
+          phones={counts.phones}
+          tablets={counts.tablets}
+          accessories={counts.accessories}
+        />
+
+        <div className="inline-wrapper">
           <HotPricesSlider products={products} />
         </div>
       </div>
     </>
   );
 };
+
 export default HomePage;

@@ -1,0 +1,9 @@
+@use '@styles/mixins' as *;
+
+.homepage__section-title__wrapper {
+  margin-bottom: 24px;
+
+  @include on-desktop {
+    margin-bottom: 30px;
+  }
+}

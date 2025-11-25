@@ -1,0 +1,73 @@
+@use '@styles/mixins' as *;
+
+.category-item {
+  height: 353px;
+
+  @include on-tablet {
+    flex: 1;
+  }
+
+  &__image-block {
+    height: 288px;
+    background-color: #6d6474;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0 15px 0.1px #ffffff inset;
+    }
+  }
+
+  &__text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 51px;
+  }
+
+  &__title {
+    line-height: 100%;
+  }
+}
+
+.image-block-1 {
+  background-image: url('./src/assets/img/category-phones.png');
+  background-repeat: no-repeat;
+  background-size: 110%;
+  background-position-y: -6vh;
+  background-position-x: -2vw;
+
+  @include on-tablet {
+    background-position-y: -5vh;
+    background-position-x: -5vh;
+    background-size: 500px;
+  }
+}
+.image-block-2 {
+  background-image: url('./src/assets/img/category-tablets.png');
+  background-repeat: no-repeat;
+  background-size: 120%;
+  background-position-y: 1vh;
+  background-position-x: 4vw;
+
+  @include on-tablet {
+    background-size: 500px;
+    background-position-y: -1vh;
+    background-position-x: -1vh;
+  }
+}
+.image-block-3 {
+  background-image: url('./src/assets/img/category-accessories.png');
+  background-repeat: no-repeat;
+  background-size: 120%;
+  background-position-y: 3vh;
+  background-position-x: 4vw;
+
+  @include on-tablet {
+    background-size: 600px;
+
+    background-position-y: 3vh;
+    background-position-x: 2vh;
+  }
+}
