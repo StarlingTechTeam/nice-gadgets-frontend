@@ -1,1 +1,2 @@
-export * from './SliderHeroButton';
+import SliderHeroButton from './SliderHeroButton';
+export default SliderHeroButton;

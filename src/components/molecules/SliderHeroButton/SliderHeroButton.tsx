@@ -3,24 +3,27 @@ import Button from '@atoms/Button';
 
 interface SliderHeroButtonProps {
   direction: 'next' | 'prev';
-  icon: string;
   className?: string;
+  baseClass?: string;
 }
 
 const SliderHeroButton: FC<SliderHeroButtonProps> = ({
   direction,
-  icon,
   className,
+  baseClass = 'slider-hero',
 }) => {
   return (
     <Button
       variant="icon"
-      className={`slider-hero__arrow slider-hero__arrow--${direction} ${className || ''}`}
+      className={`
+        ${baseClass}__arrow 
+        ${baseClass}__arrow--${direction} 
+        ${className || ''}
+      `}
       icon={
-        <img
-          src={icon}
-          alt={direction === 'next' ? 'Next slide' : 'Previous slide'}
-          className="slider-hero__arrow-icon"
+        <span
+          className={`${baseClass}__arrow-icon arrow-icon`}
+          data-icon={direction}
         />
       }
     />
