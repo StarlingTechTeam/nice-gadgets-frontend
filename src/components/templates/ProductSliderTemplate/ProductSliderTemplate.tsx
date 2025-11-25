@@ -14,6 +14,7 @@ import type { ProductCard as ProductCardType } from '@/types/ProductCard';
 interface ProductsSliderProps {
   title: string;
   products: ProductCardType[];
+  sliderId: string;
 }
 
 const splitDigitsAndLetters = (value: string) => {
@@ -48,7 +49,14 @@ const formatScreen = (value: string) => {
   return result;
 };
 
-const ProductsSlider: FC<ProductsSliderProps> = ({ products, title }) => {
+const ProductsSlider: FC<ProductsSliderProps> = ({
+  products,
+  title,
+  sliderId,
+}) => {
+  const prevClass = `js-prev-${sliderId}`;
+  const nextClass = `js-next-${sliderId}`;
+
   return (
     <div className="products-slider">
       <div className="products-slider__main">
@@ -59,12 +67,12 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ products, title }) => {
           <div className="products-slider__controls">
             <SliderHeroButton
               direction="prev"
-              className="products-slider__arrow products-slider__arrow--prev"
+              className={`products-slider__arrow products-slider__arrow--prev ${prevClass}`}
               baseClass="products-slider"
             />
             <SliderHeroButton
               direction="next"
-              className="products-slider__arrow products-slider__arrow--next"
+              className={`products-slider__arrow products-slider__arrow--prev ${nextClass}`}
               baseClass="products-slider"
             />
           </div>
@@ -76,8 +84,8 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ products, title }) => {
           spaceBetween={16}
           slidesPerView={'auto'}
           navigation={{
-            prevEl: '.products-slider__arrow--prev',
-            nextEl: '.products-slider__arrow--next',
+            prevEl: `.${prevClass}`,
+            nextEl: `.${nextClass}`,
           }}
           className="swiper-template"
         >
@@ -96,7 +104,7 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ products, title }) => {
             return (
               <SwiperSlide
                 key={product.id}
-                style={{ width: '280px' }}
+                style={{ width: '270px' }}
               >
                 <ProductCard
                   productName={product.name}
