@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import type { ProductCard } from '@/types/ProductCard ';
+import type { ProductCard } from '@/types/ProductCard';
 
 const FAVORITES_STORAGE_KEY = 'nice-gadgets:favorites';
 
