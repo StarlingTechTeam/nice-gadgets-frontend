@@ -2,9 +2,12 @@ import HomePageTitle from '@/components/atoms/HomePageTitle';
 import './HomePage.scss';
 import { useEffect, useState } from 'react';
 import { productDetailsApi } from '@/shared/api/productDetailsApi';
-import SliderHero from '@/components/organisms/SliderHero';
 import { Link } from 'react-router-dom';
 import HomePageSkeleton from './HomeSkeleton';
+import SliderHero from '@organisms/SliderHero';
+import HotPricesSlider from '@organisms/HotPricesSlider';
+import NewModelsSlider from '@organisms/NewModelsSlider/';
+import { useProducts } from '@hooks/useProducts';
 
 type CategoryCounts = {
   phones: number;
@@ -13,12 +16,14 @@ type CategoryCounts = {
 };
 
 const HomePage = () => {
+  const { products, loading } = useProducts();
+
   const [counts, setCounts] = useState<CategoryCounts>({
     phones: 0,
     tablets: 0,
     accessories: 0,
   });
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -36,15 +41,13 @@ const HomePage = () => {
         });
       } catch (err) {
         console.error('Failed to fetch product counts', err);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchCounts();
   }, []);
 
-  if (isLoading) {
+  if (loading) {
     return <HomePageSkeleton />;
   }
 
@@ -57,13 +60,8 @@ const HomePage = () => {
         <div className="inline-wrapper">
           <SliderHero />
         </div>
-        <div className="text-primary text-2xl inline-wrapper homepage-category">
-          <div className="homepage__section-title__wrapper">
-            <h2 className="homepage__section-title">Brand new models</h2>
-          </div>
-          <div className="h-[352px] bg-gray-500 text-center leading-[352px] text-2xl">
-            Brand new models
-          </div>
+        <div className="text-primary inline-wrapper homepage-category">
+          <NewModelsSlider products={products} />
         </div>
         <div className="text-primary text-2xl inline-wrapper homepage-category">
           <div className="homepage__section-title__wrapper">
@@ -112,13 +110,8 @@ const HomePage = () => {
             </Link>
           </div>
         </div>
-        <div className="text-primary text-2xl inline-wrapper">
-          <div className="homepage__section-title__wrapper">
-            <h2 className="homepage__section-title">Hot prices</h2>
-          </div>
-          <div className="h-[352px] bg-gray-500 text-center leading-[352px] text-2xl">
-            Hot prices
-          </div>
+        <div className="text-primary inline-wrapper homepage-category">
+          <HotPricesSlider products={products} />
         </div>
       </div>
     </>

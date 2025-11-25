@@ -2,9 +2,6 @@ import { type FC } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 
-import PrevArrowIcon from '@assets/icons/prevSlider.svg';
-import NextArrowIcon from '@assets/icons/nextSlider.svg';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -12,21 +9,15 @@ import './SliderHero.scss';
 
 import { slides } from './slides';
 
-import SliderHeroButton from '@molecules/SliderHeroButton/SliderHeroButton';
-import SliderHeroItem from '@molecules/SliderHeroItem/SliderHeroItem';
+import SliderHeroButton from '@molecules/SliderHeroButton';
+import SliderHeroItem from '@molecules/SliderHeroItem';
 
 const SliderHero: FC = () => {
   return (
     <div className="slider-hero">
-      <SliderHeroButton
-        direction="next"
-        icon={NextArrowIcon}
-      />
+      <SliderHeroButton direction="next" />
 
-      <SliderHeroButton
-        direction="prev"
-        icon={PrevArrowIcon}
-      />
+      <SliderHeroButton direction="prev" />
 
       <div className="slider-hero__container">
         <Swiper
