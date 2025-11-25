@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import ProductsCatalogTemplate from '@templates/ProductsCatalogTemplate';
 import { products } from '@/shared/api/products';
 import { DEFAULT_SORT, type SortOption } from '@molecules/FiltersBar';
-import type { ProductCard } from '@/types/ProductCard ';
+import type { ProductCard } from '@/types/ProductCard';
 
 const SORT_QUERY_KEY = 'sort';
 const PAGE_QUERY_KEY = 'page';

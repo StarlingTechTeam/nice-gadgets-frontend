@@ -20,6 +20,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { productDetailsApi } from '@/shared/api/productDetailsApi';
 import type { ProductDetails } from '@/types/ProductDetails';
 import { formatCapacityOrRAM, normalizeScreenQuote } from '@utils/formatting';
+import { getColorHex } from '@/utils/getColorHex';
 
 type Param = string | number;
 type Params = {
@@ -43,12 +44,6 @@ const getSearchWith = (
   });
 
   return newParams.toString();
-};
-
-const COLOR_MAP: Record<string, string> = {
-  'rosegold': '#E0BFB8',
-  'space+grey': '#717378',
-  'space+gray': '#717378',
 };
 
 const ProductDetailsPage = () => {
@@ -270,12 +265,8 @@ const ProductDetailsPage = () => {
                       />
                     ))
                   : product?.colorsAvailable.map((color) => {
-                      const normalized = color
-                        .toLowerCase()
-                        .replace(/\s+/g, '+');
-                      const displayColor = COLOR_MAP[normalized] || color;
-                      console.log('display color:', displayColor);
-                      console.log('map', COLOR_MAP[color]);
+                      const displayColor = getColorHex(color);
+
                       return (
                         <button
                           key={color}
