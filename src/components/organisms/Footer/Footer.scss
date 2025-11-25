@@ -70,9 +70,4 @@
   height: 1px;
   width: 100%;
   box-shadow: 0px -1px 0px 0px var(--color-border);
-  margin-top: 64px;
-
-  @include on-desktop {
-    margin-top: 80px;
-  }
 }
