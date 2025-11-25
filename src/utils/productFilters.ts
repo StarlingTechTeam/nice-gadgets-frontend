@@ -1,4 +1,4 @@
-import type { ProductCard as ProductCardType } from '@/types/ProductCard ';
+import type { ProductCard as ProductCardType } from '@/types/ProductCard';
 
 export const selectHotPriceProducts = (products: ProductCardType[]) => {
   return products
@@ -13,7 +13,7 @@ export const selectHotPriceProducts = (products: ProductCardType[]) => {
 
 export const selectNewModels = (products: ProductCardType[]) => {
   return products
-    .filter((product) => product.year >= 2022)
+    .filter((product) => product.year)
     .sort((a, b) => b.price - a.price);
 };
 

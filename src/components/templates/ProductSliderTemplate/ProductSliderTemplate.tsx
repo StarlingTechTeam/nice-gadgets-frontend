@@ -9,7 +9,7 @@ import './ProductSliderTemplate.scss';
 import SliderHeroButton from '@molecules/SliderHeroButton';
 import ProductCard from '@organisms/ProductCard';
 
-import type { ProductCard as ProductCardType } from '@/types/ProductCard ';
+import type { ProductCard as ProductCardType } from '@/types/ProductCard';
 
 interface ProductsSliderProps {
   title: string;

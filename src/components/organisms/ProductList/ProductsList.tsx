@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ProductCard from '@organisms/ProductCard';
 import './ProductsList.scss';
-import type { ProductCard as ProductCardType } from '@/types/ProductCard ';
+import type { ProductCard as ProductCardType } from '@/types/ProductCard';
 import ProductCardSkeleton from '@organisms/ProductCardSkeleton';
 
 type ProductListProps = {
