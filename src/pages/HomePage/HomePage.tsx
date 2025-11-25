@@ -24,25 +24,15 @@ const HomePage = () => {
     accessories: 0,
   });
 
+  const fetchCounts = async () => {
+    try {
+      setCounts(productDetailsApi.getByLength());
+    } catch (err) {
+      console.error('Failed to fetch product counts', err);
+    }
+  };
+
   useEffect(() => {
-    const fetchCounts = async () => {
-      try {
-        const [phones, tablets, accessories] = await Promise.all([
-          productDetailsApi.getByCategory('phones'),
-          productDetailsApi.getByCategory('tablets'),
-          productDetailsApi.getByCategory('accessories'),
-        ]);
-
-        setCounts({
-          phones: phones.length,
-          tablets: tablets.length,
-          accessories: accessories.length,
-        });
-      } catch (err) {
-        console.error('Failed to fetch product counts', err);
-      }
-    };
-
     fetchCounts();
   }, []);
 
