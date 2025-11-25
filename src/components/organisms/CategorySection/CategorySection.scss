@@ -1,0 +1,15 @@
+@use '@styles/mixins' as *;
+
+.category-block {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include on-tablet {
+    flex-direction: row;
+    gap: 15px;
+  }
+  @include on-tablet {
+    gap: 16px;
+  }
+}
