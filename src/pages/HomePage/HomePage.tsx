@@ -18,12 +18,12 @@ type CategoryCounts = {
 const HomePage = () => {
   const { products: newProducts, loading: newModelsLoading } = useProducts(
     'new',
-    24,
+    12,
   );
 
   const { products: hotProducts, loading: hotPricesLoading } = useProducts(
     'hot',
-    24,
+    12,
   );
 
   const [counts, setCounts] = useState<CategoryCounts>({
