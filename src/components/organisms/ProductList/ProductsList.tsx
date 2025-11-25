@@ -17,7 +17,7 @@ const ProductList = ({ products, loading = false }: ProductListProps) => {
   if (loading) {
     return (
       <div className="products-grid">
-        {Array.from({ length: 12 }).map((_, i) => (
+        {Array.from({ length: 24 }).map((_, i) => (
           <ProductCardSkeleton key={i} />
         ))}
       </div>
