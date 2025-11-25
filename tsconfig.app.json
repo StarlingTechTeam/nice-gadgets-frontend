@@ -36,7 +36,6 @@
       "@services/*": ["./src/services/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@pages/*": ["./src/pages/*"],
-      "@types/*": ["./src/types/*"],
       "@assets/*": ["./src/assets/*"],
       "@styles/*": ["./src/styles/*"],
       "@constants/*": ["./src/constants/*"]

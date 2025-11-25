@@ -19,7 +19,6 @@ export default defineConfig({
       '@services': path.resolve(__dirname, './src/services'),
       '@layouts': path.resolve(__dirname, './src/layouts'),
       '@pages': path.resolve(__dirname, './src/pages'),
-      '@types': path.resolve(__dirname, './src/types'),
       '@assets': path.resolve(__dirname, './src/assets'),
       '@styles': path.resolve(__dirname, './src/styles'),
       '@constants': path.resolve(__dirname, './src/constants'),

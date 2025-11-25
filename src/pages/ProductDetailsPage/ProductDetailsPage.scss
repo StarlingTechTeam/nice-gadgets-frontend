@@ -67,22 +67,14 @@
       }
     }
   }
-}
 
-.product__description {
-  display: flex;
-  flex-direction: column;
+  &__description {
+    display: flex;
+    flex-direction: column;
 
-  @include on-desktop {
-    flex-direction: row;
-    gap: 64px;
-
-    .item-1 {
-      flex: 3;
-    }
-
-    .item-2 {
-      flex: 3;
+    @include on-desktop {
+      flex-direction: row;
+      gap: 64px;
     }
   }
 }
