@@ -1,6 +1,11 @@
+import FavoritesPageTemplate from '@templates/FavoritesPageTemplate';
+import { useFavorites } from '@context/FavoritesContext';
 import './FavoritesPage.scss';
 
 const FavoritesPage = () => {
-  return <div className="text-primary">Favorites</div>;
+  const { favorites } = useFavorites();
+
+  return <FavoritesPageTemplate products={favorites} />;
 };
+
 export default FavoritesPage;
