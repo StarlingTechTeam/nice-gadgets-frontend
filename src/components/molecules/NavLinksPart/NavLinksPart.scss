@@ -1,0 +1,58 @@
+@use '@styles/mixins' as *;
+
+.nav {
+  display: flex;
+  gap: 32px;
+
+  @include on-desktop {
+    gap: 64px;
+  }
+
+  &--mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    align-items: center;
+  }
+
+  .nav__item {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-family: 'Mont';
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 11px;
+    letter-spacing: 4%;
+    text-transform: uppercase;
+
+    &--mobile {
+      text-align: center;
+      width: 100%;
+    }
+
+    &--active {
+      color: var(--color-primary);
+      position: relative;
+    }
+
+    &--active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 2px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--color-primary);
+
+      @include on-tablet {
+        bottom: -18px;
+      }
+
+      @include on-desktop {
+        bottom: -28px;
+      }
+    }
+  }
+}

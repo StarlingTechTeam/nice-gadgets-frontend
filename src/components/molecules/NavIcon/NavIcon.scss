@@ -1,0 +1,47 @@
+@use '@styles/mixins' as *;
+
+.nav-icon-area {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  cursor: pointer;
+
+  box-shadow: -1px 0px 0px 0px var(--color-border);
+
+  @include on-desktop {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.nav-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon-badge {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid;
+
+  background: var(--color-button-add);
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'Mont';
+  font-size: 9px;
+  font-weight: 600;
+}
