@@ -70,65 +70,51 @@ const ProductsSlider: FC<ProductsSliderProps> = ({ products, title }) => {
           </div>
         </div>
       </div>
-      <Swiper
-        modules={[Navigation]}
-        spaceBetween={16}
-        slidesPerView={4}
-        navigation={{
-          prevEl: '.products-slider__arrow--prev',
-          nextEl: '.products-slider__arrow--next',
-        }}
-        breakpoints={{
-          0: {
-            slidesPerView: 1.1,
-          },
-          360: {
-            slidesPerView: 1.3,
-          },
-          540: {
-            slidesPerView: 2.1,
-          },
-          768: {
-            slidesPerView: 2.5,
-          },
-          1024: {
-            slidesPerView: 3.2,
-          },
-          1280: {
-            slidesPerView: 4,
-          },
-        }}
-      >
-        {products.map((product) => {
-          const image_url = `./src/assets/${product.image}`;
+      <div className="swiper-wrap">
+        <Swiper
+          modules={[Navigation]}
+          spaceBetween={16}
+          slidesPerView={'auto'}
+          navigation={{
+            prevEl: '.products-slider__arrow--prev',
+            nextEl: '.products-slider__arrow--next',
+          }}
+          className="swiper-template"
+        >
+          {products.map((product) => {
+            const image_url = `./src/assets/${product.image}`;
 
-          const screen = formatScreen(product.screen);
-          const formattedCapacity = splitDigitsAndLetters(product.capacity);
-          const ram = splitDigitsAndLetters(product.ram);
+            const screen = formatScreen(product.screen);
+            const formattedCapacity = splitDigitsAndLetters(product.capacity);
+            const ram = splitDigitsAndLetters(product.ram);
 
-          const categoryType = product.category || 'phones';
+            const categoryType = product.category || 'phones';
 
-          const capacityLabel =
-            categoryType === 'accessories' ? 'Size' : 'Capacity';
+            const capacityLabel =
+              categoryType === 'accessories' ? 'Size' : 'Capacity';
 
-          return (
-            <SwiperSlide key={product.id}>
-              <ProductCard
-                productName={product.name}
-                price={product.price}
-                fullPrice={product.fullPrice}
-                screen={screen}
-                capacity={formattedCapacity}
-                capacityLabel={capacityLabel}
-                ram={ram}
-                image={image_url}
-                categoryType={categoryType}
-                itemId={product.itemId}
-              />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+            return (
+              <SwiperSlide
+                key={product.id}
+                style={{ width: '280px' }}
+              >
+                <ProductCard
+                  productName={product.name}
+                  price={product.price}
+                  fullPrice={product.fullPrice}
+                  screen={screen}
+                  capacity={formattedCapacity}
+                  capacityLabel={capacityLabel}
+                  ram={ram}
+                  image={image_url}
+                  categoryType={categoryType}
+                  itemId={product.itemId}
+                />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
     </div>
   );
 };
