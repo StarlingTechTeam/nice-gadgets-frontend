@@ -4,12 +4,11 @@ import Price from '@atoms/Price';
 import Subtitle from '@atoms/Text/Subtitle';
 import Value from '@atoms/Text/Value';
 import Divider from '@atoms/Divider';
-
 import AddToCartButton from '@molecules/AddToCartButton';
 import AddToFavButton from '@molecules/AddToFavButton';
-
 import './ProductCard.scss';
 import { Link } from 'react-router-dom';
+import type { ProductCard as ProductCardType } from '@/types/ProductCard';
 
 type ProductCardProps = {
   productName: string;
@@ -22,6 +21,7 @@ type ProductCardProps = {
   capacityLabel: string;
   itemId: string;
   categoryType: string;
+  productData?: ProductCardType;
 };
 
 const ProductCard = ({
@@ -35,6 +35,7 @@ const ProductCard = ({
   capacityLabel,
   itemId,
   categoryType,
+  productData,
 }: ProductCardProps) => {
   return (
     <Link to={`/${categoryType}/${itemId}`}>
@@ -45,7 +46,7 @@ const ProductCard = ({
         />
 
         <div className="add-to-fav-btn absolute">
-          <AddToFavButton />
+          <AddToFavButton product={productData} />
         </div>
 
         <div className="card__title-wrapper">

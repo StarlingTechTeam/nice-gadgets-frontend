@@ -1,0 +1,42 @@
+@use '@styles/mixins' as *;
+
+.favorites-grid {
+  display: grid;
+  column-gap: 16px;
+  row-gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 270px));
+  justify-content: center;
+
+  > *:last-child {
+    margin-top: -16px;
+
+    @include on-tablet {
+      margin-top: 0;
+    }
+  }
+}
+
+.favorites-page__empty {
+  grid-column: 1 / -1;
+  border: 1px dashed var(--color-border);
+  border-radius: 12px;
+  padding: 64px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &-title {
+    font:
+      600 18px/27px 'Mont',
+      sans-serif;
+    color: var(--color-primary);
+  }
+
+  &-subtitle {
+    font:
+      400 14px/21px 'Mont',
+      sans-serif;
+    color: var(--color-secondary);
+  }
+}

@@ -1,19 +1,36 @@
 import Button from '@atoms/Button';
-import { useState } from 'react';
+import { useFavorites } from '@context/FavoritesContext';
+import { useState, type MouseEvent } from 'react';
+import type { ProductCard } from '@/types/ProductCard';
 import './AddToFavButton.scss';
 
-const AddToFavButton = () => {
-  const [active, setActive] = useState(false);
+type AddToFavButtonProps = {
+  product?: ProductCard;
+};
+
+const AddToFavButton = ({ product }: AddToFavButtonProps) => {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const [localActive, setLocalActive] = useState(false);
+
+  const active = product ? isFavorite(product.itemId) : localActive;
+
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!product) {
+      setLocalActive((prev) => !prev);
+      return;
+    }
+
+    toggleFavorite(product);
+  };
 
   return (
     <div>
       <div
         className={`fav-button ${active ? 'is-active' : ''}`}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setActive((prev) => !prev);
-        }}
+        onClick={handleClick}
       >
         <Button
           variant="icon"
