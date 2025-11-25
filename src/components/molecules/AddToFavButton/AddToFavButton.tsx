@@ -1,7 +1,7 @@
 import Button from '@atoms/Button';
 import { useFavorites } from '@context/FavoritesContext';
 import { useState, type MouseEvent } from 'react';
-import type { ProductCard } from '@/types/ProductCard ';
+import type { ProductCard } from '@/types/ProductCard';
 import './AddToFavButton.scss';
 
 type AddToFavButtonProps = {

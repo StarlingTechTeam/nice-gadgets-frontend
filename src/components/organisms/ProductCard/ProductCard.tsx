@@ -8,7 +8,7 @@ import AddToCartButton from '@molecules/AddToCartButton';
 import AddToFavButton from '@molecules/AddToFavButton';
 import './ProductCard.scss';
 import { Link } from 'react-router-dom';
-import type { ProductCard as ProductCardType } from '@/types/ProductCard ';
+import type { ProductCard as ProductCardType } from '@/types/ProductCard';
 
 type ProductCardProps = {
   productName: string;

@@ -1,6 +1,6 @@
 import ProductList from '@organisms/ProductList';
 import FavoritesPageHeader from '@molecules/FavoritesPageHeader';
-import type { ProductCard } from '@/types/ProductCard ';
+import type { ProductCard } from '@/types/ProductCard';
 import './FavoritesPageTemplate.scss';
 
 type FavoritesPageTemplateProps = {
