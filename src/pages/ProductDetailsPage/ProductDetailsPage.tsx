@@ -13,13 +13,13 @@ import Breadcrumbs from '@molecules/Breadcrumbs';
 import ProductSpecRow from '@molecules/ProductCardParams';
 import SliderHero from '@organisms/SliderHero';
 import { useTheme } from '@/hooks/useTheme';
-import { formatCapacityOrRAM, normalizeScreenQuote } from '@/utills/formatting';
 import './ProductDetailsPage.scss';
-import SliderProductDetails from '@/components/organisms/SliderProductDetails';
+import SliderProductDetails from '@organisms/SliderProductDetails';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { productDetailsApi } from '@/shared/api/productDetailsApi';
 import type { ProductDetails } from '@/types/ProductDetails';
+import { formatCapacityOrRAM, normalizeScreenQuote } from '@utils/formatting';
 
 type Param = string | number;
 type Params = {
