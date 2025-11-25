@@ -11,7 +11,7 @@ export const useProducts = () => {
     setLoading(true);
 
     productsApi
-      .getAll()
+      .getLimitedData(24)
       .then((data) => {
         setProducts(data);
       })

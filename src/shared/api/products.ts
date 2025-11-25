@@ -6,7 +6,7 @@ export const products = {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(productsData as ProductCard[]);
-      }, 1000);
+      }, 300);
     });
   },
 
@@ -33,7 +33,15 @@ export const products = {
         const items = list.slice(start, start + limit);
 
         resolve({ items, total });
-      }, 1000);
+      }, 300);
+    });
+  },
+
+  getLimitedData: (quantity: number): Promise<ProductCard[]> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(productsData.slice(0, quantity) as ProductCard[]);
+      }, 300);
     });
   },
 };
