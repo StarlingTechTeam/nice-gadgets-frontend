@@ -12,119 +12,18 @@
   }
 }
 
-.homepage-block__wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-
-  @include on-tablet {
-    gap: 64px;
-  }
-
-  @include on-tablet {
-    gap: 80px;
-  }
-}
-
-.homepage__section-title__wrapper {
-  margin-bottom: 24px;
-
-  @include on-desktop {
-    margin-bottom: 30px;
-  }
-}
-
-.homepage__section-title {
-  font:
-    700 32px/41px 'Mont',
-    sans-serif;
-}
-
-.homepage__category-title {
-  font:
-    600 20px / 100% 'Mont',
-    sans-serif;
-}
-.homepage__category-subtitle {
-  font:
-    400 14px/21px 'Mont',
-    sans-serif;
-}
-
-.homepage-category {
-  .category-block {
+.homepage {
+  &-block__wrapper {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 56px;
 
     @include on-tablet {
-      flex-direction: row;
-      gap: 15px;
+      gap: 64px;
     }
+
     @include on-tablet {
-      gap: 16px;
+      gap: 80px;
     }
-    .category-item {
-      height: 353px;
-
-      @include on-tablet {
-        flex: 1;
-      }
-
-      &__image-block {
-        height: 288px;
-        background-color: #6d6474;
-        border-radius: 8px;
-        margin-bottom: 24px;
-      }
-
-      &__text-block {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        height: 51px;
-      }
-    }
-  }
-}
-
-.image-block-1 {
-  background-image: url('./src/assets/img/category-phones.png');
-  background-repeat: no-repeat;
-  background-size: 110%;
-  background-position-y: -6vh;
-  background-position-x: -2vw;
-
-  @include on-tablet {
-    background-position-y: -5vh;
-    background-position-x: -5vh;
-    background-size: 500px;
-  }
-}
-.image-block-2 {
-  background-image: url('./src/assets/img/category-tablets.png');
-  background-repeat: no-repeat;
-  background-size: 120%;
-  background-position-y: 1vh;
-  background-position-x: 4vw;
-
-  @include on-tablet {
-    background-size: 500px;
-    background-position-y: -1vh;
-    background-position-x: -1vh;
-  }
-}
-.image-block-3 {
-  background-image: url('./src/assets/img/category-accessories.png');
-  background-repeat: no-repeat;
-  background-size: 120%;
-  background-position-y: 3vh;
-  background-position-x: 4vw;
-
-  @include on-tablet {
-    background-size: 600px;
-
-    background-position-y: 3vh;
-    background-position-x: 2vh;
   }
 }
