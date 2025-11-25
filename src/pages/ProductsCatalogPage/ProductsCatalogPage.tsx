@@ -26,7 +26,7 @@ const getSortFromParam = (param: string | null): SortOption => {
 
 const getParamFromSort = (option: SortOption) => SORT_PARAM_BY_OPTION[option];
 
-const getSortComparator = (sort: SortOption) => {
+const getSortHandler = (sort: SortOption) => {
   switch (sort) {
     case 'Newest':
       return (a: ProductCard, b: ProductCard) => b.year - a.year;
@@ -71,7 +71,7 @@ const ProductsCatalogPage = () => {
         currentPage,
         ITEMS_PER_PAGE,
         categoryType,
-        getSortComparator(sortValue),
+        getSortHandler(sortValue),
       )
       .then(({ items, total }) => {
         setList(items);

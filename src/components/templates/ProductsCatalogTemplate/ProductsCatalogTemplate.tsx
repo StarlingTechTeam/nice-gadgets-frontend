@@ -3,7 +3,7 @@ import ProductsCatalogHeader from '@molecules/ProductsCatalogHeader';
 import type { SortOption } from '@molecules/FiltersBar';
 import './ProductsCatalogTemplate.scss';
 import type { ProductCard } from '@/types/ProductCard ';
-import Pagination from '@/components/molecules/Pagination/Pagination';
+import Pagination from '@molecules/Pagination';
 
 type ProductsCatalogTemplateProps = {
   products: ProductCard[];
