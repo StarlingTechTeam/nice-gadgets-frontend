@@ -3,7 +3,7 @@ import Logo from '@molecules/Logo';
 import NavLinksPart from '@molecules/NavLinksPart';
 import ThemeToggleButton from '@molecules/ThemeToggleButton';
 import './Header.scss';
-import NavIcon from '@/components/molecules/NavIcon';
+import NavIcon from '@molecules/NavIcon';
 import HeartIcon from '@assets/icons/heart-icon-outline.svg';
 import CartIcon from '@assets/icons/cart-icon.svg';
 
