@@ -16,7 +16,15 @@ type CategoryCounts = {
 };
 
 const HomePage = () => {
-  const { products, loading } = useProducts();
+  const { products: newProducts, loading: newModelsLoading } = useProducts(
+    'new',
+    24,
+  );
+
+  const { products: hotProducts, loading: hotPricesLoading } = useProducts(
+    'hot',
+    24,
+  );
 
   const [counts, setCounts] = useState<CategoryCounts>({
     phones: 0,
@@ -36,7 +44,7 @@ const HomePage = () => {
     fetchCounts();
   }, []);
 
-  if (loading) {
+  if (newModelsLoading || hotPricesLoading) {
     return <HomePageSkeleton />;
   }
 
@@ -52,7 +60,10 @@ const HomePage = () => {
         </div>
 
         <div className="inline-wrapper text-primary">
-          <NewModelsSlider products={products} />
+          <NewModelsSlider
+            products={newProducts}
+            sliderId="NewModels"
+          />
         </div>
 
         <CategorySection
@@ -62,7 +73,10 @@ const HomePage = () => {
         />
 
         <div className="inline-wrapper text-primary">
-          <HotPricesSlider products={products} />
+          <HotPricesSlider
+            products={hotProducts}
+            sliderId="HotPrices"
+          />
         </div>
       </div>
     </>

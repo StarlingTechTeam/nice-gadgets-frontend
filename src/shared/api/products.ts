@@ -1,6 +1,20 @@
 import productsData from '@/shared/api/data/products.json';
 import type { ProductCard } from '@/types/ProductCard';
 
+const getModelBaseId = (itemId: string): string => {
+  return (
+    itemId
+      // 1. Видаляємо пам'ять (32gb, 1tb)
+      .replace(/-\d+(gb|tb)/i, '')
+
+      // 2. НОВЕ: Видаляємо розмір (40mm, 44mm)
+      .replace(/-\d+mm/i, '')
+
+      // 3. Видаляємо колір в кінці (black, space-gray)
+      .replace(/-[a-z]+(-[a-z]+)?$/, '')
+  );
+};
+
 export const products = {
   getAll: async (): Promise<ProductCard[]> => {
     return new Promise((resolve) => {
@@ -41,6 +55,68 @@ export const products = {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(productsData.slice(0, quantity) as ProductCard[]);
+      }, 300);
+    });
+  },
+
+  getHotDeals: async (limit: number = 12): Promise<ProductCard[]> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const hotDeals = productsData
+          .filter((product) => product.fullPrice > product.price)
+          .sort((a, b) => {
+            const discountA = a.fullPrice - a.price;
+            const discountB = b.fullPrice - b.price;
+
+            return discountB - discountA;
+          });
+
+        resolve(hotDeals.slice(0, limit) as ProductCard[]);
+      }, 300);
+    });
+  },
+
+  getNewArrivals: async (limit: number = 12): Promise<ProductCard[]> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const selectUniqueByCategory = (category: string, count: number) => {
+          const candidates = (productsData as ProductCard[])
+            .filter((p) => p.category === category)
+            .sort((a, b) => b.year - a.year || b.price - a.price);
+
+          const uniqueItems: ProductCard[] = [];
+          const seenModels = new Set<string>();
+
+          for (const item of candidates) {
+            const baseModelId = getModelBaseId(item.itemId);
+
+            if (!seenModels.has(baseModelId)) {
+              uniqueItems.push(item);
+              seenModels.add(baseModelId);
+            }
+
+            if (uniqueItems.length === count) break;
+          }
+
+          return uniqueItems;
+        };
+        const perCategory = Math.ceil(limit / 3);
+
+        const uniquePhones = selectUniqueByCategory('phones', perCategory);
+        const uniqueTablets = selectUniqueByCategory('tablets', perCategory);
+        const uniqueAccessories = selectUniqueByCategory(
+          'accessories',
+          perCategory,
+        );
+
+        const result = [
+          ...uniquePhones,
+          ...uniqueTablets,
+          ...uniqueAccessories,
+        ];
+        result.sort(() => Math.random() - 0.5);
+
+        resolve(result);
       }, 300);
     });
   },
