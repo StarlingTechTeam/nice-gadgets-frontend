@@ -1,1 +1,2 @@
-export * from './SliderHero';
+import SliderHero from './SliderHero';
+export default SliderHero;
