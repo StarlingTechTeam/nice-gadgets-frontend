@@ -32,7 +32,7 @@
 }
 
 .image-block-1 {
-  background-image: url('./src/assets/img/category-phones.png');
+  background-image: url('@assets/img/category-phones.png');
   background-repeat: no-repeat;
   background-size: 110%;
   background-position-y: -6vh;
@@ -45,7 +45,7 @@
   }
 }
 .image-block-2 {
-  background-image: url('./src/assets/img/category-tablets.png');
+  background-image: url('@assets/img/category-tablets.png');
   background-repeat: no-repeat;
   background-size: 120%;
   background-position-y: 1vh;
@@ -58,7 +58,7 @@
   }
 }
 .image-block-3 {
-  background-image: url('./src/assets/img/category-accessories.png');
+  background-image: url('@assets/img/category-accessories.png');
   background-repeat: no-repeat;
   background-size: 120%;
   background-position-y: 3vh;
