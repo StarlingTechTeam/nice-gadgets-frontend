@@ -17,7 +17,7 @@ import ProductTechSpecs from '@organisms/ProductTechSpecs';
 import ProductImageSlider from '@organisms/ProductImageSlider';
 import './ProductDetailsPage.scss';
 import { getMainSpecs, getTechSpecs } from '@/utils/specBuilder';
-import RecomendedProductSlider from '@/components/organisms/RecomendedProductSlider';
+import RecomendedProductSlider from '@organisms/RecomendedProductSlider';
 
 type Param = string | number;
 type Params = {
