@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Image from '@atoms/Image';
 import Title from '@atoms/Text/Title';
 import Price from '@atoms/Price';
@@ -37,6 +38,47 @@ const ProductCard = ({
   categoryType,
   productData,
 }: ProductCardProps) => {
+  const product = useMemo(() => {
+    if (productData) {
+      return productData;
+    }
+
+    const parts = itemId.split('-');
+    const possibleColor = parts[parts.length - 1];
+
+    const numericId = itemId.split('').reduce((acc, char) => {
+      return (acc << 5) - acc + char.charCodeAt(0);
+    }, 0);
+
+    const normalizedImage = image.replace(/^\.\/src\/assets\//, '');
+
+    return {
+      id: numericId,
+      category: categoryType,
+      itemId,
+      name: productName,
+      fullPrice: fullPrice ?? price,
+      price,
+      screen,
+      capacity,
+      color: possibleColor || '',
+      ram,
+      year: new Date().getFullYear(),
+      image: normalizedImage,
+    } as ProductCardType;
+  }, [
+    productData,
+    productName,
+    price,
+    fullPrice,
+    screen,
+    capacity,
+    ram,
+    image,
+    itemId,
+    categoryType,
+  ]);
+
   return (
     <Link to={`/${categoryType}/${itemId}`}>
       <div className="card">
@@ -46,7 +88,7 @@ const ProductCard = ({
         />
 
         <div className="add-to-fav-btn absolute">
-          <AddToFavButton product={productData} />
+          <AddToFavButton product={product} />
         </div>
 
         <div className="card__title-wrapper">
@@ -78,7 +120,7 @@ const ProductCard = ({
         </div>
 
         <div className="card__add-to-cart-wrapper">
-          <AddToCartButton />
+          <AddToCartButton product={product} />
         </div>
       </div>
     </Link>
