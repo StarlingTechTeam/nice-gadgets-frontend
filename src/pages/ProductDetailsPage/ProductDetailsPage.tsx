@@ -150,6 +150,45 @@ const ProductDetailsPage = () => {
     location.search,
   ]);
 
+  const recommendedProducts = useMemo(() => {
+    if (!data || !product) return [];
+
+    let filtered = data.filter(
+      (p) =>
+        p.category === product.category &&
+        p.namespaceId !== product.namespaceId,
+    );
+
+    for (let i = filtered.length - 1; i > 0; i--) {
+      // eslint-disable-next-line react-hooks/purity
+      const j = Math.floor(Math.random() * (i + 1));
+      [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+    }
+
+    filtered = filtered.slice(0, 12);
+
+    return filtered.map((item) => {
+      const numericHash = item.id.split('').reduce((acc, char) => {
+        return ((acc << 5) - acc + char.charCodeAt(0)) | 0;
+      }, 0);
+
+      return {
+        id: Math.abs(numericHash),
+        name: item.name,
+        fullPrice: item.priceRegular,
+        price: item.priceDiscount,
+        screen: item.screen,
+        capacity: item.capacity,
+        ram: item.ram,
+        image: item.images[0],
+        category: item.category,
+        itemId: item.namespaceId,
+        color: item.color,
+        year: 2022,
+      };
+    });
+  }, [data, product]);
+
   if (!product && !loading) {
     return (
       <div className="inline-wrapper">
@@ -174,32 +213,6 @@ const ProductDetailsPage = () => {
   const mainSpecifications = getMainSpecs(product ?? null);
 
   const techSpecifications = getTechSpecs(product ?? null);
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const recommendedProducts = useMemo(() => {
-    if (!data || !product) return [];
-
-    const filtered = data.filter(
-      (p) =>
-        p.category === product.category &&
-        p.namespaceId !== product.namespaceId,
-    );
-
-    return filtered.map((item) => ({
-      id: Number(item.id),
-      name: item.name,
-      fullPrice: item.priceRegular,
-      price: item.priceDiscount,
-      screen: item.screen,
-      capacity: item.capacity,
-      ram: item.ram,
-      image: item.images[0],
-      category: item.category,
-      itemId: item.namespaceId,
-      color: item.color,
-      year: 2022,
-    }));
-  }, [data, product]);
 
   return (
     <div
