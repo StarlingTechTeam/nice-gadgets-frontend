@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Icon from '@atoms/Icon';
 import MenuIcon from '@assets/icons/menu-icon.svg';
 import CloseIcon from '@assets/icons/close-icon.svg';
-import Button from '@/components/atoms/Button';
+import Button from '@atoms/Button';
 
 interface BurgerMenuButtonProps {
   menuOpen: boolean;
