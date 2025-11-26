@@ -60,7 +60,7 @@ const ProductsSlider: FC<ProductsSliderProps> = ({
   return (
     <div className="products-slider">
       <div className="products-slider__main">
-        <div className="products_slider__wrapper">
+        <div className="products_slider__wrapper text-primary">
           <h2>{title}</h2>
         </div>
         <div className="products-slider__buttons">

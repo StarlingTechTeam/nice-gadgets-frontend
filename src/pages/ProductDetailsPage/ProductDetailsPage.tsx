@@ -4,7 +4,7 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { productDetailsApi } from '@/shared/api/productDetailsApi';
@@ -15,9 +15,9 @@ import ProductMainInfo from '@organisms/ProductMainInfo';
 import ProductDescription from '@organisms/ProductDescription';
 import ProductTechSpecs from '@organisms/ProductTechSpecs';
 import ProductImageSlider from '@organisms/ProductImageSlider';
-import SliderHero from '@organisms/SliderHero';
 import './ProductDetailsPage.scss';
 import { getMainSpecs, getTechSpecs } from '@/utils/specBuilder';
+import RecomendedProductSlider from '@organisms/RecomendedProductSlider';
 
 type Param = string | number;
 type Params = {
@@ -175,6 +175,32 @@ const ProductDetailsPage = () => {
 
   const techSpecifications = getTechSpecs(product ?? null);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const recommendedProducts = useMemo(() => {
+    if (!data || !product) return [];
+
+    const filtered = data.filter(
+      (p) =>
+        p.category === product.category &&
+        p.namespaceId !== product.namespaceId,
+    );
+
+    return filtered.map((item) => ({
+      id: Number(item.id),
+      name: item.name,
+      fullPrice: item.priceRegular,
+      price: item.priceDiscount,
+      screen: item.screen,
+      capacity: item.capacity,
+      ram: item.ram,
+      image: item.images[0],
+      category: item.category,
+      itemId: item.namespaceId,
+      color: item.color,
+      year: 2022,
+    }));
+  }, [data, product]);
+
   return (
     <div
       className="inline-wrapper mt-6"
@@ -226,7 +252,11 @@ const ProductDetailsPage = () => {
         />
       </div>
 
-      <SliderHero />
+      <RecomendedProductSlider
+        products={recommendedProducts}
+        sliderId="Recomended"
+        title="You may also like"
+      />
     </div>
   );
 };
