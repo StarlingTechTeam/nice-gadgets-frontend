@@ -1,7 +1,7 @@
 import Breadcrumbs from '@molecules/Breadcrumbs';
 import PageTitle from '@atoms/PageTitle';
-import FiltersBar from '@/components/molecules/SortingBar';
-import type { SortOption } from '@/components/molecules/SortingBar';
+import FiltersBar from '@molecules/SortingBar';
+import type { SortOption } from '@molecules/SortingBar';
 import './ProductsCatalogHeader.scss';
 
 type ProductsCatalogHeaderProps = {
