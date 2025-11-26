@@ -8,6 +8,7 @@ import ProductSpecRow from '@molecules/ProductCardParams';
 import type { ProductDetails } from '@/types/ProductDetails';
 import Skeleton from 'react-loading-skeleton';
 import './ProductMainInfo.scss';
+import { productDetailsToCard } from '@/utils/productDetailsToCard';
 
 type ProductMainInfoProps = {
   loading: boolean;
@@ -31,6 +32,8 @@ const ProductMainInfo = ({
   onColorChange,
   onCapacityChange,
 }: ProductMainInfoProps) => {
+  const productCardData = product ? productDetailsToCard(product) : undefined;
+
   return (
     <div
       className="product__info"
@@ -85,8 +88,8 @@ const ProductMainInfo = ({
               />
             </>
           : <>
-              <AddToCartButton product={product} />
-              <AddToFavButton product={product} />
+              <AddToCartButton product={productCardData} />
+              <AddToFavButton product={productCardData} />
             </>
           }
         </div>
