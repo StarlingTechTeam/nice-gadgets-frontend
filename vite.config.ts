@@ -3,25 +3,29 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
+  base: '/nice-gadgets-frontend/',
   plugins: [react(), tailwindcss()],
+  build: {
+    outDir: 'dist',
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@assets': path.resolve(__dirname, './src/assets'),
       '@atoms': path.resolve(__dirname, './src/components/atoms'),
-      '@molecules': path.resolve(__dirname, './src/components/molecules'),
-      '@organisms': path.resolve(__dirname, './src/components/organisms'),
-      '@templates': path.resolve(__dirname, './src/components/templates'),
+      '@constants': path.resolve(__dirname, './src/constants'),
       '@context': path.resolve(__dirname, './src/context'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@utils': path.resolve(__dirname, './src/utils'),
-      '@services': path.resolve(__dirname, './src/services'),
       '@layouts': path.resolve(__dirname, './src/layouts'),
+      '@molecules': path.resolve(__dirname, './src/components/molecules'),
+      '@organisms': path.resolve(__dirname, './src/components/organisms'),
       '@pages': path.resolve(__dirname, './src/pages'),
-      '@assets': path.resolve(__dirname, './src/assets'),
+      '@services': path.resolve(__dirname, './src/services'),
+      '@store': path.resolve(__dirname, './src/store'),
       '@styles': path.resolve(__dirname, './src/styles'),
-      '@constants': path.resolve(__dirname, './src/constants'),
+      '@templates': path.resolve(__dirname, './src/components/templates'),
+      '@utils': path.resolve(__dirname, './src/utils'),
     },
   },
 });
