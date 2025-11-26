@@ -33,7 +33,10 @@ const SliderProductDetails = ({
   const direction = screenSize === 'xs' ? 'horizontal' : 'vertical';
 
   return (
-    <div className="slider-product-details">
+    <div
+      className="slider-product-details"
+      aria-label="Product images"
+    >
       <div className="slider-product-details__container">
         <div className="slider-product-details__wrapper">
           <div className="slider-product-details__img">

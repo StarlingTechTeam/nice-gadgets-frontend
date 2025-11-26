@@ -3,13 +3,20 @@ import namer from 'color-namer';
 const FALLBACK_COLORS: Record<string, string> = {
   spacegray: '#4A4A4A',
   spacegrey: '#4A4A4A',
+  spaceblack: '#1C1C1E',
   graphite: '#4A4A4A',
   midnightgreen: '#004953',
+  midnight: '#191970',
   rosegold: '#E6B7C2',
+  sierrablue: '#69ABCE',
+  starlight: '#F9F6F3',
+  skyblue: '#A4D8E1',
 };
 
 export const getColorHex = (input: string): string => {
   const normalized = input.toLowerCase().replace(/\s+/g, '');
+
+  if (FALLBACK_COLORS[normalized]) return FALLBACK_COLORS[normalized];
 
   try {
     const result = namer(normalized);
@@ -17,8 +24,8 @@ export const getColorHex = (input: string): string => {
       return result.html[0].hex;
     }
   } catch {
-    console.log('Error getting color:', input);
+    console.warn('Unknown color:', input);
   }
 
-  return FALLBACK_COLORS[normalized] || '#cccccc';
+  return '#cccccc';
 };

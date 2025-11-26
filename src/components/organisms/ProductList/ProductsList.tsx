@@ -2,6 +2,7 @@ import ProductCard from '@organisms/ProductCard';
 import './ProductsList.scss';
 import type { ProductCard as ProductCardType } from '@/types/ProductCard';
 import ProductCardSkeleton from '@organisms/ProductCardSkeleton';
+import { skeletonArray } from '@utils/skeletonArray';
 
 type ProductListProps = {
   products: ProductCardType[];
@@ -41,7 +42,7 @@ const ProductList = ({ products, loading = false }: ProductListProps) => {
   if (loading) {
     return (
       <div className="products-grid">
-        {Array.from({ length: 24 }).map((_, index) => (
+        {skeletonArray(24).map((_, index) => (
           <ProductCardSkeleton key={index} />
         ))}
       </div>
