@@ -6,13 +6,6 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
-  margin-bottom: 64px;
-
-  & {
-    @include on-desktop {
-      margin-bottom: 80px;
-    }
-  }
 
   &__list {
     display: flex;
