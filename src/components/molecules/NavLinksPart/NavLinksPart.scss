@@ -1,6 +1,6 @@
 @use '@styles/mixins' as *;
 
-.nav {
+.nav-content {
   display: flex;
   gap: 32px;
 
@@ -9,50 +9,52 @@
   }
 
   &--mobile {
-    display: flex;
     flex-direction: column;
-    gap: 34px;
+    gap: 16px;
     align-items: center;
+    margin-top: 24px;
+  }
+}
+
+.nav-item,
+.nav-item-mobile {
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-family: 'Mont';
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 11px;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  transition: color 0.3s;
+
+  &--active {
+    color: var(--color-primary);
   }
 
-  .nav__item {
-    color: var(--color-secondary);
-    text-decoration: none;
-    font-family: 'Mont';
-    font-weight: 800;
-    font-size: 12px;
-    line-height: 11px;
-    letter-spacing: 4%;
-    text-transform: uppercase;
+  &:hover {
+    color: var(--color-primary);
+  }
+}
 
-    &--mobile {
-      text-align: center;
-      width: 100%;
-    }
+.nav-item {
+  padding: 17px 0;
+
+  @include on-desktop {
+    padding: 25px 0;
+  }
+
+  &--active {
+    border-bottom: 3px solid var(--color-primary);
+  }
+
+  &-mobile {
+    text-align: center;
+    padding: 8px 0;
 
     &--active {
-      color: var(--color-primary);
-      position: relative;
-    }
-
-    &--active::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -8px;
-      height: 2px;
-      width: 100%;
-      margin: 0 auto;
-      background: var(--color-primary);
-
-      @include on-tablet {
-        bottom: -18px;
-      }
-
-      @include on-desktop {
-        bottom: -28px;
-      }
+      padding: 8px 0 6.4px;
+      border-bottom: 2px solid var(--color-primary);
     }
   }
 }

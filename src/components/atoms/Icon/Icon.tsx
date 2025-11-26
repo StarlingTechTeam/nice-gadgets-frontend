@@ -14,7 +14,6 @@ const Icon: React.FC<IconProps> = ({
   style,
   ...rest
 }) => {
-  console.log('Icon received src:', src);
   return (
     <div
       className={`icon-wrapper ${className}`}

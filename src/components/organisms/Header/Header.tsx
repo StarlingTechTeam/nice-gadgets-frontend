@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
-import Logo from '@molecules/Logo';
-import NavLinksPart from '@molecules/NavLinksPart';
-import ThemeToggleButton from '@molecules/ThemeToggleButton';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useDevice } from '@/hooks/useDevice';
+import Navbar from '@organisms/Navbar';
 import './Header.scss';
-import NavIcon from '@molecules/NavIcon';
-import HeartIcon from '@assets/icons/heart-icon-outline.svg';
-import CartIcon from '@assets/icons/cart-icon.svg';
+import MobileMenuOverlay from '@organisms/MobileMenuOverlay';
 
 interface HeaderProps {
   cartCount?: number;
@@ -16,35 +15,49 @@ const Header: React.FC<HeaderProps> = ({
   cartCount = 0,
   favoritesCount = 0,
 }) => {
+  const { isMobile, isTablet } = useDevice();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [expandedSearch, setExpandedSearch] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setExpandedSearch(false);
+    if (isMobile) setMenuOpen(false);
+  }, [location.pathname, isMobile]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (isMobile && menuOpen) setMenuOpen(false);
+        if (isTablet && expandedSearch) setExpandedSearch(false);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isMobile, isTablet, menuOpen, expandedSearch]);
+
   return (
     <div className="header-wrapper">
       <header className="header">
-        <div className="header-bar">
-          <div className="header-bar__left">
-            <Logo />
-
-            <NavLinksPart />
-          </div>
-
-          <div className="header-bar__right">
-            <nav aria-label="Utilities">
-              <NavIcon
-                to="/favorites"
-                count={favoritesCount}
-                iconSrc={HeartIcon}
-                label="Favorites"
-              />
-              <NavIcon
-                to="/cart"
-                count={cartCount}
-                iconSrc={CartIcon}
-                label="Cart"
-              />
-            </nav>
-            <ThemeToggleButton />
-          </div>
-        </div>
+        <Navbar
+          cartCount={cartCount}
+          favoritesCount={favoritesCount}
+          expandedSearch={expandedSearch}
+          setExpandedSearch={setExpandedSearch}
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+        />
       </header>
+
+      {isMobile && (
+        <MobileMenuOverlay
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+          cartCount={cartCount}
+          favoritesCount={favoritesCount}
+        />
+      )}
 
       <div className="header-border"></div>
     </div>

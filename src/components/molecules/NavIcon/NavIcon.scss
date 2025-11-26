@@ -1,20 +1,38 @@
 @use '@styles/mixins' as *;
 
-.nav-icon-area {
+.nav-icon-area,
+.nav-icon-area-mobile {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: -1px 0px 0px 0px var(--color-border);
+}
+
+.nav-icon-area {
   width: 48px;
   height: 48px;
-  background: transparent;
-  cursor: pointer;
-
-  box-shadow: -1px 0px 0px 0px var(--color-border);
 
   @include on-desktop {
     width: 64px;
     height: 64px;
+  }
+
+  &--active {
+    border-bottom: 3px solid var(--color-primary);
+    color: var(--color-primary);
+  }
+}
+
+.nav-icon-area-mobile {
+  width: 100%;
+  height: 100%;
+
+  &--active {
+    border-top: 2px solid var(--color-primary);
+    color: var(--color-primary);
   }
 }
 
