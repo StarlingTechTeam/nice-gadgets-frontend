@@ -1,0 +1,11 @@
+@use '@styles/mixins' as *;
+
+.product {
+  &__info {
+    &-wrapper {
+      @include on-tablet {
+        width: 320px;
+      }
+    }
+  }
+}
