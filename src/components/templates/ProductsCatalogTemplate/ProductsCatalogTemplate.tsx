@@ -1,6 +1,6 @@
 import ProductList from '@organisms/ProductList';
 import ProductsCatalogHeader from '@molecules/ProductsCatalogHeader';
-import type { SortOption } from '@molecules/FiltersBar';
+import type { SortOption } from '@molecules/SortingBar';
 import './ProductsCatalogTemplate.scss';
 import type { ProductCard } from '@/types/ProductCard';
 import Pagination from '@molecules/Pagination';

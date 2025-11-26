@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 
 import ProductsCatalogTemplate from '@templates/ProductsCatalogTemplate';
 import { products } from '@/shared/api/products';
-import { DEFAULT_SORT, type SortOption } from '@molecules/FiltersBar';
+import { DEFAULT_SORT, type SortOption } from '@molecules/SortingBar';
 import type { ProductCard } from '@/types/ProductCard';
 
 const SORT_QUERY_KEY = 'sort';
