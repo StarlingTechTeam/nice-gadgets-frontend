@@ -7,7 +7,7 @@ const ThemeToggleButton = () => {
   return (
     <>
       <button
-        className="icon-btn theme-toggle"
+        className="icon-btn"
         aria-label="Toggle theme"
         onClick={() => toggleTheme()}
         title="Toggle theme"
