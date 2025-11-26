@@ -8,7 +8,7 @@ type Props = {
   title: string;
 };
 
-const NewModelsSlider: FC<Props> = ({ products, sliderId, title }) => {
+const RecomendedPricesSlider: FC<Props> = ({ products, sliderId, title }) => {
   if (products.length === 0) return null;
 
   return (
@@ -20,4 +20,4 @@ const NewModelsSlider: FC<Props> = ({ products, sliderId, title }) => {
   );
 };
 
-export default NewModelsSlider;
+export default RecomendedPricesSlider;

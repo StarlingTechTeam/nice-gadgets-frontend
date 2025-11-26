@@ -59,10 +59,11 @@ const HomePage = () => {
           <SliderHero />
         </div>
 
-        <div className="inline-wrapper text-primary">
+        <div className="inline-wrapper">
           <NewModelsSlider
             products={newProducts}
             sliderId="NewModels"
+            title="Brand new models"
           />
         </div>
 
@@ -72,10 +73,11 @@ const HomePage = () => {
           accessories={counts.accessories}
         />
 
-        <div className="inline-wrapper text-primary">
+        <div className="inline-wrapper">
           <HotPricesSlider
             products={hotProducts}
             sliderId="HotPrices"
+            title="Hot prices"
           />
         </div>
       </div>
