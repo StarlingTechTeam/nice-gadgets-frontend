@@ -1,4 +1,4 @@
-import { useState, type MouseEvent, useMemo } from 'react';
+import { useState, type MouseEvent } from 'react';
 import Button from '@atoms/Button';
 import type { ProductCard } from '@/types/ProductCard';
 import type { ProductDetails } from '@/types/ProductDetails';
@@ -12,10 +12,7 @@ const AddToCartButton = ({ product }: AddToCartButtonProps) => {
   const { isInCart, toggleCart } = useProductsSelection();
   const [localActive, setLocalActive] = useState(false);
 
-  const productCard = useMemo(() => {
-    if (!product) return undefined;
-    return product as ProductCard;
-  }, [product]);
+  const productCard = product as ProductCard | undefined;
 
   const isActive = productCard ? isInCart(productCard.itemId) : localActive;
 

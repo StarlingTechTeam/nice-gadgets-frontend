@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import Image from '@atoms/Image';
 import Title from '@atoms/Text/Title';
 import Price from '@atoms/Price';
@@ -38,46 +37,25 @@ const ProductCard = ({
   categoryType,
   productData,
 }: ProductCardProps) => {
-  const product = useMemo(() => {
-    if (productData) {
-      return productData;
-    }
-
-    const parts = itemId.split('-');
-    const possibleColor = parts[parts.length - 1];
-
-    const numericId = itemId.split('').reduce((acc, char) => {
-      return (acc << 5) - acc + char.charCodeAt(0);
-    }, 0);
-
-    const normalizedImage = image.replace(/^\.\/src\/assets\//, '');
-
-    return {
-      id: numericId,
-      category: categoryType,
-      itemId,
-      name: productName,
-      fullPrice: fullPrice ?? price,
-      price,
-      screen,
-      capacity,
-      color: possibleColor || '',
-      ram,
-      year: new Date().getFullYear(),
-      image: normalizedImage,
-    } as ProductCardType;
-  }, [
-    productData,
-    productName,
-    price,
-    fullPrice,
-    screen,
-    capacity,
-    ram,
-    image,
-    itemId,
-    categoryType,
-  ]);
+  const product: ProductCardType =
+    productData ? productData : (
+      {
+        id: itemId
+          .split('')
+          .reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0),
+        category: categoryType,
+        itemId,
+        name: productName,
+        fullPrice: fullPrice ?? price,
+        price,
+        screen,
+        capacity,
+        color: itemId.split('-').pop() || '',
+        ram,
+        year: new Date().getFullYear(),
+        image: image.replace(/^\.\/src\/assets\//, ''),
+      }
+    );
 
   return (
     <Link to={`/${categoryType}/${itemId}`}>
