@@ -182,7 +182,7 @@ const ProductDetailsPage = () => {
         ram: item.ram,
         image: item.images[0],
         category: item.category,
-        itemId: item.namespaceId,
+        itemId: item.id,
         color: item.color,
         year: 2022,
       };
