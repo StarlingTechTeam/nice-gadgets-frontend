@@ -1,29 +1,32 @@
 import Button from '@atoms/Button';
-import { useFavorites } from '@context/FavoritesContext';
+import { useProductsSelection } from '@context/ProductsSelectionContext';
 import { useState, type MouseEvent } from 'react';
 import type { ProductCard } from '@/types/ProductCard';
+import type { ProductDetails } from '@/types/ProductDetails';
 import './AddToFavButton.scss';
 
 type AddToFavButtonProps = {
-  product?: ProductCard;
+  product?: ProductCard | ProductDetails;
 };
 
 const AddToFavButton = ({ product }: AddToFavButtonProps) => {
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const { isFavorite, toggleFavorite } = useProductsSelection();
   const [localActive, setLocalActive] = useState(false);
 
-  const active = product ? isFavorite(product.itemId) : localActive;
+  const productCard = product as ProductCard | undefined;
+
+  const active = productCard ? isFavorite(productCard.itemId) : localActive;
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
-    if (!product) {
+    if (!productCard) {
       setLocalActive((prev) => !prev);
       return;
     }
 
-    toggleFavorite(product);
+    toggleFavorite(productCard);
   };
 
   return (

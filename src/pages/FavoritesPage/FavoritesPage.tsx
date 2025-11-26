@@ -1,9 +1,9 @@
 import FavoritesPageTemplate from '@templates/FavoritesPageTemplate';
-import { useFavorites } from '@context/FavoritesContext';
+import { useProductsSelection } from '@context/ProductsSelectionContext';
 import './FavoritesPage.scss';
 
 const FavoritesPage = () => {
-  const { favorites } = useFavorites();
+  const { favorites } = useProductsSelection();
 
   return <FavoritesPageTemplate products={favorites} />;
 };

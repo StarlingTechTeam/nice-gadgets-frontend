@@ -37,6 +37,26 @@ const ProductCard = ({
   categoryType,
   productData,
 }: ProductCardProps) => {
+  const product: ProductCardType =
+    productData ? productData : (
+      {
+        id: itemId
+          .split('')
+          .reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0),
+        category: categoryType,
+        itemId,
+        name: productName,
+        fullPrice: fullPrice ?? price,
+        price,
+        screen,
+        capacity,
+        color: itemId.split('-').pop() || '',
+        ram,
+        year: new Date().getFullYear(),
+        image: image.replace(/^\.\/src\/assets\//, ''),
+      }
+    );
+
   return (
     <Link to={`/${categoryType}/${itemId}`}>
       <div className="card">
@@ -46,7 +66,7 @@ const ProductCard = ({
         />
 
         <div className="add-to-fav-btn absolute">
-          <AddToFavButton product={productData} />
+          <AddToFavButton product={product} />
         </div>
 
         <div className="card__title-wrapper">
@@ -78,7 +98,7 @@ const ProductCard = ({
         </div>
 
         <div className="card__add-to-cart-wrapper">
-          <AddToCartButton />
+          <AddToCartButton product={product} />
         </div>
       </div>
     </Link>

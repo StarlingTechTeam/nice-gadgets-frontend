@@ -85,8 +85,8 @@ const ProductMainInfo = ({
               />
             </>
           : <>
-              <AddToCartButton />
-              <AddToFavButton />
+              <AddToCartButton product={product} />
+              <AddToFavButton product={product} />
             </>
           }
         </div>
