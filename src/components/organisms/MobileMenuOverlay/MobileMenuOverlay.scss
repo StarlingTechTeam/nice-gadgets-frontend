@@ -1,0 +1,36 @@
+.mobile-menu {
+  position: fixed;
+  top: 48px;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: var(--color-background);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 100;
+
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.5s linear,
+    opacity 0.5s linear;
+
+  &--open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.mobile-bottom-nav {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  box-shadow: 0px -1px 0px 0px var(--color-border);
+}

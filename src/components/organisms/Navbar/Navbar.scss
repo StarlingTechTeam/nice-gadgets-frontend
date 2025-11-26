@@ -1,0 +1,22 @@
+@use '@styles/mixins' as *;
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    @include on-desktop {
+      gap: 48px;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+}

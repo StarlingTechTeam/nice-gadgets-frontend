@@ -21,7 +21,7 @@ const NavIcon: React.FC<NavIconProps> = ({
   mobile = false,
   onClick,
 }) => {
-  const baseClass = mobile ? 'nav-icon-area--mobile' : 'nav-icon-area';
+  const baseClass = mobile ? 'nav-icon-area-mobile' : 'nav-icon-area';
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     classNames(baseClass, { [`${baseClass}--active`]: isActive });
 

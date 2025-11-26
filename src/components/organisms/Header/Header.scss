@@ -1,6 +1,14 @@
 @use '@styles/mixins' as *;
 
 .header {
+  padding-left: 16px;
+  height: 48px;
+
+  @include on-desktop {
+    padding-left: 24px;
+    height: 64px;
+  }
+
   &-wrapper {
     position: sticky;
     top: 0;
@@ -11,32 +19,5 @@
     height: 1px;
     width: 100%;
     box-shadow: 0px -1px 0px 0px var(--color-border);
-  }
-}
-
-.header-bar {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 16px;
-  height: 48px;
-
-  @include on-desktop {
-    padding-left: 24px;
-    height: 64px;
-  }
-
-  &__left {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-
-    @include on-desktop {
-      gap: 48px;
-    }
-  }
-
-  &__right {
-    display: flex;
-    align-items: center;
   }
 }
