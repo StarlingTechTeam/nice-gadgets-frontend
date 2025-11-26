@@ -16,8 +16,11 @@ import ProductDescription from '@organisms/ProductDescription';
 import ProductTechSpecs from '@organisms/ProductTechSpecs';
 import ProductImageSlider from '@organisms/ProductImageSlider';
 import './ProductDetailsPage.scss';
-import { getMainSpecs, getTechSpecs } from '@/utils/specBuilder';
+import { getMainSpecs, getTechSpecs } from '@utils/specBuilder';
 import RecomendedProductSlider from '@organisms/RecomendedProductSlider';
+import Icon from '@atoms/Icon';
+// import { useCart } from '@hooks/useCart';
+import arrowLeftIcon from '@assets/icons/arrow-left.svg';
 
 type Param = string | number;
 type Params = {
@@ -228,7 +231,7 @@ const ProductDetailsPage = () => {
         onClick={() => navigate(`../${categoryType}`)}
         aria-label="Go back to category"
       >
-        <img src={'./src/assets/icons/arrow-left.svg'} />
+        <Icon src={arrowLeftIcon} />
         <span>Back</span>
       </button>
 

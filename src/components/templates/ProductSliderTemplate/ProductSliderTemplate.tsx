@@ -90,7 +90,7 @@ const ProductsSlider: FC<ProductsSliderProps> = ({
           className="swiper-template"
         >
           {products.map((product) => {
-            const image_url = `./src/assets/${product.image}`;
+            const image_url = `${import.meta.env.BASE_URL}${product.image}`;
 
             const screen = formatScreen(product.screen);
             const formattedCapacity = splitDigitsAndLetters(product.capacity);
