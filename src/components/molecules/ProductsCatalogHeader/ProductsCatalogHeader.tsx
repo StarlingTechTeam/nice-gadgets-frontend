@@ -1,8 +1,8 @@
 import Breadcrumbs from '@molecules/Breadcrumbs';
 import PageTitle from '@atoms/PageTitle';
-import FiltersBar from '@molecules/SortingBar';
 import type { SortOption } from '@molecules/SortingBar';
 import './ProductsCatalogHeader.scss';
+import SortingBar from '@molecules/SortingBar';
 
 type ProductsCatalogHeaderProps = {
   title: string;
@@ -25,7 +25,7 @@ const ProductsCatalogHeader = ({
 
       <span className="catalog-header__models-count">{modelsCount} models</span>
 
-      <FiltersBar
+      <SortingBar
         sortValue={sortValue}
         onSortChange={onSortChange}
       />
