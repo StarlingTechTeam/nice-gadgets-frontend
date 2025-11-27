@@ -12,6 +12,7 @@
   flex-direction: column;
   z-index: 200;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 
   transform: translateX(100%);
   opacity: 0;
@@ -53,7 +54,7 @@
     font:
       700 20px/30px 'Mont',
       sans-serif;
-    color: var(--color-primary-text);
+    color: var(--color-primary);
     margin: 0;
   }
 
@@ -75,6 +76,20 @@
 
   &__apply-btn {
     width: 100%;
+    font:
+      600 16px/30px 'Mont',
+      sans-serif;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &__close {
+    width: auto;
+    cursor: pointer;
   }
 }
 

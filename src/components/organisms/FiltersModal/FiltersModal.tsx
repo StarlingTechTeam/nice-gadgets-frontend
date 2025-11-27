@@ -64,6 +64,7 @@ const FiltersModal = ({
         <div className="filters-modal__header">
           <h2 className="filters-modal__title">Filters</h2>
           <Button
+            className="filters-modal__close"
             variant="icon"
             onClick={onClose}
             aria-label="Close filters"
@@ -80,16 +81,6 @@ const FiltersModal = ({
             vertical
             allProducts={allProducts}
           />
-        </div>
-
-        <div className="filters-modal__footer">
-          <Button
-            variant="primary"
-            onClick={onClose}
-            className="filters-modal__apply-btn"
-          >
-            Apply filters
-          </Button>
         </div>
       </aside>
     </>

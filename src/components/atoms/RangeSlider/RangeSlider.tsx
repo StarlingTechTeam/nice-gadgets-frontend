@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import './RangeSlider.scss';
+import { useScreenSize } from '@/hooks/useScreenSize';
 
 type RangeSliderProps = {
   min: number;
@@ -83,6 +84,17 @@ const RangeSlider = ({
   const minPercentage = getPercentage(localValue[0]);
   const maxPercentage = getPercentage(localValue[1]);
 
+  const screenSize = useScreenSize();
+
+  const minRange =
+    screenSize !== 'xl' ?
+      `${minPercentage}%`
+    : `calc(${minPercentage}% + 1rem)`;
+  const maxRange =
+    screenSize !== 'xl' ?
+      `${maxPercentage}%`
+    : `calc(${maxPercentage}% - 1rem)`;
+
   return (
     <div
       className="range-slider"
@@ -99,7 +111,7 @@ const RangeSlider = ({
       </div>
       <div
         className="range-slider__thumb range-slider__thumb--min"
-        style={{ left: `calc(${minPercentage}% + 1rem)` }}
+        style={{ left: minRange }}
         onMouseDown={handleMouseDown('min')}
       >
         <span className="range-slider__value">
@@ -108,7 +120,9 @@ const RangeSlider = ({
       </div>
       <div
         className="range-slider__thumb range-slider__thumb--max"
-        style={{ left: `calc(${maxPercentage}% + 1rem)` }}
+        style={{
+          left: maxRange,
+        }}
         onMouseDown={handleMouseDown('max')}
       >
         <span className="range-slider__value">

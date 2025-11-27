@@ -1,12 +1,18 @@
 type ColorDotProps = {
   color: string;
-  selected: boolean;
+  selected?: boolean;
+  filterSelected?: boolean;
   onClick: () => void;
 };
 
-const ColorDot = ({ color, selected, onClick }: ColorDotProps) => (
+const ColorDot = ({
+  color,
+  selected,
+  onClick,
+  filterSelected,
+}: ColorDotProps) => (
   <button
-    className={`border-2 rounded-full cursor-pointer ${selected ? 'border-primary' : 'border-border'}`}
+    className={`border-2 rounded-full cursor-pointer ${selected ? 'border-primary' : 'border-border'} ${filterSelected ? 'border-checked' : 'border-border'}`}
     onClick={onClick}
   >
     <div

@@ -4,8 +4,9 @@ import FilterCheckbox from '@atoms/FilterCheckbox';
 import RangeSlider from '@atoms/RangeSlider';
 import ColorSelectorModal from '@molecules/ColorSelectorModal';
 import Button from '@atoms/Button';
+import Icon from '@atoms/Icon';
+import CloseIcon from '@assets/icons/close-icon.svg';
 import type { ProductFilters, FilterOptions } from '@/types/ProductFilters';
-import { getAvailableFilterOptions } from '@/utils/getAvailableFilterOptions';
 import './FiltersBar.scss';
 import type { ProductCard } from '@/types/ProductCard';
 
@@ -26,24 +27,10 @@ const FiltersBar = ({
   category,
   onFiltersChange,
   vertical = false,
-  allProducts = [],
   showPriceOnly = false,
   showOtherFiltersOnly = false,
 }: FiltersBarProps) => {
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
-
-  const availableOptions = useMemo(() => {
-    if (allProducts.length === 0) {
-      return {
-        availableRam: filterOptions.ram,
-        availableCapacity: filterOptions.capacity,
-        availableColor: filterOptions.color,
-        availableSize: filterOptions.size,
-        availableMatrixType: filterOptions.matrixType,
-      };
-    }
-    return getAvailableFilterOptions(allProducts, category, filters);
-  }, [allProducts, category, filters, filterOptions]);
   const handleRamChange = (ram: string, checked: boolean) => {
     const newRams =
       checked ? [...filters.ram, ram] : filters.ram.filter((r) => r !== ram);
@@ -110,140 +97,116 @@ const FiltersBar = ({
   };
 
   return (
-    <div
-      className={`filters-bar ${vertical ? 'filters-bar--vertical' : ''} ${showPriceOnly ? 'filters-bar--price-only' : ''} ${showOtherFiltersOnly ? 'filters-bar--other-filters-only' : ''}`}
-    >
-      {showPriceOnly && !vertical && (
-        <FilterSection
-          title="Price"
-          className="filters-bar__price-section"
-        >
-          <RangeSlider
-            min={filterOptions.priceRange[0]}
-            max={filterOptions.priceRange[1]}
-            value={filters.priceRange}
-            onChange={handlePriceRangeChange}
-            step={10}
-          />
-        </FilterSection>
-      )}
+    <div className="filters-bar__wrapper">
+      <div
+        className={`filters-bar ${vertical ? 'filters-bar--vertical' : ''}${showPriceOnly ? 'filters-bar--price-only' : ''}${showOtherFiltersOnly ? 'filters-bar--other-filters-only' : ''}`}
+      >
+        {showPriceOnly && !vertical && (
+          <FilterSection
+            title="Price"
+            className="filters-bar__price-section"
+          >
+            <RangeSlider
+              min={filterOptions.priceRange[0]}
+              max={filterOptions.priceRange[1]}
+              value={filters.priceRange}
+              onChange={handlePriceRangeChange}
+              step={10}
+            />
+          </FilterSection>
+        )}
 
-      {(showOtherFiltersOnly || vertical) && (
-        <div className="filters-bar__content">
-          {vertical && (
-            <FilterSection
-              title="Price"
-              className="filters-bar__price-section"
-            >
-              <RangeSlider
-                min={filterOptions.priceRange[0]}
-                max={filterOptions.priceRange[1]}
-                value={filters.priceRange}
-                onChange={handlePriceRangeChange}
-                step={10}
-              />
-            </FilterSection>
-          )}
-
-          {filterOptions.ram.length > 0 && (
-            <>
+        {(showOtherFiltersOnly || vertical) && (
+          <div className="filters-bar__content">
+            {vertical && (
               <FilterSection
-                title="RAM"
-                className="filters-bar__section"
+                title="Price"
+                className="filters-bar__price-section"
               >
-                <div className="filters-bar__checkboxes filters-bar__checkboxes--ram">
-                  {filterOptions.ram.map((ram) => {
-                    const isAvailable =
-                      availableOptions.availableRam.includes(ram);
-                    const isDisabled =
-                      !isAvailable && !filters.ram.includes(ram);
-                    return (
+                <RangeSlider
+                  min={filterOptions.priceRange[0]}
+                  max={filterOptions.priceRange[1]}
+                  value={filters.priceRange}
+                  onChange={handlePriceRangeChange}
+                  step={10}
+                />
+              </FilterSection>
+            )}
+
+            {filterOptions.ram.length > 0 && (
+              <>
+                <FilterSection
+                  title="RAM"
+                  className="filters-bar__section"
+                >
+                  <div className="filters-bar__checkboxes filters-bar__checkboxes--ram">
+                    {filterOptions.ram.map((ram) => (
                       <FilterCheckbox
                         key={ram}
                         label={ram}
                         checked={filters.ram.includes(ram)}
                         onChange={(checked) => handleRamChange(ram, checked)}
-                        disabled={isDisabled}
                       />
-                    );
-                  })}
-                </div>
-              </FilterSection>
-              {!vertical && <div className="filters-bar__divider" />}
-            </>
-          )}
+                    ))}
+                  </div>
+                </FilterSection>
+                {!vertical && <div className="filters-bar__divider" />}
+              </>
+            )}
 
-          {category !== 'accessories' && filterOptions.capacity.length > 0 && (
-            <>
-              <FilterSection
-                title="Capacity"
-                className="filters-bar__section"
-              >
-                <div className="filters-bar__checkboxes filters-bar__checkboxes--capacity">
-                  {filterOptions.capacity.map((capacity) => {
-                    const isAvailable =
-                      availableOptions.availableCapacity.includes(capacity);
-                    const isDisabled =
-                      !isAvailable && !filters.capacity.includes(capacity);
-                    return (
-                      <FilterCheckbox
-                        key={capacity}
-                        label={capacity}
-                        checked={filters.capacity.includes(capacity)}
-                        onChange={(checked) =>
-                          handleCapacityChange(capacity, checked)
-                        }
-                        disabled={isDisabled}
-                      />
-                    );
-                  })}
-                </div>
-              </FilterSection>
-              {!vertical && <div className="filters-bar__divider" />}
-            </>
-          )}
+            {category !== 'accessories' &&
+              filterOptions.capacity.length > 0 && (
+                <>
+                  <FilterSection
+                    title="Capacity"
+                    className="filters-bar__section"
+                  >
+                    <div className="filters-bar__checkboxes filters-bar__checkboxes--capacity">
+                      {filterOptions.capacity.map((capacity) => (
+                        <FilterCheckbox
+                          key={capacity}
+                          label={capacity}
+                          checked={filters.capacity.includes(capacity)}
+                          onChange={(checked) =>
+                            handleCapacityChange(capacity, checked)
+                          }
+                        />
+                      ))}
+                    </div>
+                  </FilterSection>
+                  {!vertical && <div className="filters-bar__divider" />}
+                </>
+              )}
 
-          {category === 'accessories' && filterOptions.size.length > 0 && (
-            <>
-              <FilterSection
-                title="Size"
-                className="filters-bar__section"
-              >
-                <div className="filters-bar__checkboxes filters-bar__checkboxes--size">
-                  {filterOptions.size.map((size) => {
-                    const isAvailable =
-                      availableOptions.availableSize.includes(size);
-                    const isDisabled =
-                      !isAvailable && !filters.size.includes(size);
-                    return (
+            {category === 'accessories' && filterOptions.size.length > 0 && (
+              <>
+                <FilterSection
+                  title="Size"
+                  className="filters-bar__section"
+                >
+                  <div className="filters-bar__checkboxes filters-bar__checkboxes--size">
+                    {filterOptions.size.map((size) => (
                       <FilterCheckbox
                         key={size}
                         label={size}
                         checked={filters.size.includes(size)}
                         onChange={(checked) => handleSizeChange(size, checked)}
-                        disabled={isDisabled}
                       />
-                    );
-                  })}
-                </div>
-              </FilterSection>
-              {!vertical && <div className="filters-bar__divider" />}
-            </>
-          )}
+                    ))}
+                  </div>
+                </FilterSection>
+                {!vertical && <div className="filters-bar__divider" />}
+              </>
+            )}
 
-          {filterOptions.matrixType.length > 0 && (
-            <>
-              <FilterSection
-                title="Matrix Type"
-                className="filters-bar__section"
-              >
-                <div className="filters-bar__checkboxes">
-                  {filterOptions.matrixType.map((matrixType) => {
-                    const isAvailable =
-                      availableOptions.availableMatrixType.includes(matrixType);
-                    const isDisabled =
-                      !isAvailable && !filters.matrixType.includes(matrixType);
-                    return (
+            {filterOptions.matrixType.length > 0 && (
+              <>
+                <FilterSection
+                  title="Matrix Type"
+                  className="filters-bar__section"
+                >
+                  <div className="filters-bar__checkboxes">
+                    {filterOptions.matrixType.map((matrixType) => (
                       <FilterCheckbox
                         key={matrixType}
                         label={matrixType}
@@ -251,54 +214,69 @@ const FiltersBar = ({
                         onChange={(checked) =>
                           handleMatrixTypeChange(matrixType, checked)
                         }
-                        disabled={isDisabled}
                       />
-                    );
-                  })}
-                </div>
-              </FilterSection>
-              {!vertical && <div className="filters-bar__divider" />}
-            </>
-          )}
+                    ))}
+                  </div>
+                </FilterSection>
+                {!vertical && <div className="filters-bar__divider" />}
+              </>
+            )}
 
-          {filterOptions.color.length > 0 && (
-            <FilterSection
-              title="Color"
-              className="filters-bar__section"
-            >
-              <Button
-                variant="primary"
-                onClick={() => setIsColorModalOpen(true)}
-                className="filters-bar__color-button"
-                isActive={filters.color.length > 0}
+            {filterOptions.color.length > 0 && (
+              <FilterSection
+                title="Color"
+                className="filters-bar__section"
               >
-                {filters.color.length > 0 ?
-                  `${filters.color.length} selected`
-                : 'Select colors'}
-              </Button>
-              <ColorSelectorModal
-                isOpen={isColorModalOpen}
-                onClose={() => setIsColorModalOpen(false)}
-                colors={filterOptions.color}
-                selectedColors={filters.color}
-                onColorChange={handleColorChange}
-                disabledColors={filterOptions.color.filter(
-                  (color) => !availableOptions.availableColor.includes(color),
+                {filters.color.length > 0 && (
+                  <div className="filters-bar__selected-colors absolute">
+                    {filters.color.map((color) => (
+                      <div
+                        key={color}
+                        className="filters-bar__selected-color"
+                        onClick={() => handleColorChange(color, false)}
+                      >
+                        <span className="filters-bar__selected-color-name">
+                          {color}
+                        </span>
+                        <Icon
+                          src={CloseIcon}
+                          className="filters-bar__selected-color-close"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 )}
-              />
-            </FilterSection>
-          )}
+                <Button
+                  variant="primary"
+                  onClick={() => setIsColorModalOpen(true)}
+                  className="filters-bar__color-button"
+                  isActive={filters.color.length > 0}
+                >
+                  {filters.color.length > 0 ?
+                    `${filters.color.length} selected`
+                  : 'Select colors'}
+                </Button>
+                <ColorSelectorModal
+                  isOpen={isColorModalOpen}
+                  onClose={() => setIsColorModalOpen(false)}
+                  colors={filterOptions.color}
+                  selectedColors={filters.color}
+                  onColorChange={handleColorChange}
+                />
+              </FilterSection>
+            )}
 
-          {hasActiveFilters && (
-            <button
-              className={`filters-bar__reset ${vertical ? 'filters-bar__reset--vertical' : ''}`}
-              onClick={handleResetFilters}
-            >
-              Reset filters
-            </button>
-          )}
-        </div>
-      )}
+            {hasActiveFilters && (
+              <button
+                className={`filters-bar__reset ${vertical ? 'filters-bar__reset--vertical' : ''}`}
+                onClick={handleResetFilters}
+              >
+                Reset
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
