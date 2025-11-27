@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-
 import ProductsCatalogTemplate from '@templates/ProductsCatalogTemplate';
 import { products } from '@/shared/api/products';
 import { DEFAULT_SORT, type SortOption } from '@molecules/SortingBar';
 import type { ProductCard } from '@/types/ProductCard';
+import type { ProductFilters, FilterOptions } from '@/types/ProductFilters';
+import { getFilterOptions } from '@/utils/filterUtils';
+import { urlParamsToFilters, filtersToUrlParams } from '@/utils/filterUrlUtils';
 
 const SORT_QUERY_KEY = 'sort';
 const PAGE_QUERY_KEY = 'page';
@@ -52,6 +54,33 @@ const ProductsCatalogPage = () => {
   const [list, setList] = useState<ProductCard[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [allProducts, setAllProducts] = useState<ProductCard[]>([]);
+
+  useEffect(() => {
+    products.getAll().then(setAllProducts);
+  }, []);
+
+  const filterOptions = useMemo<FilterOptions>(() => {
+    if (allProducts.length === 0) {
+      return {
+        ram: [],
+        capacity: [],
+        color: [],
+        size: [],
+        matrixType: [],
+        priceRange: [0, 0],
+      };
+    }
+    return getFilterOptions(allProducts, categoryType);
+  }, [allProducts, categoryType]);
+
+  const filters = useMemo<ProductFilters>(() => {
+    const defaultPriceRange: [number, number] =
+      filterOptions.priceRange[0] !== 0 && filterOptions.priceRange[1] !== 0 ?
+        filterOptions.priceRange
+      : [0, 0];
+    return urlParamsToFilters(searchParams, defaultPriceRange);
+  }, [searchParams, filterOptions.priceRange]);
 
   useEffect(() => {
     if (!sortParam) {
@@ -72,13 +101,14 @@ const ProductsCatalogPage = () => {
         ITEMS_PER_PAGE,
         categoryType,
         getSortHandler(sortValue),
+        filters,
       )
       .then(({ items, total }) => {
         setList(items);
         setTotalCount(total);
       })
       .finally(() => setLoading(false));
-  }, [categoryType, currentPage, sortValue]);
+  }, [categoryType, currentPage, sortValue, filters]);
 
   const handleSortChange = (value: SortOption) => {
     const next = new URLSearchParams(searchParams);
@@ -93,6 +123,29 @@ const ProductsCatalogPage = () => {
     setSearchParams(next);
   };
 
+  const handleFiltersChange = (newFilters: ProductFilters) => {
+    const next = new URLSearchParams(searchParams);
+    next.set(PAGE_QUERY_KEY, '1');
+
+    next.delete('ram');
+    next.delete('capacity');
+    next.delete('color');
+    next.delete('size');
+    next.delete('matrixType');
+    next.delete('priceMin');
+    next.delete('priceMax');
+
+    const filterParams = filtersToUrlParams(
+      newFilters,
+      filterOptions.priceRange,
+    );
+    filterParams.forEach((value, key) => {
+      next.set(key, value);
+    });
+
+    setSearchParams(next);
+  };
+
   return (
     <ProductsCatalogTemplate
       products={list}
@@ -104,6 +157,10 @@ const ProductsCatalogPage = () => {
       currentPage={currentPage}
       totalPages={Math.ceil(totalCount / ITEMS_PER_PAGE)}
       onPageChange={handlePageChange}
+      filters={filters}
+      filterOptions={filterOptions}
+      onFiltersChange={handleFiltersChange}
+      allProducts={allProducts}
     />
   );
 };
