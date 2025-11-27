@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import './RangeSlider.scss';
-import { useScreenSize } from '@/hooks/useScreenSize';
 
 type RangeSliderProps = {
   min: number;
@@ -46,16 +45,19 @@ const RangeSlider = ({
     [min, max, step],
   );
 
-  const handleMouseDown = (type: 'min' | 'max') => (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDragging(type);
-  };
+  const handleStart =
+    (type: 'min' | 'max') => (e: React.MouseEvent | React.TouchEvent) => {
+      e.preventDefault();
+      setIsDragging(type);
+    };
 
   useEffect(() => {
     if (!isDragging) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const newValue = getValueFromPosition(e.clientX);
+    const handleMove = (e: MouseEvent | TouchEvent) => {
+      e.preventDefault();
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const newValue = getValueFromPosition(clientX);
       const newRange: [number, number] = [...localValue] as [number, number];
 
       if (isDragging === 'min') {
@@ -67,33 +69,26 @@ const RangeSlider = ({
       setLocalValue(newRange);
     };
 
-    const handleMouseUp = () => {
+    const handleEnd = () => {
       setIsDragging(null);
       onChange(localValue);
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('mouseup', handleEnd);
+    document.addEventListener('touchmove', handleMove, { passive: false });
+    document.addEventListener('touchend', handleEnd);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mousemove', handleMove);
+      document.removeEventListener('mouseup', handleEnd);
+      document.removeEventListener('touchmove', handleMove);
+      document.removeEventListener('touchend', handleEnd);
     };
   }, [isDragging, localValue, min, max, step, onChange, getValueFromPosition]);
 
   const minPercentage = getPercentage(localValue[0]);
   const maxPercentage = getPercentage(localValue[1]);
-
-  const screenSize = useScreenSize();
-
-  const minRange =
-    screenSize !== 'xl' ?
-      `${minPercentage}%`
-    : `calc(${minPercentage}% + 1rem)`;
-  const maxRange =
-    screenSize !== 'xl' ?
-      `${maxPercentage}%`
-    : `calc(${maxPercentage}% - 1rem)`;
 
   return (
     <div
@@ -111,8 +106,9 @@ const RangeSlider = ({
       </div>
       <div
         className="range-slider__thumb range-slider__thumb--min"
-        style={{ left: minRange }}
-        onMouseDown={handleMouseDown('min')}
+        style={{ left: `${minPercentage}%` }}
+        onMouseDown={handleStart('min')}
+        onTouchStart={handleStart('min')}
       >
         <span className="range-slider__value">
           {formatValue(localValue[0])}
@@ -120,10 +116,9 @@ const RangeSlider = ({
       </div>
       <div
         className="range-slider__thumb range-slider__thumb--max"
-        style={{
-          left: maxRange,
-        }}
-        onMouseDown={handleMouseDown('max')}
+        style={{ left: `${maxPercentage}%` }}
+        onMouseDown={handleStart('max')}
+        onTouchStart={handleStart('max')}
       >
         <span className="range-slider__value">
           {formatValue(localValue[1])}
