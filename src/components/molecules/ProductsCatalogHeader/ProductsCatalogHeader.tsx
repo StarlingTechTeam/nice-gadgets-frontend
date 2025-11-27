@@ -6,6 +6,8 @@ import SortingBar from '@molecules/SortingBar';
 import FiltersBar from '@organisms/FiltersBar';
 import FiltersModal from '@organisms/FiltersModal';
 import Button from '@atoms/Button';
+import Icon from '@atoms/Icon';
+import FilterIcon from '@assets/icons/filter-icon.svg';
 import { useDevice } from '@/hooks/useDevice';
 import type { ProductFilters, FilterOptions } from '@/types/ProductFilters';
 import './ProductsCatalogHeader.scss';
@@ -78,12 +80,12 @@ const ProductsCatalogHeader = ({
             onSortChange={onSortChange}
           />
           <Button
-            variant="primary"
+            variant="icon"
             onClick={() => setIsFiltersModalOpen(true)}
             className="catalog-header__filters-btn"
-          >
-            Filters
-          </Button>
+            aria-label="Open filters"
+            icon={<Icon src={FilterIcon} />}
+          />
         </div>
       )}
 

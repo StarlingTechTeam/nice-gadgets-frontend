@@ -40,9 +40,26 @@ export const getFilterOptions = (
     if (price > maxPrice) maxPrice = price;
   });
 
+  // Sort capacity numerically in ascending order
+  // Convert all to GB for proper comparison (1TB = 1024GB)
+  const sortedCapacities = Array.from(capacities).sort((a, b) => {
+    const convertToGB = (capacity: string): number => {
+      const num = parseInt(capacity.replace(/\D/g, ''), 10) || 0;
+      const unit = capacity.toUpperCase();
+      if (unit.includes('TB')) {
+        return num * 1024; // Convert TB to GB
+      }
+      return num; // Already in GB
+    };
+
+    const gbA = convertToGB(a);
+    const gbB = convertToGB(b);
+    return gbA - gbB;
+  });
+
   return {
     ram: Array.from(rams).sort(),
-    capacity: Array.from(capacities).sort(),
+    capacity: sortedCapacities,
     color: Array.from(colors).sort(),
     size: Array.from(sizes).sort(),
     matrixType: Array.from(matrixTypes).sort(),

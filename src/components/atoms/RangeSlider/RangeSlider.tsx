@@ -82,6 +82,7 @@ const RangeSlider = ({
 
   const minPercentage = getPercentage(localValue[0]);
   const maxPercentage = getPercentage(localValue[1]);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1199;
 
   return (
     <div
@@ -99,7 +100,10 @@ const RangeSlider = ({
       </div>
       <div
         className="range-slider__thumb range-slider__thumb--min"
-        style={{ left: `calc(${minPercentage}% + 1rem)` }}
+        style={{
+          left:
+            isMobile ? `${minPercentage}%` : `calc(${minPercentage}% + 1rem)`,
+        }}
         onMouseDown={handleMouseDown('min')}
       >
         <span className="range-slider__value">
@@ -108,7 +112,10 @@ const RangeSlider = ({
       </div>
       <div
         className="range-slider__thumb range-slider__thumb--max"
-        style={{ left: `calc(${maxPercentage}% + 1rem)` }}
+        style={{
+          left:
+            isMobile ? `${maxPercentage}%` : `calc(${maxPercentage}% + 1rem)`,
+        }}
         onMouseDown={handleMouseDown('max')}
       >
         <span className="range-slider__value">
