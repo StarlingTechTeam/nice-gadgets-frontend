@@ -7,7 +7,7 @@ export const useScreenSize = () => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setScreenSize('xs');
-      } else if (window.innerWidth >= 640) {
+      } else if (window.innerWidth >= 1200) {
         setScreenSize('xl');
       }
     };

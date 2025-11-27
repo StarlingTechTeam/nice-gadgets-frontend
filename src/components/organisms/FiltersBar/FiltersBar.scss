@@ -6,7 +6,7 @@
   position: relative;
   display: flex;
 
-  @include on-tablet {
+  @include on-desktop {
     align-items: flex-end;
   }
 }
