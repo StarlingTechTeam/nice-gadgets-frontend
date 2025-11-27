@@ -16,7 +16,15 @@ type CategoryCounts = {
 };
 
 const HomePage = () => {
-  const { products, loading } = useProducts();
+  const { products: newProducts, loading: newModelsLoading } = useProducts(
+    'new',
+    12,
+  );
+
+  const { products: hotProducts, loading: hotPricesLoading } = useProducts(
+    'hot',
+    12,
+  );
 
   const [counts, setCounts] = useState<CategoryCounts>({
     phones: 0,
@@ -24,29 +32,19 @@ const HomePage = () => {
     accessories: 0,
   });
 
+  const fetchCounts = async () => {
+    try {
+      setCounts(productDetailsApi.getByLength());
+    } catch (err) {
+      console.error('Failed to fetch product counts', err);
+    }
+  };
+
   useEffect(() => {
-    const fetchCounts = async () => {
-      try {
-        const [phones, tablets, accessories] = await Promise.all([
-          productDetailsApi.getByCategory('phones'),
-          productDetailsApi.getByCategory('tablets'),
-          productDetailsApi.getByCategory('accessories'),
-        ]);
-
-        setCounts({
-          phones: phones.length,
-          tablets: tablets.length,
-          accessories: accessories.length,
-        });
-      } catch (err) {
-        console.error('Failed to fetch product counts', err);
-      }
-    };
-
     fetchCounts();
   }, []);
 
-  if (loading) {
+  if (newModelsLoading || hotPricesLoading) {
     return <HomePageSkeleton />;
   }
 
@@ -61,8 +59,12 @@ const HomePage = () => {
           <SliderHero />
         </div>
 
-        <div className="inline-wrapper text-primary">
-          <NewModelsSlider products={products} />
+        <div className="inline-wrapper">
+          <NewModelsSlider
+            products={newProducts}
+            sliderId="NewModels"
+            title="Brand new models"
+          />
         </div>
 
         <CategorySection
@@ -71,8 +73,12 @@ const HomePage = () => {
           accessories={counts.accessories}
         />
 
-        <div className="inline-wrapper text-primary">
-          <HotPricesSlider products={products} />
+        <div className="inline-wrapper">
+          <HotPricesSlider
+            products={hotProducts}
+            sliderId="HotPrices"
+            title="Hot prices"
+          />
         </div>
       </div>
     </>

@@ -1,0 +1,88 @@
+@use '@styles/mixins' as *;
+
+.filters-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+  &--open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 199;
+    animation: fadeIn 0.3s ease;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    background: var(--color-background);
+    z-index: 10;
+  }
+
+  &__title {
+    font:
+      700 20px/30px 'Mont',
+      sans-serif;
+    color: var(--color-primary-text);
+    margin: 0;
+  }
+
+  &__content {
+    padding: 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    min-height: 0;
+  }
+
+  &__footer {
+    position: sticky;
+    bottom: 0;
+    padding: 16px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-background);
+  }
+
+  &__apply-btn {
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,24 +1,49 @@
-import { useParams } from 'react-router-dom';
 import ProductCard from '@organisms/ProductCard';
 import './ProductsList.scss';
 import type { ProductCard as ProductCardType } from '@/types/ProductCard';
 import ProductCardSkeleton from '@organisms/ProductCardSkeleton';
+import { skeletonArray } from '@utils/skeletonArray';
 
 type ProductListProps = {
   products: ProductCardType[];
   loading?: boolean;
 };
 
+const splitDigitsAndLetters = (value: string) => {
+  let digits = '';
+  let letters = '';
+
+  for (const c of value) {
+    const isDigit = c >= '0' && c <= '9';
+    if (isDigit) digits += c;
+    else letters += c;
+  }
+
+  return digits && letters ? `${digits} ${letters}` : value;
+};
+
+const formatScreen = (value: string) => {
+  let result = '';
+  let replaced = false;
+
+  for (const char of value) {
+    if (char === "'" && !replaced) {
+      result += "''";
+      replaced = true;
+    } else {
+      result += char;
+    }
+  }
+
+  return result;
+};
+
 const ProductList = ({ products, loading = false }: ProductListProps) => {
-  const { categoryType } = useParams();
-
-  if (!categoryType) return null;
-
   if (loading) {
     return (
       <div className="products-grid">
-        {Array.from({ length: 24 }).map((_, i) => (
-          <ProductCardSkeleton key={i} />
+        {skeletonArray(24).map((_, index) => (
+          <ProductCardSkeleton key={index} />
         ))}
       </div>
     );
@@ -27,43 +52,13 @@ const ProductList = ({ products, loading = false }: ProductListProps) => {
   return (
     <div className="products-grid">
       {products.map((product) => {
-        const image_url = `./src/assets/${product.image}`;
-
-        let screen = '';
-        {
-          let result = '';
-          let replaced = false;
-
-          for (const char of product.screen) {
-            if (char === "'" && !replaced) {
-              result += "''";
-              replaced = true;
-            } else {
-              result += char;
-            }
-          }
-
-          screen = result;
-        }
-
-        const splitDigitsAndLetters = (value: string) => {
-          let digits = '';
-          let letters = '';
-
-          for (const c of value) {
-            const isDigit = c >= '0' && c <= '9';
-            if (isDigit) digits += c;
-            else letters += c;
-          }
-
-          return digits && letters ? `${digits} ${letters}` : value;
-        };
-
-        const formattedCapacity = splitDigitsAndLetters(product.capacity);
+        const image = `${import.meta.env.BASE_URL}${product.image}`;
+        const screen = formatScreen(product.screen);
+        const capacity = splitDigitsAndLetters(product.capacity);
+        const ram = splitDigitsAndLetters(product.ram);
+        const categoryType = product.category;
         const capacityLabel =
           categoryType === 'accessories' ? 'Size' : 'Capacity';
-
-        const ram = splitDigitsAndLetters(product.ram);
 
         return (
           <ProductCard
@@ -72,12 +67,13 @@ const ProductList = ({ products, loading = false }: ProductListProps) => {
             price={product.price}
             fullPrice={product.fullPrice}
             screen={screen}
-            capacity={formattedCapacity}
+            capacity={capacity}
             capacityLabel={capacityLabel}
             ram={ram}
-            image={image_url}
+            image={image}
             categoryType={categoryType}
             itemId={product.itemId}
+            productData={product}
           />
         );
       })}

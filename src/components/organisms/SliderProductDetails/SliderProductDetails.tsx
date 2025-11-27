@@ -33,7 +33,10 @@ const SliderProductDetails = ({
   const direction = screenSize === 'xs' ? 'horizontal' : 'vertical';
 
   return (
-    <div className="slider-product-details">
+    <div
+      className="slider-product-details"
+      aria-label="Product images"
+    >
       <div className="slider-product-details__container">
         <div className="slider-product-details__wrapper">
           <div className="slider-product-details__img">
@@ -62,7 +65,7 @@ const SliderProductDetails = ({
               {slides.map((item, i) => (
                 <SwiperSlide key={`${productName} main-${i}`}>
                   <SliderProductItem
-                    image={`./src/assets/${item}`}
+                    image={`${import.meta.env.BASE_URL}${item}`}
                     title={`${productName} view-${i}`}
                   />
                 </SwiperSlide>
@@ -88,7 +91,7 @@ const SliderProductDetails = ({
                 className="slider-product-details__thumb"
               >
                 <img
-                  src={`./src/assets/${item}`}
+                  src={`${import.meta.env.BASE_URL}${item}`}
                   alt={`${productName} thumbnail-${i}`}
                 />
               </SwiperSlide>

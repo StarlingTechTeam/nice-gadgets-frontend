@@ -18,4 +18,51 @@
     margin-top: 8px;
     margin-bottom: 32px;
   }
+
+  &__filters-row {
+    display: flex;
+    gap: 100px;
+    align-items: flex-end;
+    margin-bottom: 24px;
+    width: 100%;
+
+    @include on-desktop {
+      margin-bottom: 0;
+    }
+  }
+
+  &__price-sort-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-shrink: 0;
+    width: 127px;
+
+    @include on-tablet {
+      width: 187px;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    @include on-desktop {
+      margin-bottom: 0;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .sorting-bar {
+      flex-shrink: 0;
+    }
+  }
+
+  &__filters-btn {
+    @include on-desktop {
+      display: none;
+    }
+  }
 }
