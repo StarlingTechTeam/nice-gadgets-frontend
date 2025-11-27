@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import './NavLinksPart.scss';
@@ -14,7 +13,7 @@ const navItems = [
   { to: '/accessories', label: 'Accessories' },
 ];
 
-const NavLinksPart: React.FC<NavLinksPartProps> = ({ mobile = false }) => {
+const NavLinksPart = ({ mobile = false }: NavLinksPartProps) => {
   const baseClass = mobile ? 'nav-item-mobile' : 'nav-item';
 
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>

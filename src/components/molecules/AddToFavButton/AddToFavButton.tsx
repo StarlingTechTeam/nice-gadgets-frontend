@@ -4,6 +4,7 @@ import { useState, type MouseEvent } from 'react';
 import type { ProductCard } from '@/types/ProductCard';
 import type { ProductDetails } from '@/types/ProductDetails';
 import './AddToFavButton.scss';
+import { useToast } from '@hooks/useToast';
 
 type AddToFavButtonProps = {
   product?: ProductCard | ProductDetails;
@@ -12,6 +13,7 @@ type AddToFavButtonProps = {
 const AddToFavButton = ({ product }: AddToFavButtonProps) => {
   const { isFavorite, toggleFavorite } = useProductsSelection();
   const [localActive, setLocalActive] = useState(false);
+  const { showToast } = useToast();
 
   const productCard = product as ProductCard | undefined;
 
@@ -24,6 +26,25 @@ const AddToFavButton = ({ product }: AddToFavButtonProps) => {
     if (!productCard) {
       setLocalActive((prev) => !prev);
       return;
+    }
+
+    try {
+      if (active) {
+        showToast({
+          type: 'success',
+          message: 'Removed from favorites',
+        });
+      } else {
+        showToast({
+          type: 'success',
+          message: 'Added to favorites',
+        });
+      }
+    } catch (error) {
+      showToast({
+        type: 'error',
+        message: 'Something went wrong' + error,
+      });
     }
 
     toggleFavorite(productCard);

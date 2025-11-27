@@ -1,0 +1,36 @@
+@use '@styles/mixins' as *;
+
+.cart-header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.back-btn {
+  cursor: pointer;
+}
+
+.cart-header__title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #313237;
+  margin: 0;
+}
+
+.cart-header__count {
+  font:
+    400 14px / 21px 'Mont',
+    sans-serif;
+  color: #89939a;
+  margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+  .cart-header__title {
+    font-size: 24px;
+  }
+
+  .cart-header__count {
+    font-size: 18px;
+  }
+}

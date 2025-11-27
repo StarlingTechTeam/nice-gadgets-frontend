@@ -19,7 +19,6 @@ import './ProductDetailsPage.scss';
 import { getMainSpecs, getTechSpecs } from '@utils/specBuilder';
 import RecomendedProductSlider from '@organisms/RecomendedProductSlider';
 import Icon from '@atoms/Icon';
-// import { useCart } from '@hooks/useCart';
 import arrowLeftIcon from '@assets/icons/arrow-left.svg';
 
 type Param = string | number;
@@ -228,7 +227,7 @@ const ProductDetailsPage = () => {
 
       <button
         className="text-secondary mb-4 hover:cursor-pointer go-back"
-        onClick={() => navigate(`../${categoryType}`)}
+        onClick={() => window.history.back()}
         aria-label="Go back to category"
       >
         <Icon src={arrowLeftIcon} />

@@ -52,7 +52,7 @@ const ProductList = ({ products, loading = false }: ProductListProps) => {
   return (
     <div className="products-grid">
       {products.map((product) => {
-        const image = `${import.meta.env.BASE_URL}${product.image}`;
+        const image = product.image;
         const screen = formatScreen(product.screen);
         const capacity = splitDigitsAndLetters(product.capacity);
         const ram = splitDigitsAndLetters(product.ram);

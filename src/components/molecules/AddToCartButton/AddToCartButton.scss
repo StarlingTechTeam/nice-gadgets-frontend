@@ -1,0 +1,22 @@
+.add-to-cart-button__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.add-to-cart-button__quantity {
+  font-size: 14px;
+  font-weight: 600;
+  color: #313237;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .add-to-cart-button__controls {
+    gap: 8px;
+  }
+
+  .add-to-cart-button__quantity {
+    font-size: 13px;
+  }
+}

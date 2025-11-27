@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import { useTheme } from '@hooks/useTheme';
 import logo from '@assets/icons/Logo.svg';
@@ -9,7 +8,7 @@ interface LogoProps {
   footer?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ footer = false }) => {
+const Logo = ({ footer = false }: LogoProps) => {
   const { theme } = useTheme();
 
   const logoSrc = theme === 'dark' ? logoDark : logo;

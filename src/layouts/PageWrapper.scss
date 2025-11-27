@@ -1,6 +1,6 @@
 @use '@styles/mixins' as *;
 
-.content-wrapper {
+.content-body {
   margin-bottom: 64px;
 
   @include on-desktop {

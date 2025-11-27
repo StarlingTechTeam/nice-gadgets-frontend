@@ -57,6 +57,8 @@ const ProductCard = ({
       }
     );
 
+  console.log('image:', image);
+
   return (
     <Link to={`/${categoryType}/${itemId}`}>
       <div className="card">

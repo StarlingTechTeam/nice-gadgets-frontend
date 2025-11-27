@@ -19,7 +19,12 @@ export const products = {
   getAll: async (): Promise<ProductCard[]> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve((productsData as ProductCard[]).map(normalizeProduct));
+        resolve(
+          productsData.map((item) => ({
+            ...item,
+            image: import.meta.env.BASE_URL + item.image,
+          })) as ProductCard[],
+        );
       }, 300);
     });
   },
@@ -60,9 +65,10 @@ export const products = {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
-          (productsData.slice(0, quantity) as ProductCard[]).map(
-            normalizeProduct,
-          ),
+          productsData.slice(0, quantity).map((item) => ({
+            ...item,
+            image: import.meta.env.BASE_URL + item.image,
+          })) as ProductCard[],
         );
       }, 300);
     });
@@ -80,7 +86,12 @@ export const products = {
             return discountB - discountA;
           });
 
-        resolve(hotDeals.slice(0, limit));
+        resolve(
+          hotDeals.slice(0, limit).map((item) => ({
+            ...item,
+            image: import.meta.env.BASE_URL + item.image,
+          })) as ProductCard[],
+        );
       }, 300);
     });
   },
@@ -125,7 +136,12 @@ export const products = {
         ];
         result.sort(() => Math.random() - 0.5);
 
-        resolve(result);
+        resolve(
+          result.map((item) => ({
+            ...item,
+            image: import.meta.env.BASE_URL + item.image,
+          })) as ProductCard[],
+        );
       }, 300);
     });
   },

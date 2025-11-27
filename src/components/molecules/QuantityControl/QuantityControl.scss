@@ -1,0 +1,89 @@
+.quantity-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e6e9;
+  border-radius: 8px;
+}
+
+.quantity-control--small {
+  height: 32px;
+}
+
+.quantity-control--medium {
+  height: 40px;
+}
+
+.quantity-control--large {
+  height: 48px;
+}
+
+.quantity-control__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: var(--color-button-add);
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  border-radius: 100%;
+}
+
+.quantity-control--small .quantity-control__button {
+  width: 32px;
+  font-size: 18px;
+}
+
+.quantity-control--large .quantity-control__button {
+  width: 48px;
+  font-size: 24px;
+}
+
+.quantity-control__button:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.quantity-control__button:active:not(:disabled) {
+  background: #e2e6e9;
+}
+
+.quantity-control__button:disabled {
+  color: #b4bdc3;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.quantity-control__input {
+  width: 50px;
+  height: 100%;
+  border: none;
+  border-left: 1px solid #e2e6e9;
+  border-right: 1px solid #e2e6e9;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-background);
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.quantity-control--large .quantity-control__input {
+  width: 60px;
+  font-size: 16px;
+}
+
+.quantity-control__input::-webkit-outer-spin-button,
+.quantity-control__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-control__input:focus {
+  background: #f4f4f5;
+}

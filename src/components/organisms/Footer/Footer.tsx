@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <>
       <div className="footer-border"></div>
-      <footer className="footer">
+      <footer className="footer content-wrapper">
         <Logo footer />
 
         <nav className="footer-nav-company-information">

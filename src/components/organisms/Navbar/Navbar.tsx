@@ -1,4 +1,3 @@
- 
 import React from 'react';
 import Logo from '@molecules/Logo';
 import ThemeToggleButton from '@molecules/ThemeToggleButton';
