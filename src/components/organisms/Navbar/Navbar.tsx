@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import React from 'react';
 import Logo from '@molecules/Logo';
 import ThemeToggleButton from '@molecules/ThemeToggleButton';
@@ -9,6 +9,7 @@ import BurgerMenuButton from '@molecules/BurgerMenuButton';
 import HeartIcon from '@assets/icons/heart-icon-outline.svg';
 import CartIcon from '@assets/icons/cart-icon.svg';
 import './Navbar.scss';
+import Search from '@organisms/Search';
 
 interface NavbarProps {
   cartCount?: number;
@@ -28,8 +29,24 @@ const Navbar: React.FC<NavbarProps> = ({
   setMenuOpen,
 }) => {
   const { isMobile, isTablet, isDesktop } = useDevice();
-
   const hideControls = isTablet && expandedSearch;
+
+  const renderSearch = () => {
+    if (isDesktop) {
+      return <Search isMobile={false} />;
+    }
+
+    if (isTablet) {
+      return (
+        <Search
+          isMobile={true}
+          expanded={expandedSearch}
+          setExpanded={setExpandedSearch}
+        />
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="navbar">
@@ -39,15 +56,11 @@ const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       <div className="navbar__right">
-        {/*isTablet && (
-          <Search
-            isMobile={true}
-            expanded={expandedSearch}
-            setExpanded={setExpandedSearch}
-          />
-        )*/}
+        {renderSearch()}
 
-        {(!isMobile || (isMobile && menuOpen)) && <ThemeToggleButton />}
+        {(!isMobile || (isMobile && menuOpen)) && !hideControls && (
+          <ThemeToggleButton />
+        )}
 
         {!hideControls && (
           <>
