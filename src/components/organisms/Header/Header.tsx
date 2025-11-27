@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDevice } from '@/hooks/useDevice';
@@ -11,10 +10,7 @@ interface HeaderProps {
   favoritesCount?: number;
 }
 
-const Header: React.FC<HeaderProps> = ({
-  cartCount = 0,
-  favoritesCount = 0,
-}) => {
+const Header = ({ cartCount = 0, favoritesCount = 0 }: HeaderProps) => {
   const { isMobile, isTablet } = useDevice();
   const [menuOpen, setMenuOpen] = useState(false);
   const [expandedSearch, setExpandedSearch] = useState(false);

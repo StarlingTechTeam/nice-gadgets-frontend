@@ -8,6 +8,7 @@
   --color-button-add: #4219d0;
   --color-like: #e2e6e9;
   --color-checked: green;
+  --color-background-cart: #fafbfc79;
 }
 
 @layer base {
@@ -27,6 +28,7 @@
     --color-pagination-button-background: #000000;
     --color-pagination-button-text: #ffffff;
     --color-checked: rgb(15, 182, 0);
+    --color-background-cart: #fafbfc79;
   }
 }
 
@@ -42,5 +44,6 @@
     --color-dropdown: #323542;
     --color-dropdown-border: #161827;
     --color-pagination-button-background: #905bff;
+    --color-background-cart: #2f3cb438;
   }
 }

@@ -4,6 +4,7 @@ export type ProductCard = {
   itemId: string;
   name: string;
   fullPrice: number;
+  discountedPrice?: number;
   price: number;
   screen: string;
   capacity: string;

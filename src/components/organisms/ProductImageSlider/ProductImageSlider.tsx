@@ -11,7 +11,7 @@ const ProductImageSlider = ({ loading, slides }: ProductImageSliderProps) => (
     {loading ?
       <Skeleton
         height={464}
-        width={464}
+        width={490}
       />
     : <SliderProductDetails
         slides={slides}
