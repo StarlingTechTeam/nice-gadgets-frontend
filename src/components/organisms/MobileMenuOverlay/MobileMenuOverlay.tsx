@@ -4,6 +4,7 @@ import NavLinksPart from '@molecules/NavLinksPart';
 import NavIcon from '@molecules/NavIcon';
 import HeartIcon from '@assets/icons/heart-icon-outline.svg';
 import CartIcon from '@assets/icons/cart-icon.svg';
+import Search from '@organisms/Search';
 import './MobileMenuOverlay.scss';
 
 interface MobileMenuOverlayProps {
@@ -20,9 +21,20 @@ const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = ({
   favoritesCount = 0,
 }) => {
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    let timeoutId: number | undefined;
+
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('menu-open');
+    } else {
+      timeoutId = window.setTimeout(() => {
+        document.body.classList.remove('menu-open');
+        document.body.style.overflow = '';
+      }, 500);
+    }
+
     return () => {
-      document.body.style.overflow = '';
+      if (timeoutId) clearTimeout(timeoutId);
     };
   }, [menuOpen]);
 
@@ -35,6 +47,14 @@ const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = ({
     >
       <nav aria-label="Mobile menu">
         <NavLinksPart mobile />
+
+        <div className="mobile-search-wrapper">
+          <Search
+            isMobile
+            isOverlay
+            menuOpen={menuOpen}
+          />
+        </div>
 
         <div className="mobile-bottom-nav">
           <NavIcon

@@ -1,3 +1,15 @@
+body.menu-open .swiper {
+  z-index: 0 !important;
+}
+
+body.menu-open .swiper-wrapper {
+  z-index: 0 !important;
+}
+
+body.menu-open .slider-product-details__arrow {
+  z-index: 0 !important;
+}
+
 .mobile-menu {
   position: fixed;
   top: 48px;
@@ -21,6 +33,14 @@
     opacity: 1;
     pointer-events: auto;
   }
+}
+
+.mobile-search-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
 }
 
 .mobile-bottom-nav {
