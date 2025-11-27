@@ -180,7 +180,7 @@ const ProductDetailsPage = () => {
         name: item.name,
         fullPrice: item.priceRegular,
         price: item.priceDiscount,
-        screen: item.screen,
+        screen: item.screen.replace(/(\d+\.\d+).*?(XDR|OLED).*/, '$1 $2'),
         capacity: item.capacity,
         ram: item.ram,
         image: item.images[0],
