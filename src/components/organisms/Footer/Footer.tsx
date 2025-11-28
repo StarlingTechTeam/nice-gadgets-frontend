@@ -13,18 +13,18 @@ const Footer = () => {
         <nav className="footer-nav-company-information">
           <ul>
             <li>
-              <a
-                href="#"
+              <NavLink
+                to="https://github.com/StarlingTechTeam/nice-gadgets-frontend"
                 className="footer-navlink"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 GitHub
-              </a>
+              </NavLink>
             </li>
             <li>
               <NavLink
-                to="/"
+                to="contacts"
                 className="footer-navlink"
               >
                 Contacts

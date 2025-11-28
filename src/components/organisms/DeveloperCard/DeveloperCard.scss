@@ -1,0 +1,26 @@
+.developer-card {
+  background-color: var(--color-background-secondary);
+  border-radius: 16px;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border: 1px solid var(--color-border);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(144, 91, 255, 0.15);
+  }
+}
+
+.developer-card__image {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 24px;
+  border-radius: 50%;
+}
+
+.developer-card__content {
+  padding: 24px;
+}
