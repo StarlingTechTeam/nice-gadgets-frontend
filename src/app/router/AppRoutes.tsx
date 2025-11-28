@@ -3,6 +3,7 @@ import ProductsCatalogPage from '@pages/ProductsCatalogPage';
 import ProductDetailsPage from '@pages/ProductDetailsPage';
 import CartPage from '@pages/CartPage';
 import FavoritesPage from '@pages/FavoritesPage';
+import ContactsPage from '@pages/ContactsPage';
 import NotFoundPage from '@pages/NotFoundPage';
 import HomePage from '@pages/HomePage';
 
@@ -21,6 +22,10 @@ const AppRoutes = () => {
         <Route
           path="favorites"
           element={<FavoritesPage />}
+        />
+        <Route
+          path="contacts"
+          element={<ContactsPage />}
         />
         <Route
           path=":categoryType"

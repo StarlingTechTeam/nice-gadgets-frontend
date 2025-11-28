@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Mariia Alefirenko",
+    "role": "Team Lead | Full-Stack Developer",
+    "description": "Motivated Full-Stack Developer with a background in Computer Engineering and hands-on experience creating responsive, user-friendly landing pages using ReactJS, JavaScript, and TypeScript. Familiar with Node.js backend development and continuously expanding skills in modern web technologies.",
+    "photo": "https://media.licdn.com/dms/image/v2/D4E03AQHKoJSivLMQHA/profile-displayphoto-crop_800_800/B4EZoAXGurKYAM-/0/1760942649259?e=1766016000&v=beta&t=sXDJ9Y9REiBOdxwGhI8MvoN6hCqgSQtnyIOcu14mJ4g",
+    "github": "https://github.com/Volodymyr-Bauzi",
+    "linkedin": "https://www.linkedin.com/in/volodia-shavel/",
+    "email": "fs.mariia.alefirenko@gmail.com"
+  },
+  {
+    "id": 2,
+    "name": "Volodymyr Shavel",
+    "role": "Project Manager | React Developer",
+    "description": "Front-end developer who loves building clean, fast, and user-friendly interfaces. I work with HTML, CSS, JavaScript, TypeScript, and React, and I'm always exploring new tools and modern web technologies to make things better.",
+    "photo": "https://avatars.githubusercontent.com/u/62158052?v=4",
+    "github": "https://github.com/MariaAlefirenko",
+    "linkedin": "https://www.linkedin.com/in/mariia-alefirenko-065a9738b/",
+    "email": "volodiashavel@gmail.com"
+  },
+  {
+    "id": 3,
+    "name": "Dmytro Kutsenko",
+    "role": "Frontend Developer",
+    "description": "Web developer with over a year of JavaScript experience, eager to learn new technologies and grow as part of a team. Worked on responsive landing pages, e-commerce websites, sales funnels, and A/B testing in a collaborative environment. Known for strong responsibility and excellent soft skills that help build effective communication and teamwork.",
+    "photo": "https://avatars.githubusercontent.com/u/105816723?v=4",
+    "github": "https://github.com/webqarbon",
+    "linkedin": "https://www.linkedin.com/in/dmytro-kutsenko27/",
+    "email": "dmytrokutsenkodev@gmail.com"
+  },
+  {
+    "id": 4,
+    "name": "Oleh Pshyk",
+    "role": "Frontend Developer",
+    "description": "Frontend Developer with a solid understanding of HTML, CSS, JavaScript, and React, and paying great attention to code readability, reusability, and performance. Worked with API integration, state management, and version control with Git.",
+    "photo": "https://media.licdn.com/dms/image/v2/D4E03AQGjleOgfzdmiA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1712575063155?e=1766016000&v=beta&t=xIhkMuMZkzGO5bzU9HD1_2TbF94kBfiGOeVKX39XJ2Q",
+    "github": "https://github.com/pshy4ok",
+    "linkedin": "https://www.linkedin.com/in/oleh-pshyk-835820295/",
+    "email": "fe.oleh.pshyk@gmail.com"
+  }
+]
