@@ -9,6 +9,9 @@
   --color-like: #e2e6e9;
   --color-checked: green;
   --color-background-cart: #fafbfc79;
+  --color-cart-input-background: #fafbfc;
+  --color-hint: #4219d0;
+  --color-placeholder: #89939a;
 }
 
 @layer base {
@@ -29,6 +32,9 @@
     --color-pagination-button-text: #ffffff;
     --color-checked: rgb(15, 182, 0);
     --color-background-cart: #fafbfc79;
+    --color-cart-input-background: #fafbfc;
+    --color-hint: #4219d0;
+    --color-placeholder: #6c7983;
   }
 }
 
@@ -45,5 +51,8 @@
     --color-dropdown-border: #161827;
     --color-pagination-button-background: #905bff;
     --color-background-cart: #2f3cb438;
+    --color-cart-input-background: #161827;
+    --color-hint: #51be72;
+    --color-placeholder: #a6acb1;
   }
 }

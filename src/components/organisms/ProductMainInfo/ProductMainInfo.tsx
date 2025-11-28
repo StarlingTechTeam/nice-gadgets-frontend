@@ -8,7 +8,7 @@ import ProductSpecRow from '@molecules/ProductCardParams';
 import type { ProductDetails } from '@/types/ProductDetails';
 import Skeleton from 'react-loading-skeleton';
 import './ProductMainInfo.scss';
-import { productDetailsToCard } from '@/utils/productDetailsToCard';
+import { productDetailsToCard } from '@utils/productDetailsToCard';
 
 type ProductMainInfoProps = {
   loading: boolean;

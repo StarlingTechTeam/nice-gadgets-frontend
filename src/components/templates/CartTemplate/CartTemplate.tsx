@@ -30,7 +30,6 @@ interface CartTemplateProps {
   onQuantityChange: (id: string, qty: number) => void;
   onRemoveItem: (id: string) => void;
   onClearCart: () => void;
-  onCheckout: () => void;
   onApplyCoupon: (code: string) => void;
   onRemoveCoupon: () => void;
 }
@@ -50,11 +49,9 @@ const CartTemplate = ({
   error,
   onQuantityChange,
   onRemoveItem,
-  onCheckout,
   onApplyCoupon,
   onRemoveCoupon,
 }: CartTemplateProps) => {
-  console.log(onCheckout);
   return (
     <div className="cart-template bg-background">
       <div className="inline-wrapper ">
@@ -97,7 +94,6 @@ const CartTemplate = ({
                   shippingAddress={shippingAddress}
                   onApplyCoupon={onApplyCoupon}
                   onRemoveCoupon={onRemoveCoupon}
-                  onCheckout={onCheckout}
                   isLoading={isLoading}
                   error={error}
                 />

@@ -1,10 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { useCart } from '@hooks/useCart';
 import CartTemplate from '@templates/CartTemplate/CartTemplate';
 
 const CartPage = () => {
-  const navigate = useNavigate();
-
   const {
     items,
     subtotal,
@@ -24,25 +21,6 @@ const CartPage = () => {
     applyDiscount,
     removeDiscount,
   } = useCart();
-
-  const handleCheckout = () => {
-    if (!shippingMethod || !shippingAddress) {
-      console.warn('Shipping information incomplete');
-      return;
-    }
-
-    navigate('/checkout', {
-      state: {
-        items,
-        subtotal,
-        shipping,
-        discount,
-        total,
-        shippingMethod,
-        shippingAddress,
-      },
-    });
-  };
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     updateQuantity(itemId, newQuantity);
@@ -81,7 +59,6 @@ const CartPage = () => {
       onQuantityChange={handleQuantityChange}
       onRemoveItem={handleRemoveItem}
       onClearCart={handleClearCart}
-      onCheckout={handleCheckout}
       onApplyCoupon={handleApplyCoupon}
       onRemoveCoupon={handleRemoveCoupon}
     />

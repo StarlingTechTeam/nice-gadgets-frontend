@@ -17,9 +17,23 @@ const DiscountCode = ({ onApplyCoupon, onRemoveCoupon }: DiscountCodeProps) => {
     }
   };
 
+  const handleDivClick = async (e: React.MouseEvent<HTMLDivElement>) => {
+    const codeFromDiv = e.currentTarget.textContent?.trim();
+    setCode(codeFromDiv || '');
+
+    setTimeout(() => {
+      onApplyCoupon(codeFromDiv || '');
+    }, 100);
+  };
+
+  const removeCoupon = () => {
+    onRemoveCoupon();
+    setCode('');
+  };
+
   return (
     <div className="discount-code">
-      <h4 className="discount-code__title">Discount Code</h4>
+      <h4 className="discount-code__title">Enter Discount Code</h4>
 
       {discountCode?.isValid ?
         <div className="discount-code__applied">
@@ -57,7 +71,7 @@ const DiscountCode = ({ onApplyCoupon, onRemoveCoupon }: DiscountCodeProps) => {
           <button
             type="button"
             className="discount-code__remove"
-            onClick={onRemoveCoupon}
+            onClick={removeCoupon}
             aria-label="Remove discount code"
           >
             <svg
@@ -175,8 +189,9 @@ const DiscountCode = ({ onApplyCoupon, onRemoveCoupon }: DiscountCodeProps) => {
       {!discountCode && (
         <div className="discount-code__hint">
           <p className="discount-code__hint-text">
-            💡 Try: <strong>SAVE10</strong>, <strong>SAVE20</strong>, or{' '}
-            <strong>WELCOME</strong>
+            💡 Try: <span onClick={handleDivClick}>SAVE10</span>,{' '}
+            <span onClick={handleDivClick}>SAVE20</span>, or{' '}
+            <span onClick={handleDivClick}>WELCOME</span>
           </p>
         </div>
       )}

@@ -12,7 +12,9 @@
   grid-template-columns: 1fr;
 
   @include on-desktop {
-    grid-template-columns: 1fr 500px;
+    &:not(.hidden) {
+      grid-template-columns: 1fr 500px;
+    }
   }
 }
 
@@ -23,7 +25,9 @@
 }
 
 .cart-template__header {
-  display: none;
+  .hidden {
+    display: none;
+  }
 
   @include on-desktop {
     display: block;
@@ -48,10 +52,10 @@
 
 .cart-template__summary {
   background: var(--color-background-secondary);
+  padding: 24px;
   @include on-desktop {
     position: sticky;
     top: 0;
-    padding: 24px;
     border-top: 1px solid var(--color-border);
   }
 }

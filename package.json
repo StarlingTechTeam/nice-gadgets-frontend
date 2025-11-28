@@ -20,6 +20,7 @@
     "@tailwindcss/vite": "^4.1.17",
     "classnames": "^2.5.1",
     "color-namer": "^1.4.0",
+    "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-loading-skeleton": "^3.5.0",
