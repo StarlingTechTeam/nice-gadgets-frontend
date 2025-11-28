@@ -1,0 +1,60 @@
+@use '@styles/mixins' as *;
+
+.search__results {
+  position: absolute;
+  top: 14px;
+  left: 13%;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  width: 290px;
+  max-height: 200px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  z-index: 50;
+
+  @include on-tablet {
+    left: -23%;
+    max-height: 150px;
+    top: 40px;
+  }
+
+  @include on-desktop {
+    left: 62%;
+    top: 50px;
+  }
+}
+
+.search__result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--color-primary);
+  font-family: 'Mont';
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 11px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #905bff;
+  }
+}
+
+.search__no-results,
+.search__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--color-primary);
+  font-family: 'Mont';
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 11px;
+  padding: 10px 16px;
+  text-align: center;
+  opacity: 0.7;
+}
