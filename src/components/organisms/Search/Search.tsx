@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import Icon from '@/components/atoms/Icon';
 import SearchIcon from '@assets/icons/search-icon.svg';
 import CloseIcon from '@assets/icons/close-icon.svg';
+import { useSearch } from '@hooks/useSearch';
+import type { ProductDetails } from '@/types/ProductDetails';
+
+import SearchResults from '@molecules/SearchResults/SearchResults';
 import './Search.scss';
 
 interface SearchProps {
@@ -25,83 +30,103 @@ const Search: React.FC<SearchProps> = ({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [value, setValue] = useState('');
 
+  const { results, loading } = useSearch(value);
+
+  // Reset on route change
   useEffect(() => {
     setValue('');
     setExpanded?.(false);
   }, [location.pathname, setExpanded]);
 
+  // Auto focus on tablet
   useEffect(() => {
-    if (expanded && inputRef.current) {
-      const t = setTimeout(() => inputRef.current?.focus(), 50);
+    if ((expanded && setExpanded) || (isOverlay && menuOpen)) {
+      const t = setTimeout(() => inputRef.current?.focus(), 80);
       return () => clearTimeout(t);
     }
-  }, [expanded, menuOpen]);
+  }, [expanded, menuOpen, isOverlay, setExpanded]);
 
+  // Escape clears & closes
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setValue('');
         setExpanded?.(false);
       }
     };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [setExpanded]);
 
+  // Click outside closes
   useEffect(() => {
-    const handleOutside = (e: MouseEvent | TouchEvent) => {
+    const handler = (e: MouseEvent | TouchEvent) => {
       if (!wrapperRef.current) return;
       if (!wrapperRef.current.contains(e.target as Node)) {
         setValue('');
         setExpanded?.(false);
       }
     };
-
-    if (expanded || (isOverlay && menuOpen)) {
-      document.addEventListener('mousedown', handleOutside);
-      document.addEventListener('touchstart', handleOutside);
+    if ((expanded && setExpanded) || (isOverlay && menuOpen)) {
+      document.addEventListener('mousedown', handler);
+      document.addEventListener('touchstart', handler);
     }
-
     return () => {
-      document.removeEventListener('mousedown', handleOutside);
-      document.removeEventListener('touchstart', handleOutside);
+      document.removeEventListener('mousedown', handler);
+      document.removeEventListener('touchstart', handler);
     };
   }, [expanded, isOverlay, menuOpen, setExpanded]);
 
+  // Select product
+  const handleSelect = (p: ProductDetails) => {
+    setValue('');
+    setExpanded?.(false);
+    navigate(`/${p.category}/${p.id}`);
+  };
+
+  // ---------------- MOBILE OVERLAY ----------------
   if (isOverlay) {
     return (
       <div
         ref={wrapperRef}
-        className="mobile-search"
+        className="mobile-search-overlay"
       >
-        <div className="mobile-search__box">
+        <div className="search__input-box">
           <Icon src={SearchIcon} />
           <input
             ref={inputRef}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="mobile-search__input"
             placeholder="Search…"
-            aria-label="Search on mobile"
+            className="mobile-search__input"
           />
           {value && (
             <button
               type="button"
-              className="mobile-search__clear"
+              className="search__clear-btn"
               onClick={() => setValue('')}
-              aria-label="Clear search"
             >
               <Icon src={CloseIcon} />
             </button>
           )}
         </div>
+
+        {value && (
+          <SearchResults
+            results={results}
+            loading={loading}
+            onSelect={handleSelect}
+          />
+        )}
       </div>
     );
   }
 
+  // ---------------- TABLET TOGGLE ----------------
   if (setExpanded) {
     return (
       <div
@@ -113,8 +138,7 @@ const Search: React.FC<SearchProps> = ({
         {!expanded && (
           <button
             type="button"
-            className="icon-btn search__toggle-btn"
-            aria-label="Open search"
+            className="search__toggle-btn icon-btn"
             onClick={() => setExpanded(true)}
           >
             <Icon src={SearchIcon} />
@@ -128,19 +152,25 @@ const Search: React.FC<SearchProps> = ({
               ref={inputRef}
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className="search__input"
               placeholder="Search…"
-              aria-label="Search products"
+              className="search__input"
             />
             {value && (
               <button
                 type="button"
                 className="search__clear-btn"
                 onClick={() => setValue('')}
-                aria-label="Clear search"
               >
                 <Icon src={CloseIcon} />
               </button>
+            )}
+
+            {value && (
+              <SearchResults
+                results={results}
+                loading={loading}
+                onSelect={handleSelect}
+              />
             )}
           </div>
         )}
@@ -148,6 +178,7 @@ const Search: React.FC<SearchProps> = ({
     );
   }
 
+  // ---------------- DESKTOP ----------------
   return (
     <div
       ref={wrapperRef}
@@ -159,21 +190,27 @@ const Search: React.FC<SearchProps> = ({
           ref={inputRef}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="search__input"
           placeholder="Search…"
-          aria-label="Search products"
+          className="search__input"
         />
         {value && (
           <button
             type="button"
             className="search__clear-btn"
             onClick={() => setValue('')}
-            aria-label="Clear search"
           >
             <Icon src={CloseIcon} />
           </button>
         )}
       </div>
+
+      {value && (
+        <SearchResults
+          results={results}
+          loading={loading}
+          onSelect={handleSelect}
+        />
+      )}
     </div>
   );
 };
