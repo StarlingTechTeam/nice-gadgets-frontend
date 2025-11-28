@@ -2,13 +2,16 @@ import type { ReactNode } from 'react';
 import Header from '@organisms/Header';
 import Footer from '@organisms/Footer';
 import './PageWrapper.scss';
+import { useProductsSelection } from '@/context/ProductsSelectionContext';
 
 const PageWrapper = ({ children }: { children: ReactNode }) => {
+  const { favorites } = useProductsSelection();
+
   return (
     <div className="min-h-screen flex flex-col">
       <div className="bg-background transition-colors duration-400">
         <Header
-          favoritesCount={10}
+          favoritesCount={favorites.length}
           cartCount={5}
         />
       </div>
