@@ -369,7 +369,7 @@ const ShippingSelector = () => {
             ref={cityInputRef}
             type="text"
             className={`shipping-selector__input ${errors.city ? 'shipping-selector__input--error' : ''} ${selectedCity ? 'shipping-selector__input--filled' : ''}`}
-            placeholder="Введіть назву міста (Kyiv, Lviv, Odesa...)"
+            placeholder="Введіть назву міста (Київ, Львів, Одеса...)"
             value={citySearch || ''}
             onChange={handleCityInputChange}
             onFocus={() => {
