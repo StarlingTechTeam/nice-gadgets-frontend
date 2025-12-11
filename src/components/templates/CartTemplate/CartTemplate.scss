@@ -25,9 +25,7 @@
 }
 
 .cart-template__header {
-  .hidden {
-    display: none;
-  }
+  display: none;
 
   @include on-desktop {
     display: block;
@@ -53,6 +51,7 @@
 .cart-template__summary {
   background: var(--color-background-secondary);
   padding: 24px;
+
   @include on-desktop {
     position: sticky;
     top: 0;
@@ -60,22 +59,11 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .cart-template__content {
-    gap: 24px;
-  }
-}
-
-@media (max-width: 768px) {
-  .cart-template {
-    padding: 16px 0;
-  }
-
-  .cart-template__container {
-    padding: 0 16px;
-  }
-
-  .cart-template__content {
-    gap: 16px;
-  }
+.cart-template__error {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  color: #c33;
 }

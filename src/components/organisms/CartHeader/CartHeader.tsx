@@ -1,14 +1,16 @@
 import Icon from '@atoms/Icon/Icon';
 import './CartHeader.scss';
 import arrowLeftIcon from '@assets/icons/arrow-left.svg';
+import cn from 'classnames';
 
 interface CartHeaderProps {
   itemCount: number;
+  className?: string;
 }
 
-const CartHeader = ({ itemCount }: CartHeaderProps) => {
+const CartHeader = ({ itemCount, className }: CartHeaderProps) => {
   return (
-    <header className="cart-header mb-10">
+    <header className={cn('cart-header mb-10', className)}>
       <button
         className="back-btn flex items-center"
         onClick={() => window.history.back()}
@@ -18,12 +20,7 @@ const CartHeader = ({ itemCount }: CartHeaderProps) => {
           src={arrowLeftIcon}
           size={20}
         />
-        <span
-          className="text-secondary"
-          style={{ paddingBottom: '1px' }}
-        >
-          Back
-        </span>
+        <span className="cart-header__back-text text-secondary">Back</span>
       </button>
 
       <div>
