@@ -8,7 +8,6 @@
 .cart-template__content {
   display: grid;
   gap: 32px;
-  margin-top: 32px;
   grid-template-columns: 1fr;
 
   @include on-desktop {
@@ -28,12 +27,12 @@
   display: none;
 
   @include on-desktop {
-    display: block;
+    display: flex;
   }
 }
 
 .cart-template__header-summary {
-  display: block;
+  display: flex;
 
   @include on-desktop {
     display: none;

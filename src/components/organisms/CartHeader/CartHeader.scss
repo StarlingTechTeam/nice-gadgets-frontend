@@ -3,31 +3,19 @@
 .cart-header {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin-bottom: 40px;
-
-  @include on-tablet {
-    margin-bottom: 32px;
-  }
+  gap: 8px;
 }
 
 .cart-header__title-section {
   display: flex;
   align-items: baseline;
-  gap: 8px;
   flex-wrap: wrap;
 }
 
 .cart-header__title {
-  font-size: 32px;
-  font-weight: 700;
   line-height: 1.2;
-  color: var(--color-text-primary);
+  color: var(--color-primary);
   margin: 0;
-
-  @include on-tablet {
-    font-size: 24px;
-  }
 }
 
 .cart-header__count {
@@ -35,9 +23,5 @@
   font-weight: 400;
   line-height: 21px;
   font-family: 'Mont', sans-serif;
-  color: var(--color-text-secondary);
-
-  @include on-tablet {
-    font-size: 12px;
-  }
+  color: var(--color-secondary);
 }

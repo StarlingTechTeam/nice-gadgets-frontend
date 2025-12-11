@@ -3,7 +3,7 @@
 .back-button {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   background: none;
   border: none;
   padding: 0;
@@ -20,7 +20,7 @@
 }
 
 .back-button__text {
-  color: var(--color-text-secondary);
+  color: var(--color-secondary);
   font-size: 14px;
   line-height: 1;
   padding-bottom: 1px;

@@ -1,14 +1,13 @@
-import BackButton from '@atoms/BackButton';
 import './CartHeader.scss';
 import cn from 'classnames';
+import Breadcrumbs from '@/components/molecules/Breadcrumbs';
 
 interface CartHeaderProps {
   itemCount: number;
   className?: string;
-  onBack?: () => void;
 }
 
-const CartHeader = ({ itemCount, className, onBack }: CartHeaderProps) => {
+const CartHeader = ({ itemCount, className }: CartHeaderProps) => {
   const itemText =
     itemCount === 0 ? '(empty)' : (
       `${itemCount} ${itemCount === 1 ? 'item' : 'items'}`
@@ -16,12 +15,10 @@ const CartHeader = ({ itemCount, className, onBack }: CartHeaderProps) => {
 
   return (
     <header className={cn('cart-header', className)}>
-      <BackButton onClick={onBack} />
+      <Breadcrumbs />
 
-      <div className="cart-header__title-section">
-        <h1 className="cart-header__title">Cart</h1>
-        <span className="cart-header__count">{itemText}</span>
-      </div>
+      <h1 className="cart-header__title">Cart</h1>
+      <p className="cart-header__count">{itemText}</p>
     </header>
   );
 };
