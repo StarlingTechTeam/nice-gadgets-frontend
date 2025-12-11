@@ -69,7 +69,10 @@ const CartTemplate = ({
     return (
       <div className="cart-template bg-background">
         <div className="inline-wrapper">
-          <CartHeader itemCount={0} />
+          <CartHeader
+            itemCount={0}
+            onBack={() => window.history.back()}
+          />
           <EmptyCart />
         </div>
       </div>
@@ -93,6 +96,7 @@ const CartTemplate = ({
             <CartHeader
               itemCount={itemCount}
               className="cart-template__header"
+              onBack={() => window.history.back()}
             />
             <CartList
               items={items}
@@ -105,6 +109,7 @@ const CartTemplate = ({
             <CartHeader
               itemCount={itemCount}
               className="cart-template__header-summary"
+              onBack={() => window.history.back()}
             />
             <aside className="cart-template__summary">
               <CartSummary

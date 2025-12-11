@@ -1,33 +1,26 @@
-import Icon from '@atoms/Icon/Icon';
+import BackButton from '@atoms/BackButton';
 import './CartHeader.scss';
-import arrowLeftIcon from '@assets/icons/arrow-left.svg';
 import cn from 'classnames';
 
 interface CartHeaderProps {
   itemCount: number;
   className?: string;
+  onBack?: () => void;
 }
 
-const CartHeader = ({ itemCount, className }: CartHeaderProps) => {
-  return (
-    <header className={cn('cart-header mb-10', className)}>
-      <button
-        className="back-btn flex items-center"
-        onClick={() => window.history.back()}
-        aria-label="Go back"
-      >
-        <Icon
-          src={arrowLeftIcon}
-          size={20}
-        />
-        <span className="cart-header__back-text text-secondary">Back</span>
-      </button>
+const CartHeader = ({ itemCount, className, onBack }: CartHeaderProps) => {
+  const itemText =
+    itemCount === 0 ? '(empty)' : (
+      `${itemCount} ${itemCount === 1 ? 'item' : 'items'}`
+    );
 
-      <div>
-        <h1 className="text-primary">Cart</h1>
-        {itemCount > 0 ?
-          <span className="cart-header__count">{`${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}</span>
-        : <span className="cart-header__count">(empty)</span>}
+  return (
+    <header className={cn('cart-header', className)}>
+      <BackButton onClick={onBack} />
+
+      <div className="cart-header__title-section">
+        <h1 className="cart-header__title">Cart</h1>
+        <span className="cart-header__count">{itemText}</span>
       </div>
     </header>
   );
