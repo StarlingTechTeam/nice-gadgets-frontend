@@ -1,6 +1,7 @@
 import React from 'react';
 import CartItemComponent from '@organisms/CartItemComponent';
 import type { CartItem } from '@/types/CartItem';
+import './CartList.scss';
 
 interface CartListProps {
   items: CartItem[];
@@ -13,27 +14,18 @@ const CartList: React.FC<CartListProps> = ({
   onQuantityChange,
   onRemoveItem,
 }) => {
-  if (items.length === 0) {
-    return (
-      <div className="py-12">
-        <p className="text-center text-secondary">Your cart is empty.</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-col">
+    <div className="cart-list">
       {items.map((item) => (
         <CartItemComponent
           key={item.id}
           item={item}
-          updateQuantity={(id: string, qty: number) =>
-            onQuantityChange(id, qty)
-          }
+          updateQuantity={onQuantityChange}
           onRemove={() => onRemoveItem(item.id)}
         />
       ))}
     </div>
   );
 };
+
 export default CartList;

@@ -10,7 +10,6 @@ import type {
 } from '@/types/CartItem';
 import './CartTemplate.scss';
 import Skeleton from 'react-loading-skeleton';
-import cn from 'classnames';
 
 interface CartTemplateProps {
   items: CartItem[];
@@ -29,7 +28,6 @@ interface CartTemplateProps {
 
   onQuantityChange: (id: string, qty: number) => void;
   onRemoveItem: (id: string) => void;
-  onClearCart: () => void;
   onApplyCoupon: (code: string) => void;
   onRemoveCoupon: () => void;
 }
@@ -52,68 +50,81 @@ const CartTemplate = ({
   onApplyCoupon,
   onRemoveCoupon,
 }: CartTemplateProps) => {
+  const isEmpty = items.length === 0;
+
+  if (isLoading) {
+    return (
+      <div className="cart-template bg-background">
+        <div className="inline-wrapper">
+          <Skeleton
+            height={200}
+            width="100%"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (isEmpty) {
+    return (
+      <div className="cart-template bg-background">
+        <div className="inline-wrapper">
+          <CartHeader itemCount={0} />
+          <EmptyCart />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="cart-template bg-background">
-      <div className="inline-wrapper ">
-        <div
-          className={cn('flex cart-template__content', {
-            hidden: items.length === 0,
-          })}
-        >
-          <div className="cart-template__items">
-            <div className="cart-template__header">
-              <CartHeader itemCount={itemCount} />
-            </div>
-            {items.length === 0 ?
-              <EmptyCart />
-            : <div className="cart-template__items">
-                <CartList
-                  items={items}
-                  onQuantityChange={onQuantityChange}
-                  onRemoveItem={onRemoveItem}
-                />
-              </div>
-            }
-          </div>
-
-          {items.length > 0 && (
-            <div className="cart-template-summary flex flex-col">
-              <div className="cart-template__header-summary">
-                <CartHeader itemCount={itemCount} />
-              </div>
-              <aside className="cart-template__summary">
-                <CartSummary
-                  subtotal={subtotal}
-                  shippingCost={shippingCost}
-                  discountAmount={discountAmount}
-                  total={total}
-                  totalPriceWithoutDiscounts={totalPriceWithoutDiscounts}
-                  appliedCoupon={appliedCoupon}
-                  itemCount={itemCount}
-                  shippingMethod={shippingMethod}
-                  shippingAddress={shippingAddress}
-                  onApplyCoupon={onApplyCoupon}
-                  onRemoveCoupon={onRemoveCoupon}
-                  isLoading={isLoading}
-                  error={error}
-                />
-              </aside>
-            </div>
-          )}
-        </div>
-
+      <div className="inline-wrapper">
         {error && (
-          <div className="cart-template__error">
+          <div
+            className="cart-template__error"
+            role="alert"
+          >
             <p>{error}</p>
           </div>
         )}
 
-        {isLoading && (
-          <Skeleton
-            height={200}
-            width={200}
-          />
-        )}
+        <div className="cart-template__content">
+          <div className="cart-template__items">
+            <CartHeader
+              itemCount={itemCount}
+              className="cart-template__header"
+            />
+            <CartList
+              items={items}
+              onQuantityChange={onQuantityChange}
+              onRemoveItem={onRemoveItem}
+            />
+          </div>
+
+          <div className="cart-template-summary">
+            <CartHeader
+              itemCount={itemCount}
+              className="cart-template__header-summary"
+            />
+            <aside className="cart-template__summary">
+              <CartSummary
+                subtotal={subtotal}
+                shippingCost={shippingCost}
+                discountAmount={discountAmount}
+                total={total}
+                totalPriceWithoutDiscounts={totalPriceWithoutDiscounts}
+                appliedCoupon={appliedCoupon}
+                itemCount={itemCount}
+                shippingMethod={shippingMethod}
+                shippingAddress={shippingAddress}
+                onApplyCoupon={onApplyCoupon}
+                onRemoveCoupon={onRemoveCoupon}
+                isLoading={isLoading}
+                error={error}
+              />
+            </aside>
+          </div>
+        </div>
       </div>
     </div>
   );
